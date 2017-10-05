@@ -31,3 +31,10 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+article.aux
+article.bbl
+article.blg
+article.log
+article.out
+article.pdf
+article.tdo
