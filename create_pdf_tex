@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# inkscape -D -z --file=figure_220.svg --export-pdf=figure_220.pdf --export-latex
+for filename in `ls *.svg`; do
+  echo $filename
+  basename=${filename%.*}
+  pdf_filename=$basename".pdf"
+  inkscape -D -z --file=$filename --export-pdf=$pdf_filename --export-latex
+done

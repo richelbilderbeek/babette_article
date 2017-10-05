@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sudo apt-get install pandoc
+sudo apt-get install pdflatex
+sudo apt-get install texlive-extra-utils
+sudo apt-get install texlive-latex-recommended
+sudo apt-get install texlive-full

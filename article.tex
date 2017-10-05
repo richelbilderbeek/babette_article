@@ -1,0 +1,58 @@
+\documentclass{article}
+
+% \includegraphics
+\usepackage{ifluatex}
+\ifluatex
+  \usepackage{pdftexcmds}
+  \makeatletter
+  \let\pdfstrcmp\pdf@strcmp
+  \let\pdffilemoddate\pdf@filemoddate
+  \makeatother
+\fi
+\usepackage{svg}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usepackage{pgf}
+\usetikzlibrary{arrows,automata}
+
+
+
+\usepackage{scalerel}
+\usepackage{stackengine,wasysym}
+
+
+\usepackage{todonotes}
+
+\title{The error when inferring phylogenies with incipient species by a Birth-Death model}
+% \subtitle{Should protracted speciation be incorporated in phylogenetic tree construction methods?}
+
+\author{Richel Bilderbeek}
+
+\input{functions.tex}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  \input{abstract.tex}
+\end{abstract}
+
+\input{introduction.tex}
+
+\input{methods.tex}
+
+\input{results.tex}
+
+\input{discussion.tex}
+
+\input{acknowledgements.tex}
+
+\bibliographystyle{plain}
+\bibliography{article}
+
+\listoftodos
+
+\end{document}
