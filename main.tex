@@ -33,7 +33,7 @@ to use phylogenies of fixed crown age.\\
 \textbf{Availability:} The package is free and is available from the official R package archive at 
 http://cran.r-project.org/src/contrib/PACKAGES.html\#beastscriptr. 
 beastscriptr is licensed under the GNU General Public License.
-\textbf{Contact:} \href{name@bio.com}{name@bio.com}\\
+\textbf{Contact:} \href{r.j.c.bilderbeek@rug.nl}{r.j.c.bilderbeek@rug.nl}\\
 \textbf{Supplementary information:} Supplementary data are available at \textit{Bioinformatics}
 online.}
 
@@ -42,26 +42,24 @@ online.}
 \section{Introduction}
 
 BEAST2 \cite{bouckaert2014beast} is a popular Bayesian phylogenetics tool.
-The program BEAUti \cite{drummond2012bayesian} allows for a user-friendly 
-way to create the
+BEAST2 is bundled with the program called BEAUti \cite{drummond2012bayesian},
+which  allows for a user-friendly way to create the
 input files that BEAST2 needs. This is convenient to get started, yet
-does not facilitate the scripted use of BEAST2. 
-beastscriptr is an R package that can create BEAST2 input files from an R
-function call.
+does not allow for the scripted use of BEAST2. beastscriptr is an R package 
+that can create BEAST2 input files from an R function call.
 
 \section{Approach}
 
-The goal of the R package beastscriptr was to mimic the functionality of BEAUti.
-Where BEAUti creates a BEAST2 XML input file by a graphical user interface,
-beastscriptr would do the same from one R function call.
+The goal of the R package beastscriptr is to create the 
+same BEAST2 input files that BEAUti creates, but from one R function call 
+instead.
 
 \begin{methods}
 \section{Methods}
 
-By creating BEAST2 input files in BEAUti, the files beastscriptr should
-create were determined. BEAUti already has many options, already
-before taking all possible plug-ins into account. beastscriptr 
-gradually grew in mimicking the basic functionality of BEAUti.
+By creating BEAST2 input files in BEAUti, 
+the desired output of beastscriptr was determined. 
+The functionality of BEAUti is added gradually (and is still growing).
 
 beastscriptr has a novel functionality not built into BEAUti yet:
 it allows for using phylogenies of a fixed crown age. 
@@ -100,7 +98,7 @@ and for providing access to the Peregrine high performance computing cluster.
 \section*{Funding}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-This work has been supported by the VICI of Rampal S. Etienne.
+???This work has been supported by the VICI of Rampal S. Etienne.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{natbib}
