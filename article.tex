@@ -2,31 +2,41 @@
 
 \usepackage{listings}
 \usepackage{todonotes}
+\usepackage{verbatim}
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usepackage{pgf}
+\usetikzlibrary{arrows,automata}
+
+% \newcommand*\beastscriptr{\verb;beastscriptr;}
 
 \title{beastscriptr: BEAUti for R}
 \author{Rich\`el J.C. Bilderbeek}
 
-\begin{document}
 
+% \newcommand*\filename[1]{${#1}$}
+% \newcommand*\myfilename[1]{\verb;{#1};}
+
+
+\begin{document}
 
 \maketitle
 
-
 \begin{abstract}
-  \textbf{Motivation:} BEAST2 is a popular Bayesian phylogenetics tool.
-  The program BEAUti allows for a user-friendly way to create the
-  input files that BEAST2 needs. This is convenient to get started, yet
-  does not facilitate the scripted use of BEAST2. 
-  beastscriptr is an R package that can create BEAST2 input files from an R
-  function call.\\
-  \textbf{Results:} beastscriptr has only parts of the functionality of BEAUti, yet
-  can be extended easily. beastcriptr, on the other hand, does allow for specifying
-  to use phylogenies of fixed crown age.\\
-  \textbf{Availability:} The package is free and is available from the official R package archive at 
-  http://cran.r-project.org/src/contrib/PACKAGES.html\#beastscriptr. 
-  beastscriptr is licensed under the GNU General Public License.
-  \textbf{Key-words:} computational biology, evolution, phylogeny, BEAST2, R
+  \textbf{1. }
+  Here, I present a package, \verb;beastscriptr;, for the R programming language. \\
+  \textbf{2. }
+    \verb;beastscriptr; allows for scripted use of the BEAST2 phylogenetics tool, 
+    by creating BEAST2 input files from an R function call. \\
+  \textbf{3. }
+    I describe \verb;beastscriptr; usage, the novel functionality it provides
+    compared to BEAUti, and give some minimal examples. \\
+  \textbf{4. }
+    As \verb;beastscriptr; is free, libre, open-source and designed to be extended, 
+    I conclude by describing the current development of the package \\
 \end{abstract}
+
+% Key-words: computational biology, evolution, phylogeny, BEAST2, R
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
@@ -35,21 +45,126 @@
 BEAST2 \cite{bouckaert2014beast} is a popular Bayesian phylogenetics tool.
 BEAST2 is bundled with the program called BEAUti \cite{drummond2012bayesian},
 which  allows for a user-friendly way to create the
-input files that BEAST2 needs. This is convenient to get started, yet
-does not allow for the scripted use of BEAST2. beastscriptr is an R package 
-that can create BEAST2 input files from an R function call.
+input files that BEAST2 needs. BEAUti is convenient to get started, yet
+does not allow for the scripted use of BEAST2. For creating BEAST2 input
+files from a script, beastscriptr is the R package facilitating this:
+it creates a BEAST2 input files from an R function call.
+
+%\begin{figure}
+%  \centering
+%  \includegraphics[]{BeautiSiteModel.png}
+%  \caption{BEAUti}
+%  \label{figure:beauti}
+%\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+  \centering
+  \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=6cm, semithick]   
+  \tikzstyle{every state}=[]
+  \node[state] (A) [rectangle] {
+    \includegraphics[width=0.2\textwidth]{alignment.png}
+    \includegraphics[width=0.2\textwidth]{thought_cloud.png}
+  };   
+  \node[state] (E) [below of=A, rectangle] {
+    \includegraphics[height=0.1\textheight]{xml.png}
+  };   
+  \node[state] (F) [rectangle, below of=E] {\includegraphics[width=0.3\textwidth]{DensiTreeExample2.jpg}};
+  \path (A) edge [anchor = east] node {\includegraphics[height=0.15\textheight]{beastscriptr_logo.png}} (E)
+        (A) edge [anchor = west] node {\includegraphics[height=0.15\textheight]{BeautiSiteModel.png}} (E)
+        (E) edge [] node {\includegraphics[width=0.2\textwidth]{Beast2LogoRat.png}} (F); 
+  \end{tikzpicture}
+
+  \caption{
+    Workflow
+  }
+  \label{fig:beauti}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Descriptions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+The goal of the R package \verb;beastscriptr; is to create the 
+same BEAST2 input files that BEAUti creates, but from one R function call 
+instead.
+
+By creating BEAST2 input files in BEAUti, 
+the desired output of beastscriptr was determined. 
+The functionality of BEAUti is added gradually (and is still growing).
+
+\verb;beastscriptr; has only parts of the functionality of BEAUti, yet
+can be extended easily. beastcriptr, on the other hand, does allow for specifying
+to use phylogenies of fixed crown age.
+
+\verb;beastscriptr; has a novel functionality not built into BEAUti yet:
+it allows for using phylogenies of a fixed crown age. 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+As in BEAUti, to create a BEAST2 input file, 
+one needs an alignment, model priors and MCMC parameters.
+When the alignment is stored in the file alignment.fasta,
+the desired tree prior is a constant-rate Birth-Death 
+model \cite{nee1994reconstructed} and the MCMC chain needs to run 1M 
+states, beastscriptr can create a file 
+(called \verb;birth_death.xml;) from R 
+as such:
+
+\begin{lstlisting}[language=R]
+beast_scriptr(
+  input_fasta_filename = "alignment.fasta",
+  mcmc_chainlength = 10000000,
+  tree_prior = "birth_death",
+  output_xml_filename = "birth_death.xml"
+)
+\end{lstlisting}
+
+The created file \verb;birth_death.xml; can then be used by BEAST2.
+
+Novel about beastscriptr is that it allows for specifying a fixed crown age:
+
+\begin{lstlisting}[language=R]
+beast_scriptr(
+  input_fasta_filename = "alignment.fasta",
+  mcmc_chainlength = 10000000,
+  tree_prior = "birth_death",
+  output_xml_filename = "birth_death_fixed_15.xml"
+  fixed_crown_age = TRUE,
+  initial_phylogeny = beastscriptr::fasta_to_phylo(
+    input_fasta_filename, crown_age = 15)
+)
+\end{lstlisting}
+
+In this example, a random phylogeny is created from the FASTA file, but
+one could also use a more informed initial phylogeny with the desired crown age. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{beastscriptr development and other resources}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+beastscriptr successfully creates valid BEAST2 input files. Unlike BEAUti,
+beascriptr allows for setting a fixed crown age.
+
+beastscriptr does not support the full functionality of BEAUti. Considering
+the size, age and number of plugins, this would be close to impossible.
+To compensate for this, an extensible software architecture is used.
+
+beastscriptr has minimal support for calling BEAST2 from within R and does
+so for testing purposes. 
+
+beastscript has minimal support for parsing and interpreting BEAST2 output files,
+for that the RBeast package is recommended.
+
+The package is free and is available from the official R package archive at 
+http://cran.r-project.org/src/contrib/PACKAGES.html\#beastscriptr. 
+beastscriptr is licensed under the GNU General Public License.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Citation of beastscriptr}
@@ -71,64 +186,6 @@ from within R.
 
 We would like to thank the Center for Information Technology of the University of Groningen for their support
 and for providing access to the Peregrine high performance computing cluster.
-
-
-
-
-
-
-
-
-
-\appendix
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Approach}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The goal of the R package beastscriptr is to create the 
-same BEAST2 input files that BEAUti creates, but from one R function call 
-instead.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Methods}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-By creating BEAST2 input files in BEAUti, 
-the desired output of beastscriptr was determined. 
-The functionality of BEAUti is added gradually (and is still growing).
-
-beastscriptr has a novel functionality not built into BEAUti yet:
-it allows for using phylogenies of a fixed crown age. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Discussion}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-beastscriptr does not support the full functionality of BEAUti. Considering
-the size, age and number of plugins, this would be close to impossible.
-To compensate for this, an extensible software architecture is used.
-
-beastscriptr has minimal support for calling BEAST2 from within R and does
-so for testing purposes. 
-
-beastscript has minimal support for parsing and interpreting BEAST2 output files,
-for that the RBeast package is recommended.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusion}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-beastscriptr successfully creates valid BEAST2 input files. Unlike BEAUti,
-beascriptr allows for setting a fixed crown age.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{plain}
