@@ -17,6 +17,35 @@
 % \newcommand*\filename[1]{${#1}$}
 % \newcommand*\myfilename[1]{\verb;{#1};}
 
+% Style of code
+% From http://r.789695.n4.nabble.com/How-to-nicely-display-R-code-with-the-LaTeX-package-listings-tp4648110.html
+\usepackage{fancyvrb} 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+  language=R,% set programming language
+  basicstyle=\ttfamily\small,% basic font style
+  commentstyle=\color{gray},% comment style
+  numbers=left,% display line numbers on the left side
+  numberstyle=\scriptsize,% use small line numbers
+  numbersep=10pt,% space between line numbers and code
+  tabsize=2,% sizes of tabs
+  showstringspaces=false,% do not replace spaces in strings by a certain character
+  captionpos=b,% positioning of the caption below
+  breaklines=true,% automatic line breaking
+  escapeinside={(*}{*)},% escaping to LaTeX
+  fancyvrb=true,% verbatim code is typset by listings
+  extendedchars=false,% prohibit extended chars (chars of codes 128--255)
+  literate={"}{{\texttt{"}}}1{<-}{{$\bm\leftarrow$}}1{<<-}{{$\bm\twoheadleftarrow$}}1
+  {~}{{$\bm\sim$}}1{<=}{{$\bm\le$}}1{>=}{{$\bm\ge$}}1{!=}{{$\bm\neq$}}1{^}{{$^{\bm\wedge}$}}1,% item to replace, text, length of chars
+  alsoletter={.<-},% becomes a letter
+  alsoother={$},% becomes other
+  otherkeywords={!=, ~, $, \&, \%/\%, \%*\%, \%\%, <-, <<-, /},% other keywords
+  deletekeywords={c}% remove keywords 
+}
+\lstset{style=mystyle}
 
 \begin{document}
 
@@ -108,38 +137,33 @@ it allows for using phylogenies of a fixed crown age.
 \section{Examples}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 As in BEAUti, to create a BEAST2 input file, 
-one needs an alignment, model priors and MCMC parameters.
-When the alignment is stored in the file alignment.fasta,
-the desired tree prior is a constant-rate Birth-Death 
-model \cite{nee1994reconstructed} and the MCMC chain needs to run 1M 
-states, beastscriptr can create a file 
-(called \verb;birth_death.xml;) from R 
-as such:
+one needs an alignment and model settings.
+With those settings at their default, \verb;beastscriptr; is easy to use:
+Create a BEAST2 input file with name \verb;beast2.xml; from 
+a FASTA file with name \verb;alignment.fas; is done like this:
 
-\begin{lstlisting}[language=R]
-beast_scriptr(
-  input_fasta_filename = "alignment.fasta",
-  mcmc_chainlength = 10000000,
-  tree_prior = "birth_death",
-  output_xml_filename = "birth_death.xml"
+\begin{lstlisting}[language=R, caption=Simplest example]
+library(beastscriptr)
+create_beast2_input_file(
+  "alignment.fas",
+  "beast2.xml"
 )
 \end{lstlisting}
 
-The created file \verb;birth_death.xml; can then be used by BEAST2.
+The created file \verb;beast2.xml; can then be used by BEAST2.
 
 Novel about beastscriptr is that it allows for specifying a fixed crown age:
 
-\begin{lstlisting}[language=R]
-beast_scriptr(
-  input_fasta_filename = "alignment.fasta",
-  mcmc_chainlength = 10000000,
-  tree_prior = "birth_death",
-  output_xml_filename = "birth_death_fixed_15.xml"
+\begin{lstlisting}[language=R, caption=Example with fixed crown age]
+create_beast2_input_file(
+  "alignment.fas",
+  "beast2.xml"
   fixed_crown_age = TRUE,
   initial_phylogeny = beastscriptr::fasta_to_phylo(
-    input_fasta_filename, crown_age = 15)
+    fasta_filename = "alignment.fas", 
+    crown_age = 15
+  )
 )
 \end{lstlisting}
 
