@@ -1,4 +1,4 @@
-# beastscriptr_article
+# beautier_article
 
 ## Acknowledgemennts
 

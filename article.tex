@@ -8,9 +8,9 @@
 \usepackage{pgf}
 \usetikzlibrary{arrows,automata}
 
-% \newcommand*\beastscriptr{\verb;beastscriptr;}
+% \newcommand*\beautier{\verb;beautier;}
 
-\title{beastscriptr: BEAUti for R}
+\title{beautier: BEAUti for R}
 \author{Rich\`el J.C. Bilderbeek}
 
 
@@ -53,15 +53,15 @@
 
 \begin{abstract}
   \textbf{1. }
-  Here, I present a package, \verb;beastscriptr;, for the R programming language. \\
+  Here, I present a package, \verb;beautier;, for the R programming language. \\
   \textbf{2. }
-    \verb;beastscriptr; allows for scripted use of the BEAST2 phylogenetics tool, 
+    \verb;beautier; allows for scripted use of the BEAST2 phylogenetics tool, 
     by creating BEAST2 input files from an R function call. \\
   \textbf{3. }
-    I describe \verb;beastscriptr; usage, the novel functionality it provides
+    I describe \verb;beautier; usage, the novel functionality it provides
     compared to BEAUti, and give some minimal examples. \\
   \textbf{4. }
-    As \verb;beastscriptr; is free, libre, open-source and designed to be extended, 
+    As \verb;beautier; is free, libre, open-source and designed to be extended, 
     I conclude by describing the current development of the package \\
 \end{abstract}
 
@@ -76,7 +76,7 @@ BEAST2 is bundled with the program called BEAUti \cite{drummond2012bayesian},
 which  allows for a user-friendly way to create the
 input files that BEAST2 needs. BEAUti is convenient to get started, yet
 does not allow for the scripted use of BEAST2. For creating BEAST2 input
-files from a script, beastscriptr is the R package facilitating this:
+files from a script, beautier is the R package facilitating this:
 it creates a BEAST2 input files from an R function call.
 
 %\begin{figure}
@@ -99,7 +99,7 @@ it creates a BEAST2 input files from an R function call.
     \includegraphics[height=0.1\textheight]{xml.png}
   };   
   \node[state] (F) [rectangle, below of=E] {\includegraphics[width=0.3\textwidth]{DensiTreeExample2.jpg}};
-  \path (A) edge [anchor = east] node {\includegraphics[height=0.15\textheight]{beastscriptr_logo.png}} (E)
+  \path (A) edge [anchor = east] node {\includegraphics[height=0.15\textheight]{beautier_logo.png}} (E)
         (A) edge [anchor = west] node {\includegraphics[height=0.15\textheight]{BeautiSiteModel.png}} (E)
         (E) edge [] node {\includegraphics[width=0.2\textwidth]{Beast2LogoRat.png}} (F); 
   \end{tikzpicture}
@@ -117,19 +117,19 @@ it creates a BEAST2 input files from an R function call.
 \section{Descriptions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The goal of the R package \verb;beastscriptr; is to create the 
+The goal of the R package \verb;beautier; is to create the 
 same BEAST2 input files that BEAUti creates, but from one R function call 
 instead.
 
 By creating BEAST2 input files in BEAUti, 
-the desired output of beastscriptr was determined. 
+the desired output of beautier was determined. 
 The functionality of BEAUti is added gradually (and is still growing).
 
-\verb;beastscriptr; has only parts of the functionality of BEAUti, yet
+\verb;beautier; has only parts of the functionality of BEAUti, yet
 can be extended easily. beastcriptr, on the other hand, does allow for specifying
 to use phylogenies of fixed crown age.
 
-\verb;beastscriptr; has a novel functionality not built into BEAUti yet:
+\verb;beautier; has a novel functionality not built into BEAUti yet:
 it allows for using phylogenies of a fixed crown age. 
 
 
@@ -139,12 +139,12 @@ it allows for using phylogenies of a fixed crown age.
 
 As in BEAUti, to create a BEAST2 input file, 
 one needs an alignment and model settings.
-With those settings at their default, \verb;beastscriptr; is easy to use:
+With those settings at their default, \verb;beautier; is easy to use:
 Create a BEAST2 input file with name \verb;beast2.xml; from 
 a FASTA file with name \verb;alignment.fas; is done like this:
 
 \begin{lstlisting}[language=R, caption=Simplest example]
-library(beastscriptr)
+library(beautier)
 create_beast2_input_file(
   "alignment.fas",
   "beast2.xml"
@@ -153,14 +153,14 @@ create_beast2_input_file(
 
 The created file \verb;beast2.xml; can then be used by BEAST2.
 
-Novel about beastscriptr is that it allows for specifying a fixed crown age:
+Novel about beautier is that it allows for specifying a fixed crown age:
 
 \begin{lstlisting}[language=R, caption=Example with fixed crown age]
 create_beast2_input_file(
   "alignment.fas",
   "beast2.xml"
   fixed_crown_age = TRUE,
-  initial_phylogeny = beastscriptr::fasta_to_phylo(
+  initial_phylogeny = beautier::fasta_to_phylo(
     fasta_filename = "alignment.fas", 
     crown_age = 15
   )
@@ -171,37 +171,37 @@ In this example, a random phylogeny is created from the FASTA file, but
 one could also use a more informed initial phylogeny with the desired crown age. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{beastscriptr development and other resources}
+\section{beautier development and other resources}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-beastscriptr successfully creates valid BEAST2 input files. Unlike BEAUti,
+beautier successfully creates valid BEAST2 input files. Unlike BEAUti,
 beascriptr allows for setting a fixed crown age.
 
-beastscriptr does not support the full functionality of BEAUti. Considering
+beautier does not support the full functionality of BEAUti. Considering
 the size, age and number of plugins, this would be close to impossible.
 To compensate for this, an extensible software architecture is used.
 
-beastscriptr has minimal support for calling BEAST2 from within R and does
+beautier has minimal support for calling BEAST2 from within R and does
 so for testing purposes. 
 
 beastscript has minimal support for parsing and interpreting BEAST2 output files,
 for that the RBeast package is recommended.
 
 The package is free and is available from the official R package archive at 
-http://cran.r-project.org/src/contrib/PACKAGES.html\#beastscriptr. 
-beastscriptr is licensed under the GNU General Public License.
+http://cran.r-project.org/src/contrib/PACKAGES.html\#beautier. 
+beautier is licensed under the GNU General Public License.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Citation of beastscriptr}
+\section{Citation of beautier}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Scientists using beastscriptr in a published paper should cite this
-article. Users can additionally cite the beastscriptr package 
+Scientists using beautier in a published paper should cite this
+article. Users can additionally cite the beautier package 
 directly. Citation information can be obtained by typing:
 
 \begin{lstlisting}[language=R]
-> citation("beastscriptr")
+> citation("beautier")
 \end{lstlisting}
 
 from within R.
