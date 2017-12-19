@@ -76,7 +76,7 @@ BEAST2 is bundled with the program called BEAUti \cite{drummond2012bayesian},
 which  allows for a user-friendly way to create the
 input files that BEAST2 needs. BEAUti is convenient to get started, yet
 does not allow for the scripted use of BEAST2. For creating BEAST2 input
-files from a script, beautier is the R package facilitating this:
+files from a script, \verb;beautier; is the R package facilitating this:
 it creates a BEAST2 input files from an R function call.
 
 %\begin{figure}
@@ -122,7 +122,7 @@ same BEAST2 input files that BEAUti creates, but from one R function call
 instead.
 
 By creating BEAST2 input files in BEAUti, 
-the desired output of beautier was determined. 
+the desired output of \verb;beautier; was determined. 
 The functionality of BEAUti is added gradually (and is still growing).
 
 \verb;beautier; has only parts of the functionality of BEAUti, yet
@@ -153,7 +153,7 @@ create_beast2_input_file(
 
 The created file \verb;beast2.xml; can then be used by BEAST2.
 
-Novel about beautier is that it allows for specifying a fixed crown age:
+Novel about \verb;beautier; is that it allows for specifying a fixed crown age:
 
 \begin{lstlisting}[language=R, caption=Example with fixed crown age]
 create_beast2_input_file(
@@ -171,33 +171,33 @@ In this example, a random phylogeny is created from the FASTA file, but
 one could also use a more informed initial phylogeny with the desired crown age. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{beautier development and other resources}
+\section{\verb;beautier; development and other resources}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-beautier successfully creates valid BEAST2 input files. Unlike BEAUti,
+\verb;beautier; successfully creates valid BEAST2 input files. Unlike BEAUti,
 beascriptr allows for setting a fixed crown age.
 
-beautier does not support the full functionality of BEAUti. Considering
+\verb;beautier; does not support the full functionality of BEAUti. Considering
 the size, age and number of plugins, this would be close to impossible.
 To compensate for this, an extensible software architecture is used.
 
-beautier has minimal support for calling BEAST2 from within R and does
+\verb;beautier; has minimal support for calling BEAST2 from within R and does
 so for testing purposes. 
 
-beastscript has minimal support for parsing and interpreting BEAST2 output files,
-for that the RBeast package is recommended.
+\verb;beautier; has minimal support for parsing and interpreting BEAST2 output files,
+for that the \verb;RBeast; package is recommended.
 
 The package is free and is available from the official R package archive at 
 http://cran.r-project.org/src/contrib/PACKAGES.html\#beautier. 
-beautier is licensed under the GNU General Public License.
+\verb;beautier; is licensed under the GNU General Public License.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Citation of beautier}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Scientists using beautier in a published paper should cite this
-article. Users can additionally cite the beautier package 
+Scientists using \verb;beautier; in a published paper should cite this
+article. Users can additionally cite the \verb;beautier; package 
 directly. Citation information can be obtained by typing:
 
 \begin{lstlisting}[language=R]
