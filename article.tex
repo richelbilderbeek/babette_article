@@ -151,7 +151,7 @@ Multiple alignments can be used, each with its own (unlinked) site model, clock 
 \verb;create_cbs_tree_prior; & Create a coalescent Bayesian skyline tree prior \\
 \verb;create_ccp_tree_prior; & Create a coalescent constant-population tree prior \\
 \verb;create_cep_tree_prior; & Create a coalescent exponential-population tree prior \\
-\verb;create_yule_tree_prior; & Create a Yule tree prior \\
+\verb;create_yule_tree_prior; & Create a Yule tree prior \cite{yule} \\
 \hline
 \verb;create_beta_distr; & Create a beta distribution \\
 \verb;create_exp_distr; & Create an exponential distribution \\
@@ -223,7 +223,7 @@ create_beast2_input_file(
 This code will create a BEAST2 file with name '\verb;beast2.xml;',
 using a FASTA file with name \verb;alignment.fas;, using the same default settings as BEAUti.
 The default settings are, among others, to use a Jukes-Cantor site model \cite{cantor1969mammalian}, 
-a strict clock, and a Yule birth tree prior. Listing \ref{lis:simplest_example_explicit} shows how
+a strict clock, and a Yule birth tree prior \cite{yule1925mathematical}. Listing \ref{lis:simplest_example_explicit} shows how
 to explicitly pick these settings:
 
 \begin{lstlisting}[language=R, caption=Simplest example with explicit defaults, label=lst:simplest_example_explicit, floatplacement=H]
