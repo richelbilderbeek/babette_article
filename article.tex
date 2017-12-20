@@ -53,7 +53,7 @@
 
 \begin{abstract}
   \textbf{1. }
-  Here, I present a package, \verb;beautier; , for the R programming language. \\
+  Here, I present a package, \verb;beautier;, 'BEAUti for R', for the R programming language. \\
   \textbf{2. }
     \verb;beautier; allows for scripted use of the BEAST2 phylogenetics tool, 
     by creating BEAST2 input files from an R function call. \\
@@ -72,12 +72,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 BEAST2 \cite{bouckaert2014beast} is a popular Bayesian phylogenetics tool.
-BEAST2 is bundled with the program called BEAUti \cite{drummond2012bayesian},
-which  allows for a user-friendly way to create the
-input files that BEAST2 needs. BEAUti is convenient to get started, yet
-does not allow for the scripted use of BEAST2. For creating BEAST2 input
-files from a script, \verb;beautier; is the R package facilitating this:
-it creates a BEAST2 input files from an R function call.
+BEAST2 is bundled with the program called BEAUti \cite{drummond2012bayesian}.
+BEAUti has a user-friendly graphical user interface to create BEAST2 input files,
+but does not allow for the scripted use of BEAST2. '
+\verb;beautier; does allow for scripted use of BEAST2 from an R function call.
+An additional novelty is that \verb;beautier; allows to specify a fixed crown age.
 
 %\begin{figure}
 %  \centering
@@ -85,6 +84,7 @@ it creates a BEAST2 input files from an R function call.
 %  \caption{BEAUti}
 %  \label{figure:beauti}
 %\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
@@ -117,33 +117,84 @@ it creates a BEAST2 input files from an R function call.
 \section{Descriptions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The goal of the R package \verb;beautier; is to create the 
-same BEAST2 input files that BEAUti creates, but from one R function call 
-instead.
+\verb;beautier; is written in the R programming language \cite{R}.
+\verb;beautier; creates the BEAST2 input files from an R function call.
+
+\verb;beautier;'s main function is \verb;create_beast2_input_file;, which creates
+an BEAST2 input file. 
+
+\verb;create_beast2_input_file; needs at least the name of a FASTA file containing a DNA alignment
+and a name for the to-be-created output file. This interface follows BEAUti's default settings.
+Per alignment, a site model, clock model and tree priors can be chosen.
+Multiple alignments can be used, each with its own (unlinked) site model, clock model and tree prior.
+
+
+\begin{table}[]
+\centering
+\begin{tabular}{ | l | l | }
+\hline
+\textbf{Name} & \textbf{Description} \\
+\hline
+\verb;create_beast2_input_file; & Creates a BEAST2 input file \\
+\hline
+\verb;create_gamma_site_model; & Create a gamma site model \\
+\verb;create_gtr_site_model; & Create a GTR site model \\
+\verb;create_hky_site_model; & Create an HKY site model \\
+\verb;create_jc69_site_model; & Create a Jukes-Cantor site model \\
+\verb;create_tn93_site_model; & Create a TN93 site model \\
+\hline
+\verb;create_rln_clock_model; & Create a relaxed log-normal clock model \\
+\verb;create_strict_clock_model; & Create a strict clock model \\
+\hline
+\verb;create_bd_tree_prior; & Create a birth-death tree prior \\
+\verb;create_cbs_tree_prior; & Create a coalescent Bayesian skyline tree prior \\
+\verb;create_ccp_tree_prior; & Create a coalescent constant-population tree prior \\
+\verb;create_cep_tree_prior; & Create a coalescent exponential-population tree prior \\
+\verb;create_yule_tree_prior; & Create a Yule tree prior \\
+\hline
+\verb;create_beta_distr; & Create a beta distribution \\
+\verb;create_exp_distr; & Create an exponential distribution \\
+\verb;create_gamma_distr; & Create a gamma distribution \\
+\verb;create_inv_gamma_distr; & Create an inverse gamma distribution \\
+\verb;create_laplace_distr; & Create a Laplace distribution \\
+\verb;create_log_normal_distr; & Create a log-normal distribution \\
+\verb;create_normal_distr; & Create a normal distribution \\
+\verb;create_one_div_x_distr; & Create a 1/X distribution \\
+\verb;create_poisson_distr; & Create a Poisson distribution \\
+\verb;create_uniform_distr; & Create a uniform distribution \\
+\hline
+\end{tabular}
+\caption{beautier's functions}
+\label{tab:functions}
+\end{table}
 
 By creating BEAST2 input files in BEAUti, 
 the desired output of \verb;beautier; was determined. 
 The functionality of BEAUti is added gradually (and is still growing).
 
 \verb;beautier; has only parts of the functionality of BEAUti, yet
-can be extended easily. beastcriptr, on the other hand, does allow for specifying
+can be extended easily. \verb;beautier; , on the other hand, does allow for specifying
 to use phylogenies of fixed crown age.
 
 \verb;beautier; has a novel functionality not built into BEAUti yet:
 it allows for using phylogenies of a fixed crown age. 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-As in BEAUti, to create a BEAST2 input file, 
-one needs an alignment and model settings.
-With those settings at their default, \verb;beautier; is easy to use:
-Create a BEAST2 input file with name \verb;beast2.xml; from 
-a FASTA file with name \verb;alignment.fas; is done like this:
+In R, a package's function need to be loaded in the global namespace first:
 
-\begin{lstlisting}[language=R, caption=Simplest example]
+\begin{lstlisting}[language=R, caption=Loading, label=lst:loading_beautier, floatplacement=H]
+library(beautier)
+\end{lstlisting}
+
+BEAUti, and likewise \verb;beautier;, need at least a FASTA filename
+and an XML output filename. In BEAUti, this is achieved by loading a FASTA file (resulting
+in figure \ref{fig:simplest_beauti_usage}), then saving an output file using a common
+save file dialog. In \verb;beautier;, the same is achieved by listing \ref{lst:simplest_example}:
+
+\begin{lstlisting}[language=R, caption=Simplest example, label=lst:simplest_example, floatplacement=H]
 library(beautier)
 create_beast2_input_file(
   "alignment.fas",
@@ -151,38 +202,101 @@ create_beast2_input_file(
 )
 \end{lstlisting}
 
-The created file \verb;beast2.xml; can then be used by BEAST2.
+\begin{figure}
+  \centering
+  \includegraphics[]{all_default.png}
+  \caption{Simplest BEAUti usage}
+  \label{fig:simplest_beauti_usage}
+\end{figure}
 
-Novel about \verb;beautier; is that it allows for specifying a fixed crown age:
+This code will create a BEAST2 file with name '\verb;beast2.xml;',
+using a FASTA file with name \verb;alignment.fas;, using the same default settings as BEAUti.
+The default settings are, among others, to use a Jukes-Cantor site model, a strict clock,
+and a Yule birth tree prior. Listing \ref{lis:simplest_example_explicit} shows how
+to explicitly pick these settings:
 
-\begin{lstlisting}[language=R, caption=Example with fixed crown age]
+\begin{lstlisting}[language=R, caption=Simplest example with explicit defaults, label=lst:simplest_example_explicit, floatplacement=H]
+library(beautier)
+create_beast2_input_file(
+  input_fasta_filenames = "alignment.fas",
+  output_xml_filename = "beast2.xml",
+  site_models = create_jc69_site_model(),
+  clock_models = create_strict_clock_model(),
+  tree_priors = create_yule_tree_prior()
+)
+\end{lstlisting}
+
+The argument names \verb;input_fasta_filenames;, \verb;site_models;, \verb;clock_models; and \verb;tree_priors; are plural, as each of these
+can be (a list of) one or more elements. Each of these arguments must have the same number of elements, so that each alignment has its
+own site model, clock model and tree prior. An example of using a different site model, clock model and tree prior is shown by listing \ref{lis:all_different}:
+
+\begin{lstlisting}[language=R, caption=Example with different site model and clock model and tree prior, label=lst:all_different, floatplacement=H]
+library(beautier)
+create_beast2_input_file(
+  input_fasta_filenames = "alignment.fas",
+  output_xml_filename = "beast2.xml",
+  site_models = create_hky_site_model(),
+  clock_models = create_rln_clock_model(),
+  tree_priors = create_bd_tree_prior()
+)
+\end{lstlisting}
+
+This code uses an HKY site model, a relaxed log-normal clock model and a birth-death tree prior.
+Table \ref{tab:functions} shows an overview of all functions to create site models, clock models and tree priors.
+
+\verb;beautier; creates site models, clock models and tree priors with the same default distrbutions as BEAUti.
+For example, a Yule tree prior assumes that birth rate likelihoods follow a uniform distribution, from minus infinity
+to infinity. This assumption entails that negative and positive birth rates are just as likely, where a negative birth rate is biologically impossible. 
+One may prefer to have an exponential distribution instead, as this would state that birth rates are always positive, and
+higher values are less likely than lower values. To do so \verb;beautier; is shown by listing \ref{lis:diff_distr}:
+
+
+\begin{lstlisting}[language=R, caption=Example with Yule tree prior with different birth rate distribution, label=lst:diff_distr, floatplacement=H]
+library(beautier)
+create_beast2_input_file(
+  input_fasta_filenames = "alignment.fas",
+  output_xml_filename = "beast2.xml",
+  tree_priors = create_yule_tree_prior(
+    birth_rate_distr = create_exp_distr()    
+  )
+)
+\end{lstlisting}
+
+Novel about \verb;beautier; is that it allows for specifying a fixed crown age. 
+By default, a phylogeny's crown age is jointly estimated with the other parameters.
+Setting a fixed crown age is not yet possible in BEAUti directly, but it is documented how to 
+manually edit the XML file to allow for a fixed crown age. Listing \ref{lst:fixed_crown_age} shows how to specify a fixed crown age is \verb;beautier;:
+
+\begin{lstlisting}[language=R, caption=Example with fixed crown age, label=lst:fixed_crown_age, floatplacement=H]
 create_beast2_input_file(
   "alignment.fas",
   "beast2.xml"
   fixed_crown_age = TRUE,
-  initial_phylogeny = beautier::fasta_to_phylo(
+  initial_phylogeny = fasta_to_phylo(
     fasta_filename = "alignment.fas", 
     crown_age = 15
   )
 )
 \end{lstlisting}
 
-In this example, a random phylogeny is created from the FASTA file, but
-one could also use a more informed initial phylogeny with the desired crown age. 
+This code shows that setting \verb;fixed_crown_age; to true is insufficient. An
+initial phylogeny of the desired (fixed) crown age needs to be supplied. In this
+example, a random phylogeny is constructed from the FASTA filename. Supplying an 
+informed phylogeny will make the MCMC algorithm start at a likelier initial state.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{beautier development and other resources}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \verb;beautier; successfully creates valid BEAST2 input files. Unlike BEAUti,
-beascriptr allows for setting a fixed crown age.
+\verb;beautier; allows for setting a fixed crown age.
 
 \verb;beautier; does not support the full functionality of BEAUti. Considering
 the size, age and number of plugins, this would be close to impossible.
 To compensate for this, an extensible software architecture is used.
 
 \verb;beautier; has minimal support for calling BEAST2 from within R and does
-so for testing purposes. 
+so for testing purposes only. 
 
 \verb;beautier; has minimal support for parsing and interpreting BEAST2 output files,
 for that the \verb;RBeast; package is recommended.
