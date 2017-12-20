@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \usepackage{listings}
+\usepackage{hyperref}
 \usepackage{todonotes}
 \usepackage{verbatim}
 \usepackage{tikz}
@@ -179,6 +180,16 @@ to use phylogenies of fixed crown age.
 \verb;beautier; has a novel functionality not built into BEAUti yet:
 it allows for using phylogenies of a fixed crown age. 
 
+\verb;beautier; does not support the full functionality of BEAUti. Considering
+the size, age and number of plugins, this would be close to impossible.
+To compensate for this, an extensible software architecture is used.
+
+\verb;beautier; has minimal support for calling BEAST2 from within R and does
+so for testing purposes only. 
+
+\verb;beautier; has minimal support for parsing and interpreting BEAST2 output files,
+for that the \verb;RBeast; \cite{RBeast} package is recommended.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -288,22 +299,67 @@ informed phylogeny will make the MCMC algorithm start at a likelier initial stat
 \section{beautier development and other resources}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\verb;beautier; successfully creates valid BEAST2 input files. Unlike BEAUti,
-\verb;beautier; allows for setting a fixed crown age.
-
-\verb;beautier; does not support the full functionality of BEAUti. Considering
-the size, age and number of plugins, this would be close to impossible.
-To compensate for this, an extensible software architecture is used.
-
-\verb;beautier; has minimal support for calling BEAST2 from within R and does
-so for testing purposes only. 
-
-\verb;beautier; has minimal support for parsing and interpreting BEAST2 output files,
-for that the \verb;RBeast; package is recommended.
-
-The package is free and is available from the official R package archive at 
-http://cran.r-project.org/src/contrib/PACKAGES.html\#beautier. 
+\verb;beautier; is free, libre and open source software available from the official R package archive at 
+\url{http://cran.r-project.org/src/contrib/PACKAGES.html\#beautier}.  
 \verb;beautier; is licensed under the GNU General Public License.
+
+\verb;beautier;'s development takes place on GitHub \cite{github}. 
+GitHub is a website that hosts (among others) software and facilites its development.
+Using GitHub is a good practice for computational scientists \cite{perez2016ten} 
+and improves transparency \cite{gorgolewski2016practical}.
+
+\verb;beautier;'s quality is assured by Travis CI \cite{travis}. Travis CI is
+a continuous integration service, that runs a script upon a (suggested)
+change in \verb;beautier;'s code. The \verb;beautier; script checks if the
+package can be build, runs all unit and intergration tests, 
+measures code coverage, coding style and good practices.
+
+Unit and integration tests check the intergrity of \verb;beatier;. All functions
+are tested for producing the correct output and desired error handling. 
+Travis CI uses the testing facilities of the \verb;testthat; \cite{testthat} package.
+
+Code coverage is the percentage of code that is executed in tests. 
+Code coverage correlates with code quality \cite{del1995correlation}. 
+Travis CI uses the \verb;covr; \cite{covr} package to measure code coverage. 
+\verb;beautier; has a 100\% code coverage. 
+
+Coding style is the way statements are laid out, for example the placement of 
+curly brackets. \verb;beautier; follows Hadley Wickham's style guide. 
+Travis CI uses the \verb;lintr; \cite{lintr} package to comfirm this coding style
+is used.
+
+Good practices are miscellaneous things considered good practices. An example
+of a good practice is (next to high code coverage and consistent coding style) 
+to have short functions with a low cyclomatic complexity. Travis CI uses 
+the \verb;goodpractice; \cite{goodpractice} package to comfirm all good practices
+are followed.
+
+\verb;beautier; is dependent on multiple packages, which are 
+\verb;APE; \cite{APE}, 
+\verb;devtools; \cite{devtools},
+\verb;geiger; \cite{GEIGER},
+\verb;ggplot2; \cite{ggplot2},
+\verb;knitr; \cite{knitr},
+\verb;phangorn; \cite{phangorn},
+\verb;RBeast; \cite{RBeast},
+\verb;rmarkdown; \cite{rmarkdown},
+\verb;seqinr; \cite{seqinr},
+\verb;stringr; \cite{stringr},
+\verb;testit; \cite{testit} and 
+\verb;TreeSim; \cite{TreeSim}.
+
+\verb;beautier;'s documentation is extensive, yet concise. All funnctions are documented
+in the package's internal documentation. For quick use, each exported function shows a minimal example. 
+For easy exploration, each exported function's documentation links to related functions.
+Additionally, \verb;beautier; has a vignette that demonstrates in a longer form how
+to use it. The integrity of this documentation is tested each time the package is built by Travis CI.
+The documentation on the GitHub helps to get started, with a dozen examples 
+of a BEAUti screenshot and the equivalent \verb;beautier; code.
+
+\verb;beautier;'s GitHub facilitates feature requests and guidelines how to do so.
+New code can be submitted using GitHub's infrastructure (a 'Pull Request'). New
+code will be tested by Travis CI to follow the same quality standards and only accepted
+when there are no 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -319,13 +375,6 @@ directly. Citation information can be obtained by typing:
 \end{lstlisting}
 
 from within R.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Acknowledgements}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-We would like to thank the Center for Information Technology of the University of Groningen for their support
-and for providing access to the Peregrine high performance computing cluster.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{plain}
