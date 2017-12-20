@@ -141,7 +141,7 @@ Multiple alignments can be used, each with its own (unlinked) site model, clock 
 \verb;create_gamma_site_model; & Create a gamma site model \\
 \verb;create_gtr_site_model; & Create a GTR site model \\
 \verb;create_hky_site_model; & Create an HKY site model \\
-\verb;create_jc69_site_model; & Create a Jukes-Cantor site model \\
+\verb;create_jc69_site_model; & Create a Jukes-Cantor site model \cite{cantor1969mammalian} \\
 \verb;create_tn93_site_model; & Create a TN93 site model \\
 \hline
 \verb;create_rln_clock_model; & Create a relaxed log-normal clock model \\
@@ -174,7 +174,7 @@ the desired output of \verb;beautier; was determined.
 The functionality of BEAUti is added gradually (and is still growing).
 
 \verb;beautier; has only parts of the functionality of BEAUti, yet
-can be extended easily. \verb;beautier; , on the other hand, does allow for specifying
+can be extended easily. \verb;beautier;, on the other hand, does allow for specifying
 to use phylogenies of fixed crown age.
 
 \verb;beautier; has a novel functionality not built into BEAUti yet:
@@ -222,8 +222,8 @@ create_beast2_input_file(
 
 This code will create a BEAST2 file with name '\verb;beast2.xml;',
 using a FASTA file with name \verb;alignment.fas;, using the same default settings as BEAUti.
-The default settings are, among others, to use a Jukes-Cantor site model, a strict clock,
-and a Yule birth tree prior. Listing \ref{lis:simplest_example_explicit} shows how
+The default settings are, among others, to use a Jukes-Cantor site model \cite{cantor1969mammalian}, 
+a strict clock, and a Yule birth tree prior. Listing \ref{lis:simplest_example_explicit} shows how
 to explicitly pick these settings:
 
 \begin{lstlisting}[language=R, caption=Simplest example with explicit defaults, label=lst:simplest_example_explicit, floatplacement=H]
@@ -324,7 +324,7 @@ Travis CI uses the \verb;covr; \cite{covr} package to measure code coverage.
 \verb;beautier; has a 100\% code coverage. 
 
 Coding style is the way statements are laid out, for example the placement of 
-curly brackets. \verb;beautier; follows Hadley Wickham's style guide. 
+curly brackets. \verb;beautier; follows Hadley Wickham's style guide \cite{style_guide}. 
 Travis CI uses the \verb;lintr; \cite{lintr} package to comfirm this coding style
 is used.
 
