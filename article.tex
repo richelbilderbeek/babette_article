@@ -147,7 +147,7 @@ Multiple alignments can be used, each with its own (unlinked) site model, clock 
 \verb;create_rln_clock_model; & Create a relaxed log-normal clock model \\
 \verb;create_strict_clock_model; & Create a strict clock model \\
 \hline
-\verb;create_bd_tree_prior; & Create a birth-death tree prior \\
+\verb;create_bd_tree_prior; & Create a birth-death tree prior \cite{kendall1948generalized} \\
 \verb;create_cbs_tree_prior; & Create a coalescent Bayesian skyline tree prior \\
 \verb;create_ccp_tree_prior; & Create a coalescent constant-population tree prior \\
 \verb;create_cep_tree_prior; & Create a coalescent exponential-population tree prior \\
@@ -215,7 +215,7 @@ create_beast2_input_file(
 
 \begin{figure}
   \centering
-  \includegraphics[]{all_default.png}
+  \includegraphics[width=\textwidth]{all_default.png}
   \caption{Simplest BEAUti usage}
   \label{fig:simplest_beauti_usage}
 \end{figure}
@@ -223,7 +223,7 @@ create_beast2_input_file(
 This code will create a BEAST2 file with name '\verb;beast2.xml;',
 using a FASTA file with name \verb;alignment.fas;, using the same default settings as BEAUti.
 The default settings are, among others, to use a Jukes-Cantor site model \cite{cantor1969mammalian}, 
-a strict clock, and a Yule birth tree prior \cite{yule1925mathematical}. Listing \ref{lis:simplest_example_explicit} shows how
+a strict clock, and a Yule birth tree prior \cite{yule}. Listing \ref{lis:simplest_example_explicit} shows how
 to explicitly pick these settings:
 
 \begin{lstlisting}[language=R, caption=Simplest example with explicit defaults, label=lst:simplest_example_explicit, floatplacement=H]
@@ -252,7 +252,7 @@ create_beast2_input_file(
 )
 \end{lstlisting}
 
-This code uses an HKY site model, a relaxed log-normal clock model and a birth-death tree prior.
+This code uses an HKY site model, a relaxed log-normal clock model and a birth-death tree prior \cite{kendall1948generalized}.
 Table \ref{tab:functions} shows an overview of all functions to create site models, clock models and tree priors.
 
 \verb;beautier; creates site models, clock models and tree priors with the same default distrbutions as BEAUti.
