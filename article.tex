@@ -72,20 +72,29 @@
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-BEAST2 \cite{bouckaert2014beast} is a popular Bayesian phylogenetics tool.
-BEAST2 is bundled with the program called BEAUti \cite{drummond2012bayesian}.
-BEAUti has a user-friendly graphical user interface to create BEAST2 input files,
-but does not allow for the scripted use of BEAST2. '
-\verb;beautier; does allow for scripted use of BEAST2 from an R function call.
-An additional novelty is that \verb;beautier; allows to specify a fixed crown age.
+BEAST2 \cite{bouckaert2014beast} is a Bayesian phylogenetics tool.
+BEAST2 creates a posterior of jointly-estimated phylonies and model
+parameters, from a DNA, RNA or amino acid alignment. BEAST2 can be run
+from the command line. To run BEAST2 from the command-line, 
+an XML configuration file is needed, that contains the alignment and model parameters.
 
-%\begin{figure}
-%  \centering
-%  \includegraphics[]{BeautiSiteModel.png}
-%  \caption{BEAUti}
-%  \label{figure:beauti}
-%\end{figure}
+BEAST2 is bundled with BEAUti \cite{drummond2012bayesian}. 
+BEAUti is a program to create a BEAST2 XML configuration file, 
+with a user-friendly graphical user interface.
+BEAUti's purpose is to help new BEAST2 users getting started.
+To do so, BEAUti starts with reasonable default settings. To
+create a minimal BEAST2 configuration file, BEAUti only needs one alignment file.
+BEAUti cannot be used from within shell scripts.
 
+\verb;beautier;, 'BEAUti for R', allows for creating BEAST2 configuration files 
+from an R function call. The interface of \verb;beautier; mimics BEAUti. This
+familiar interface helps experienced BEAST2 users to create configuration'
+files from shell scripts.
+
+BEAUti does not allow yet that an inferred phylogeny's crown age is fixed.
+In an emperical context, a phylogeny's crown age is one of the estimated
+parameters. For theoretical work, a fixed and known crown age can result
+in a cleaner analysis. \verb;beautier; allows to specify a fixed crown age.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
@@ -102,12 +111,12 @@ An additional novelty is that \verb;beautier; allows to specify a fixed crown ag
   \node[state] (F) [rectangle, below of=E] {\includegraphics[width=0.3\textwidth]{DensiTreeExample2.jpg}};
   \path (A) edge [anchor = east] node {\includegraphics[height=0.15\textheight]{beautier_logo.png}} (E)
         (A) edge [anchor = west] node {\includegraphics[height=0.15\textheight]{BeautiSiteModel.png}} (E)
-        (E) edge [] node {\includegraphics[width=0.2\textwidth]{Beast2LogoRat.png}} (F); 
+        (E) edge [] node {\includegraphics[width=0.2\textwidth]{beast_logo.png}} (F); 
   \end{tikzpicture}
 
   \caption{
     Workflow. From an alignment and priors, one creates a BEAST2 XML input file. This
-    can be done using beastscript and BEAUti. The XML file created is run by BEAST2
+    can be done using beautier or BEAUti. The created configuration file is run by BEAST2
     to create a posterior.
   }
   \label{fig:workflow}
@@ -129,7 +138,6 @@ and a name for the to-be-created output file. This interface follows BEAUti's de
 Per alignment, a site model, clock model and tree priors can be chosen.
 Multiple alignments can be used, each with its own (unlinked) site model, clock model and tree prior.
 
-
 \begin{table}[]
 \centering
 \begin{tabular}{ | l | l | }
@@ -138,7 +146,6 @@ Multiple alignments can be used, each with its own (unlinked) site model, clock 
 \hline
 \verb;create_beast2_input_file; & Creates a BEAST2 input file \\
 \hline
-\verb;create_gamma_site_model; & Create a gamma site model \\
 \verb;create_gtr_site_model; & Create a GTR site model \\
 \verb;create_hky_site_model; & Create an HKY site model \\
 \verb;create_jc69_site_model; & Create a Jukes-Cantor site model \cite{cantor1969mammalian} \\
@@ -169,14 +176,11 @@ Multiple alignments can be used, each with its own (unlinked) site model, clock 
 \label{tab:functions}
 \end{table}
 
-In total, \verb;beautier; has more than 150 exported functions to create
-any    
-By creating BEAST2 input files in BEAUti, 
-the desired output of \verb;beautier; was determined. 
-The functionality of BEAUti is added gradually (and is still growing).
+In total, \verb;beautier; has 59 exported functions to create
+a BEAST2 configuration file. \verb;beautier; is an alternative for a majority of BEAUti use cases.
+\verb;beautier;s future extensions (also: road map) can be found on its GitHub.
 
-\verb;beautier; has only parts of the functionality of BEAUti, yet
-can be extended easily. \verb;beautier;, on the other hand, does allow for specifying
+\verb;beautier;, on the other hand, does allow for specifying
 to use phylogenies of fixed crown age.
 
 \verb;beautier; has a novel functionality not built into BEAUti yet:
@@ -190,7 +194,7 @@ To compensate for this, an extensible software architecture is used.
 so for testing purposes only. 
 
 \verb;beautier; has minimal support for parsing and interpreting BEAST2 output files,
-for that the \verb;RBeast; \cite{RBeast} package is recommended.
+for that the \verb;beastier; \cite{beastier} package is recommended.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
