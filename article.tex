@@ -12,7 +12,7 @@
 % \newcommand*\beautier{\verb;beautier;}
 
 \title{beautier: BEAUti for R}
-\author{Rich\`el J.C. Bilderbeek}
+\author{Rich\`el J.C. Bilderbeek, Rampal S. Etienne}
 
 
 % \newcommand*\filename[1]{${#1}$}
@@ -92,7 +92,7 @@ familiar interface helps experienced BEAST2 users to create configuration'
 files from shell scripts.
 
 BEAUti does not allow yet that an inferred phylogeny's crown age is fixed.
-In an emperical context, a phylogeny's crown age is one of the estimated
+In an empirical context, a phylogeny's crown age is one of the estimated
 parameters. For theoretical work, a fixed and known crown age can result
 in a cleaner analysis. \verb;beautier; allows to specify a fixed crown age.
 
@@ -257,7 +257,7 @@ create_beast2_input_file(
 This code uses an HKY site model, a relaxed log-normal clock model and a birth-death tree prior \cite{kendall1948generalized}.
 Table \ref{tab:functions} shows an overview of all functions to create site models, clock models and tree priors.
 
-\verb;beautier; creates site models, clock models and tree priors with the same default distrbutions as BEAUti.
+\verb;beautier; creates site models, clock models and tree priors with the same default distributions as BEAUti.
 For example, a Yule tree prior assumes that birth rate likelihoods follow a uniform distribution, from minus infinity
 to infinity. This assumption entails that negative and positive birth rates are just as likely, where a negative birth rate is biologically impossible. 
 One may prefer to have an exponential distribution instead, as this would state that birth rates are always positive, and
@@ -306,17 +306,17 @@ informed phylogeny will make the MCMC algorithm start at a likelier initial stat
 \verb;beautier; is licensed under the GNU General Public License.
 
 \verb;beautier;'s development takes place on GitHub \cite{github}. 
-GitHub is a website that hosts (among others) software and facilites its development.
+GitHub is a website that hosts (among others) software and facilitates its development.
 Using GitHub is a good practice for computational scientists \cite{perez2016ten} 
 and improves transparency \cite{gorgolewski2016practical}.
 
 \verb;beautier;'s quality is assured by Travis CI \cite{travis}. Travis CI is
 a continuous integration service, that runs a script upon a (suggested)
 change in \verb;beautier;'s code. The \verb;beautier; script checks if the
-package can be build, runs all unit and intergration tests, 
+package can be build, runs all unit and integration tests, 
 measures code coverage, coding style and good practices.
 
-Unit and integration tests check the intergrity of \verb;beatier;. All functions
+Unit and integration tests check the integrity of \verb;beatier;. All functions
 are tested for producing the correct output and desired error handling. 
 Travis CI uses the testing facilities of the \verb;testthat; \cite{testthat} package.
 
@@ -327,7 +327,7 @@ Travis CI uses the \verb;covr; \cite{covr} package to measure code coverage.
 
 Coding style is the way statements are laid out, for example the placement of 
 curly brackets. \verb;beautier; follows Hadley Wickham's style guide \cite{style_guide}. 
-Travis CI uses the \verb;lintr; \cite{lintr} package to comfirm this coding style
+Travis CI uses the \verb;lintr; \cite{lintr} package to confirm this coding style
 is used.
 
 Good practices are miscellaneous things considered good practices. An example
