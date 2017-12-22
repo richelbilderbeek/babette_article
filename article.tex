@@ -24,7 +24,7 @@
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{backcolor}{rgb}{0.95,0.95,0.92}
 \lstdefinestyle{mystyle}{
   language=R,% set programming language
   basicstyle=\ttfamily\small,% basic font style
@@ -54,7 +54,7 @@
 
 \begin{abstract}
   \textbf{1. }
-  Here, I present a package, \verb;beautier;, 'BEAUti for R', for the R programming language. \\
+  Here, we present a package, \verb;beautier;, 'BEAUti for R', for the R programming language. \\
   \textbf{2. }
     \verb;beautier; allows for scripted use of the BEAST2 phylogenetics tool, 
     by creating BEAST2 input files from an R function call. \\
@@ -73,7 +73,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 BEAST2 \cite{bouckaert2014beast} is a Bayesian phylogenetics tool.
-BEAST2 creates a posterior of jointly-estimated phylonies and model
+BEAST2 creates a posterior of jointly estimated phylonies and model
 parameters, from a DNA, RNA or amino acid alignment. BEAST2 can be run
 from the command line. To run BEAST2 from the command-line, 
 an XML configuration file is needed, that contains the alignment and model parameters.
@@ -128,12 +128,11 @@ in a cleaner analysis. \verb;beautier; allows to specify a fixed crown age.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \verb;beautier; is written in the R programming language \cite{R}.
-\verb;beautier; creates the BEAST2 input files from an R function call.
+\verb;beautier; creates the BEAST2 input files from an R function call,
+in a similar way that BEAUti does.
 
 \verb;beautier;'s main function is \verb;create_beast2_input_file;, which creates
-an BEAST2 input file. 
-
-\verb;create_beast2_input_file; needs at least the name of a FASTA file containing a DNA alignment
+an BEAST2 input file. \verb;create_beast2_input_file; needs at least the name of a FASTA file containing a DNA alignment
 and a name for the to-be-created output file. This interface follows BEAUti's default settings.
 Per alignment, a site model, clock model and tree priors can be chosen.
 Multiple alignments can be used, each with its own (unlinked) site model, clock model and tree prior.
@@ -178,22 +177,19 @@ Multiple alignments can be used, each with its own (unlinked) site model, clock 
 
 In total, \verb;beautier; has 59 exported functions to create
 a BEAST2 configuration file. \verb;beautier; is an alternative for a majority of BEAUti use cases.
-\verb;beautier;s future extensions (also: road map) can be found on its GitHub.
-
-\verb;beautier;, on the other hand, does allow for specifying
-to use phylogenies of fixed crown age.
-
-\verb;beautier; has a novel functionality not built into BEAUti yet:
-it allows for using phylogenies of a fixed crown age. 
-
 \verb;beautier; does not support the full functionality of BEAUti. Considering
 the size, age and number of plugins, this would be close to impossible.
 To compensate for this, an extensible software architecture is used.
+\verb;beautier;s future extensions can be found on its GitHub.
 
-\verb;beautier; has minimal support for calling BEAST2 from within R and does
-so for testing purposes only. 
+BEAUti assumes that a phylogeny has a crown age that needs to be jointly estimated
+with the phylogeny and other parameters. BEAUti does not allow for fixing
+a phylogeny's crown age. Before \verb;beautier;, one needs to manually edit the BEAST2 
+XML configuration file, which is prone to errors. \verb;beautier;, allow easy
+fixing of phylogenies' crown ages.
 
-\verb;beautier; has minimal support for parsing and interpreting BEAST2 output files,
+\verb;beautier; has only internal support for calling BEAST2 from within R and does
+so for testing purposes only. \verb;beautier; has minimal support for parsing and interpreting BEAST2 output files,
 for that the \verb;beastier; \cite{beastier} package is recommended.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -288,8 +284,8 @@ manually edit the XML file to allow for a fixed crown age. Listing \ref{lst:fixe
 create_beast2_input_file(
   "alignment.fas",
   "beast2.xml"
-  fixed_crown_age = TRUE,
-  initial_phylogeny = fasta_to_phylo(
+  fixed_crown_ages = TRUE,
+  initial_phylogenies = fasta_to_phylo(
     fasta_filename = "alignment.fas", 
     crown_age = 15
   )
@@ -347,14 +343,14 @@ are followed.
 \verb;ggplot2; \cite{ggplot2},
 \verb;knitr; \cite{knitr},
 \verb;phangorn; \cite{phangorn},
-\verb;RBeast; \cite{RBeast},
+\verb;beastier; \cite{beastier},
 \verb;rmarkdown; \cite{rmarkdown},
 \verb;seqinr; \cite{seqinr},
 \verb;stringr; \cite{stringr},
 \verb;testit; \cite{testit} and 
 \verb;TreeSim; \cite{TreeSim}.
 
-\verb;beautier;'s documentation is extensive, yet concise. All funnctions are documented
+\verb;beautier;'s documentation is extensive, yet concise. All functions are documented
 in the package's internal documentation. For quick use, each exported function shows a minimal example. 
 For easy exploration, each exported function's documentation links to related functions.
 Additionally, \verb;beautier; has a vignette that demonstrates in a longer form how
