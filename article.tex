@@ -278,24 +278,15 @@ create_beast2_input_file(
 Novel about \verb;beautier; is that it allows for specifying a fixed crown age. 
 By default, a phylogeny's crown age is jointly estimated with the other parameters.
 Setting a fixed crown age is not yet possible in BEAUti directly, but it is documented how to 
-manually edit the XML file to allow for a fixed crown age. Listing \ref{lst:fixed_crown_age} shows how to specify a fixed crown age is \verb;beautier;:
+manually edit the XML file to allow for a fixed crown age. Listing \ref{lst:fixed_crown_age} shows how to specify a fixed crown age with \verb;beautier;:
 
 \begin{lstlisting}[language=R, caption=Example with fixed crown age, label=lst:fixed_crown_age, floatplacement=H]
 create_beast2_input_file(
   "alignment.fas",
   "beast2.xml"
-  fixed_crown_ages = TRUE,
-  initial_phylogenies = fasta_to_phylo(
-    fasta_filename = "alignment.fas", 
-    crown_age = 15
-  )
+  crown_age = 15
 )
 \end{lstlisting}
-
-This code shows that setting \verb;fixed_crown_age; to true is insufficient. An
-initial phylogeny of the desired (fixed) crown age needs to be supplied. In this
-example, a random phylogeny is constructed from the FASTA filename. Supplying an 
-informed phylogeny will make the MCMC algorithm start at a likelier initial state.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{beautier development and other resources}
