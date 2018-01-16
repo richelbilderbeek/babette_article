@@ -59,11 +59,11 @@
     \verb;beautier; allows for scripted use of the BEAST2 phylogenetics tool, 
     by creating BEAST2 input files from an R function call. \\
   \textbf{3. }
-    I describe \verb;beautier; usage, the novel functionality it provides
+    We describe \verb;beautier; usage, the novel functionality it provides
     compared to BEAUti, and give some minimal examples. \\
   \textbf{4. }
     As \verb;beautier; is free, libre, open-source and designed to be extended, 
-    I conclude by describing the current development of the package \\
+    We conclude by describing the current development of the package \\
 \end{abstract}
 
 % Key-words: computational biology, evolution, phylogeny, BEAST2, R
@@ -72,29 +72,33 @@
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+Phylogenies are a commonly used tool to explore evolutionary hypotheses.
+Not only can phylogenies tell us how species relate to each other, also relevant parameters like
+extinction and speciation rates can be estimated from them.
+
 BEAST2 \cite{bouckaert2014beast} is a Bayesian phylogenetics tool.
-BEAST2 creates a posterior of jointly estimated phylonies and model
-parameters, from a DNA, RNA or amino acid alignment. BEAST2 can be run
-from the command line. To run BEAST2 from the command-line, 
-an XML configuration file is needed, that contains the alignment and model parameters.
+BEAST2 creates a posterior of jointly-estimated phylonies and model
+parameters, from a DNA, RNA or amino acid alignment. BEAST2 is a 
+console application, that needs a configuration file containing alignments and model parameters.
 
-BEAST2 is bundled with BEAUti \cite{drummond2012bayesian}. 
+BEAST2 is bundled with the BEAUti \cite{drummond2012bayesian}. 
 BEAUti is a program to create a BEAST2 XML configuration file, 
-with a user-friendly graphical user interface.
-BEAUti's purpose is to help new BEAST2 users getting started.
-To do so, BEAUti starts with reasonable default settings. To
-create a minimal BEAST2 configuration file, BEAUti only needs one alignment file.
-BEAUti cannot be used from within shell scripts.
+using a user-friendly graphical user interface, with helpful and reasonable 
+default settings. BEAUti replaces the manual editing of the BEAST2 XML
+files. 
 
-\verb;beautier;, 'BEAUti for R', allows for creating BEAST2 configuration files 
-from an R function call. The interface of \verb;beautier; mimics BEAUti. This
-familiar interface helps experienced BEAST2 users to create configuration'
-files from shell scripts.
+BEAUti cannot be called from a command-line script, which is not a problem in all cases.
+For example, the BEAST book \cite{drummond2015bayesian} encourages to first infer a posterior
+from simpler models first, then exploring if adding complexity changes the inferred results.
+This can easily be done manually using BEAUti. 
+For bigger theoretical explorations (for example, using thousands of simulated alignments), this approach
+becomes inviable. 
 
-BEAUti does not allow yet that an inferred phylogeny's crown age is fixed.
-In an empirical context, a phylogeny's crown age is one of the estimated
-parameters. For theoretical work, a fixed and known crown age can result
-in a cleaner analysis. \verb;beautier; allows to specify a fixed crown age.
+Here, we present \verb;beautier;, 'BEAUti for R', which 
+creates BEAST2 configuration files from an R function call. 
+The interface of \verb;beautier; mimics BEAUti and is easy to use. This
+familiar interface helps both beginner and experienced BEAST2 users 
+to create configuration files from shell scripts.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
@@ -108,16 +112,20 @@ in a cleaner analysis. \verb;beautier; allows to specify a fixed crown age.
   \node[state] (E) [below of=A, rectangle] {
     \includegraphics[height=0.1\textheight]{xml.png}
   };   
-  \node[state] (F) [rectangle, below of=E] {\includegraphics[width=0.3\textwidth]{DensiTreeExample2.jpg}};
+  \node[state] (F) [rectangle, below of=E] {
+    \includegraphics[width=0.3\textwidth]{DensiTreeExample2.jpg}
+    \includegraphics[width=0.6\textwidth]{ParameterEstimates.png}
+  };
   \path (A) edge [anchor = east] node {\includegraphics[height=0.15\textheight]{beautier_logo.png}} (E)
         (A) edge [anchor = west] node {\includegraphics[height=0.15\textheight]{BeautiSiteModel.png}} (E)
-        (E) edge [] node {\includegraphics[width=0.2\textwidth]{beast_logo.png}} (F); 
+        (E) edge [anchor = east] node {\includegraphics[width=0.25\textwidth]{lumier_logo_big.png}} (F) 
+        (E) edge [anchor = west] node {\includegraphics[width=0.2\textwidth]{beast_logo.png}} (F); 
   \end{tikzpicture}
 
   \caption{
     Workflow. From an alignment and priors, one creates a BEAST2 XML input file. This
-    can be done using beautier or BEAUti. The created configuration file is run by BEAST2
-    to create a posterior.
+    can be done using beautier or BEAUti. The created configuration file is run by lumier or BEAST2
+    to create a posterior of phylogenies and model parameter estimates.
   }
   \label{fig:workflow}
 \end{figure}
@@ -145,13 +153,13 @@ Multiple alignments can be used, each with its own (unlinked) site model, clock 
 \hline
 \verb;create_beast2_input_file; & Creates a BEAST2 input file \\
 \hline
-\verb;create_gtr_site_model; & Create a GTR site model \\
-\verb;create_hky_site_model; & Create an HKY site model \\
+\verb;create_gtr_site_model; & Create a GTR site model \cite{tavare1986some} \\
+\verb;create_hky_site_model; & Create an HKY site model \cite{hasegawa1985dating} \\
 \verb;create_jc69_site_model; & Create a Jukes-Cantor site model \cite{cantor1969mammalian} \\
-\verb;create_tn93_site_model; & Create a TN93 site model \\
+\verb;create_tn93_site_model; & Create a TN93 site model \cite{tamura1993estimation} \\
 \hline
-\verb;create_rln_clock_model; & Create a relaxed log-normal clock model \\
-\verb;create_strict_clock_model; & Create a strict clock model \\
+\verb;create_rln_clock_model; & Create a relaxed log-normal clock model \cite{drummond2006relaxed} \\
+\verb;create_strict_clock_model; & Create a strict clock model \cite{sarich1967immunological} \\
 \hline
 \verb;create_bd_tree_prior; & Create a birth-death tree prior \cite{kendall1948generalized} \\
 \verb;create_cbs_tree_prior; & Create a coalescent Bayesian skyline tree prior \\
@@ -178,19 +186,22 @@ Multiple alignments can be used, each with its own (unlinked) site model, clock 
 In total, \verb;beautier; has 59 exported functions to create
 a BEAST2 configuration file. \verb;beautier; is an alternative for a majority of BEAUti use cases.
 \verb;beautier; does not support the full functionality of BEAUti. Considering
-the size, age and number of plugins, this would be close to impossible.
+BEAUti's flexibility and number of plugins, this would be a Herculean effort.
 To compensate for this, an extensible software architecture is used.
 \verb;beautier;s future extensions can be found on its GitHub.
 
-BEAUti assumes that a phylogeny has a crown age that needs to be jointly estimated
+BEAUti assumes that a phylogeny has a crown age that needs to be jointly-estimated
 with the phylogeny and other parameters. BEAUti does not allow for fixing
 a phylogeny's crown age. Before \verb;beautier;, one needs to manually edit the BEAST2 
-XML configuration file, which is prone to errors. \verb;beautier;, allow easy
-fixing of phylogenies' crown ages.
+XML configuration file, which is prone to errors. \verb;beautier;, allows easy
+fixing of phylogenies' crown ages. For theoretical work, a fixed and known crown age can result
+in a cleaner analysis. 
 
-\verb;beautier; has only internal support for calling BEAST2 from within R and does
-so for testing purposes only. \verb;beautier; has minimal support for parsing and interpreting BEAST2 output files,
-for that the \verb;beastier; \cite{beastier} package is recommended.
+\verb;beastier; and \verb;lumier; are related packages, used in testing. 
+\verb;lumier; calls BEAST2 from within R. \verb;lumier; is used to confirm that the XML files 
+created by \verb;beautier; are valid. Additionally, \verb;lumier; is used to run BEAST2
+to create posteriors. Using \verb;beastier;, these posteriors are checked to have an
+estimated or fixed crown age.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
@@ -225,29 +236,15 @@ create_beast2_input_file(
 This code will create a BEAST2 file with name '\verb;beast2.xml;',
 using a FASTA file with name \verb;alignment.fas;, using the same default settings as BEAUti.
 The default settings are, among others, to use a Jukes-Cantor site model \cite{cantor1969mammalian}, 
-a strict clock, and a Yule birth tree prior \cite{yule}. Listing \ref{lis:simplest_example_explicit} shows how
-to explicitly pick these settings:
+a strict clock, and a Yule birth tree prior \cite{yule}. 
 
-\begin{lstlisting}[language=R, caption=Simplest example with explicit defaults, label=lst:simplest_example_explicit, floatplacement=H]
-library(beautier)
-create_beast2_input_file(
-  input_fasta_filenames = "alignment.fas",
-  output_xml_filename = "beast2.xml",
-  site_models = create_jc69_site_model(),
-  clock_models = create_strict_clock_model(),
-  tree_priors = create_yule_tree_prior()
-)
-\end{lstlisting}
-
-The argument names \verb;input_fasta_filenames;, \verb;site_models;, \verb;clock_models; and \verb;tree_priors; are plural, as each of these
-can be (a list of) one or more elements. Each of these arguments must have the same number of elements, so that each alignment has its
-own site model, clock model and tree prior. An example of using a different site model, clock model and tree prior is shown by listing \ref{lis:all_different}:
+An example of using a different site model, clock model and tree prior is shown by listing \ref{lst:all_different}:
 
 \begin{lstlisting}[language=R, caption=Example with different site model and clock model and tree prior, label=lst:all_different, floatplacement=H]
 library(beautier)
 create_beast2_input_file(
-  input_fasta_filenames = "alignment.fas",
-  output_xml_filename = "beast2.xml",
+  "alignment.fas",
+  "beast2.xml",
   site_models = create_hky_site_model(),
   clock_models = create_rln_clock_model(),
   tree_priors = create_bd_tree_prior()
@@ -257,18 +254,21 @@ create_beast2_input_file(
 This code uses an HKY site model, a relaxed log-normal clock model and a birth-death tree prior \cite{kendall1948generalized}.
 Table \ref{tab:functions} shows an overview of all functions to create site models, clock models and tree priors.
 
+The argument names \verb;site_models;, \verb;clock_models; and \verb;tree_priors; are plural, as each of these
+can be (a list of) one or more elements. Each of these arguments must have the same number of elements, so that each alignment has its
+own site model, clock model and tree prior. 
+
 \verb;beautier; creates site models, clock models and tree priors with the same default distributions as BEAUti.
 For example, a Yule tree prior assumes that birth rate likelihoods follow a uniform distribution, from minus infinity
 to infinity. This assumption entails that negative and positive birth rates are just as likely, where a negative birth rate is biologically impossible. 
 One may prefer to have an exponential distribution instead, as this would state that birth rates are always positive, and
-higher values are less likely than lower values. To do so \verb;beautier; is shown by listing \ref{lis:diff_distr}:
-
+higher values are less likely than lower values. To do so \verb;beautier; is shown by listing \ref{lst:diff_distr}:
 
 \begin{lstlisting}[language=R, caption=Example with Yule tree prior with different birth rate distribution, label=lst:diff_distr, floatplacement=H]
 library(beautier)
 create_beast2_input_file(
-  input_fasta_filenames = "alignment.fas",
-  output_xml_filename = "beast2.xml",
+  "alignment.fas",
+  "beast2.xml",
   tree_priors = create_yule_tree_prior(
     birth_rate_distr = create_exp_distr()    
   )
@@ -276,9 +276,10 @@ create_beast2_input_file(
 \end{lstlisting}
 
 Novel about \verb;beautier; is that it allows for specifying a fixed crown age. 
-By default, a phylogeny's crown age is jointly estimated with the other parameters.
+By default, a phylogeny's crown age is jointly-estimated with the other parameters.
 Setting a fixed crown age is not yet possible in BEAUti directly, but it is documented how to 
-manually edit the XML file to allow for a fixed crown age. Listing \ref{lst:fixed_crown_age} shows how to specify a fixed crown age with \verb;beautier;:
+manually edit the XML file to allow for a fixed crown age. 
+Listing \ref{lst:fixed_crown_age} shows how to specify a fixed crown age with \verb;beautier;:
 
 \begin{lstlisting}[language=R, caption=Example with fixed crown age, label=lst:fixed_crown_age, floatplacement=H]
 create_beast2_input_file(
@@ -296,45 +297,25 @@ create_beast2_input_file(
 \url{http://cran.r-project.org/src/contrib/PACKAGES.html\#beautier}.  
 \verb;beautier; is licensed under the GNU General Public License.
 
-\verb;beautier;'s development takes place on GitHub \cite{github}. 
-GitHub is a website that hosts (among others) software and facilitates its development.
-Using GitHub is a good practice for computational scientists \cite{perez2016ten} 
+\verb;beautier;'s development takes place on GitHub \cite{github}, 
+which is a good practice for computational scientists \cite{perez2016ten} 
 and improves transparency \cite{gorgolewski2016practical}.
 
-\verb;beautier;'s quality is assured by Travis CI \cite{travis}. Travis CI is
-a continuous integration service, that runs a script upon a (suggested)
-change in \verb;beautier;'s code. The \verb;beautier; script checks if the
-package can be build, runs all unit and integration tests, 
-measures code coverage, coding style and good practices.
-
-Unit and integration tests check the integrity of \verb;beatier;. All functions
-are tested for producing the correct output and desired error handling. 
-Travis CI uses the testing facilities of the \verb;testthat; \cite{testthat} package.
-
-Code coverage is the percentage of code that is executed in tests. 
-Code coverage correlates with code quality \cite{del1995correlation}. 
-Travis CI uses the \verb;covr; \cite{covr} package to measure code coverage. 
-\verb;beautier; has a 100\% code coverage. 
-
-Coding style is the way statements are laid out, for example the placement of 
-curly brackets. \verb;beautier; follows Hadley Wickham's style guide \cite{style_guide}. 
-Travis CI uses the \verb;lintr; \cite{lintr} package to confirm this coding style
-is used.
-
-Good practices are miscellaneous things considered good practices. An example
-of a good practice is (next to high code coverage and consistent coding style) 
-to have short functions with a low cyclomatic complexity. Travis CI uses 
-the \verb;goodpractice; \cite{goodpractice} package to comfirm all good practices
-are followed.
+\verb;beautier;'s uses the Travis CI \cite{travis} 
+continuous integration service, which is known to significantly 
+increase the the number of bugs exposed \cite{vasilescu2015}.
+\verb;beautier; has a 100\% code coverage, which correlates with code quality \cite{horgan1994,del1995correlation}. 
+\verb;beautier; follows Hadley Wickham's style guide \cite{style_guide}, which improves software quality \cite{fang2001}.
 
 \verb;beautier; is dependent on multiple packages, which are 
 \verb;APE; \cite{APE}, 
+\verb;beastier; \cite{beastier},
 \verb;devtools; \cite{devtools},
 \verb;geiger; \cite{GEIGER},
 \verb;ggplot2; \cite{ggplot2},
 \verb;knitr; \cite{knitr},
+\verb;lumier; \cite{lumier},
 \verb;phangorn; \cite{phangorn},
-\verb;beastier; \cite{beastier},
 \verb;rmarkdown; \cite{rmarkdown},
 \verb;seqinr; \cite{seqinr},
 \verb;stringr; \cite{stringr},
@@ -345,15 +326,12 @@ are followed.
 in the package's internal documentation. For quick use, each exported function shows a minimal example. 
 For easy exploration, each exported function's documentation links to related functions.
 Additionally, \verb;beautier; has a vignette that demonstrates in a longer form how
-to use it. The integrity of this documentation is tested each time the package is built by Travis CI.
-The documentation on the GitHub helps to get started, with a dozen examples 
+to use it. The integrity of this documentation is tested by Travis CI.
+The GitHub documentation helps to get started, with a dozen examples 
 of a BEAUti screenshot and the equivalent \verb;beautier; code.
 
-\verb;beautier;'s GitHub facilitates feature requests and guidelines how to do so.
-New code can be submitted using GitHub's infrastructure (a 'Pull Request'). New
-code will be tested by Travis CI to follow the same quality standards and only accepted
-when there are no 
-
+\verb;beautier;'s GitHub facilitates feature requests and has guidelines how to do so.
+Thanks to Travis CI, newly submitted code is expected to be accepted quicker \cite{vasilescu2015}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Citation of beautier}
@@ -379,3 +357,4 @@ from within R.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
+\grid
