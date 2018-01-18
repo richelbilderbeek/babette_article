@@ -1,5 +1,8 @@
 \documentclass{article}
 
+\title{beautier: BEAUti for R}
+\author{Rich\`el J.C. Bilderbeek, Rampal S. Etienne}
+
 \usepackage{listings}
 \usepackage{hyperref}
 \usepackage{todonotes}
@@ -9,16 +12,7 @@
 \usepackage{pgf}
 \usetikzlibrary{arrows,automata}
 
-% \newcommand*\beautier{\verb;beautier;}
-
-\title{beautier: BEAUti for R}
-\author{Rich\`el J.C. Bilderbeek, Rampal S. Etienne}
-
-
-% \newcommand*\filename[1]{${#1}$}
-% \newcommand*\myfilename[1]{\verb;{#1};}
-
-% Style of code
+% Style of listings
 % From http://r.789695.n4.nabble.com/How-to-nicely-display-R-code-with-the-LaTeX-package-listings-tp4648110.html
 \usepackage{fancyvrb} 
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -48,14 +42,19 @@
 }
 \lstset{style=mystyle}
 
-% Thanks Raphael Scherrer
-\usepackage[switch]{lineno}
+% Adds numbered lines, thanks to Raphael Scherrer
+% \usepackage[switch]{lineno}
+
+
 
 \begin{document}
 
 \maketitle
 
 % TODO: RS: Rename to 'Summary 
+% https://tex.stackexchange.com/a/24778 does not work:
+% \addto{\captionsenglish}{\renewcommand{\abstractname}{Summary}}
+
 \begin{abstract}
   \textbf{1. }
     Here, we present a free, libre and open-source package, \verb;beautier;, 
@@ -78,37 +77,34 @@
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Phylogenies are a commonly used tool to explore evolutionary hypotheses.
-Not only can phylogenies tell us how species relate to each other, also relevant parameters like
-extinction and speciation rates can be estimated from them.
+Phylogenies are commonly used to explore evolutionary hypotheses.
+Not only can phylogenies show us how species relate to each other, 
+also relevant parameters like extinction and speciation rates can be estimated from them.
 
 BEAST2 \cite{bouckaert2014beast} is a Bayesian phylogenetics tool.
-BEAST2 creates a posterior of jointly-estimated phylogenies and model
-parameters, from a DNA, RNA or amino acid alignment (see figure \ref{fig:workflow} for an overview
-of the workflow). BEAST2 is a 
-console application, that needs a configuration file containing alignments and model parameters.
+BEAST2 creates a posterior of jointly-estimated phylogenies and model parameters, 
+from a DNA, RNA or amino acid alignment (see figure \ref{fig:workflow} for an overview of the workflow). 
+BEAST2 is a console application, that needs a configuration file containing alignments and model parameters.
 
-BEAST2 is bundled with BEAUti \cite{drummond2012bayesian}. 
-BEAUti is a program to create a BEAST2 XML configuration file, 
-using a user-friendly graphical user interface, with helpful and reasonable 
-default settings. BEAUti replaces the manual editing of the BEAST2 XML
-files. 
+BEAST2 is bundled with BEAUti \cite{drummond2012bayesian}, a desktop application to create a BEAST2 configuration file.
+BEAUti has a user-friendly graphical user interface, with helpful and reasonable default settings.
+As such, BEAUti is an attractive alternative to the manual and error-prone editing of BEAST2 configuration files. 
 
 BEAUti cannot be called from a command-line script, which is not a problem in all cases.
-For example, the BEAST book \cite{drummond2015bayesian} encourages a stepwise approach: 
+One workflow that is already viable can be found in the BEAST book \cite{drummond2015bayesian}:
 (1) infer a posterior from the simplest models possible, (2) while a posterior with a more complex model gives
 a different posterior, increase complexity. This can be done manually using BEAUti and is the common workflow
 when using a few alignments and doing a superficial search through model space.  
 
 Here, we present \verb;beautier;, 'BEAUti for R', which 
 creates BEAST2 configuration files from an R function call.
-The interface of \verb;beautier; mimics BEAUti and is easy to use. This
-familiar interface helps both beginner and experienced BEAST2 users 
-to create configuration files from shell scripts.
-Using \verb;beautier; will save you time and thousands of mouse clicks.
 \verb;beautier; brings deep exploration of model space within reach,
 as you can loop through multiple (simulated) alignments, 
 nucleotide substitution models, clock models and tree priors.
+Using \verb;beautier; will save time and tedious mouse clicking.
+The interface of \verb;beautier; mimics BEAUti. This
+familiarity helps both beginner and experienced BEAST2 users 
+to create configuration files using \verb;beautier;.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
@@ -145,13 +141,14 @@ nucleotide substitution models, clock models and tree priors.
 \section{Description}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\verb;beautier; is written in the R programming language \cite{R}.
-\verb;beautier; creates the BEAST2 input files from an R function call,
+\verb;beautier; is written in the R programming language \cite{R}
+and creates a BEAST2 configuration file from an R function call,
 in a similar way that BEAUti does.
 
-\verb;beautier;'s main function is \verb;create_beast2_input_file;, which creates
-a BEAST2 input file. \verb;create_beast2_input_file; needs at least the name of a FASTA file containing a DNA alignment
-and a name for the to-be-created output file. This interface follows BEAUti's default settings.
+\verb;beautier;'s main function is \verb;create_beast2_input_file;, which creates a BEAST2 configuration file. 
+\verb;create_beast2_input_file; needs at least the name of a FASTA file containing a DNA alignment
+and a name for the to-be-created configuration file. 
+This interface follows BEAUti's default settings.
 Per alignment, a site model, clock model and tree prior can be chosen.
 Multiple alignments can be used, each with its own (unlinked) site model, clock model and tree prior.
 
@@ -193,37 +190,35 @@ Multiple alignments can be used, each with its own (unlinked) site model, clock 
 \label{tab:functions}
 \end{table}
 
-In total, \verb;beautier; has 59 exported functions to create
-a BEAST2 configuration file. \verb;beautier; is an alternative for a majority of BEAUti use cases.
-\verb;beautier; does not support the full functionality of BEAUti. 
-Because of its high number of plugins, an extensible software architecture is used.
+In total, \verb;beautier; has 61 exported functions to create a BEAST2 configuration file. 
+\verb;beautier; is an alternative for a majority of BEAUti use cases, 
+but does not support the full functionality of BEAUti. 
+Because of BEAUti's high number of plugins, \verb;beautier; uses an extensible software architecture.
 A roadmap of \verb;beautier;'s future extensions can be found on its GitHub.
 
 BEAUti assumes that a phylogeny has a crown age that needs to be jointly-estimated
 with the phylogeny and other parameters. BEAUti does not allow for fixing
 a phylogeny's crown age. Without \verb;beautier;, one needs to manually edit the BEAST2 
-XML configuration file, which is prone to errors. \verb;beautier;, allows easy
-fixing of phylogenies' crown ages. For theoretical work, a fixed and known crown age can result
-in a cleaner analysis. 
+XML configuration file, which is tedious and prone to errors. 
+\verb;beautier;, allows for easy setting of a fixed crown age, which allows for theoretical experiments with one less source of variation. 
 
-\verb;beastier; and \verb;lumier; are related packages, which are used to confirm the correct
-working of verb;beautier;. \verb;lumier; calls BEAST2 from within R and is used to confirm that the XML files 
-created by \verb;beautier; are valid. Additionally, \verb;lumier; is used to run BEAST2
-to create posteriors. Using \verb;beastier;, these posteriors are checked to have an
-estimated or fixed crown age.
+\verb;beastier; \cite{beastier} and \verb;lumier; \cite{lumier} are related packages, used to confirm the correct working of verb;beautier;.
+\verb;lumier; calls BEAST2 from within R and is used to confirm that the XML files created by \verb;beautier; are valid. 
+Additionally, \verb;lumier; is used to run BEAST2 to create posteriors. 
+\verb;beastier; can parse BEAST2 posteriors, and is used to confirm whether posteriors have an estimated or fixed crown age.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In R, a package's function needs to be loaded in the global namespace first:
+In R, a package's functions need to be loaded in the global namespace first:
 
 \begin{lstlisting}[language=R, caption=Loading, label=lst:loading_beautier, floatplacement=H]
 library(beautier)
 \end{lstlisting}
 
 BEAUti, and likewise \verb;beautier;, needs at least a FASTA filename
-and an XML output filename. In BEAUti, this is achieved by loading a FASTA file (resulting
+and an output filename. In BEAUti, this is achieved by loading a FASTA file (resulting
 in figure \ref{fig:simplest_beauti_usage}), then saving an output file using a common
 save file dialog. In \verb;beautier;, the same is achieved by listing \ref{lst:simplest_example}:
 
@@ -242,7 +237,7 @@ create_beast2_input_file(
   \label{fig:simplest_beauti_usage}
 \end{figure}
 
-This code will create a BEAST2 file with name '\verb;beast2.xml;',
+This code will create a BEAST2 configuration file with name '\verb;beast2.xml;',
 using a FASTA file with name \verb;alignment.fas;, using the same default settings as BEAUti.
 The default settings are, among others, to use a Jukes-Cantor site model \cite{cantor1969mammalian}, 
 a strict clock, and a Yule birth tree prior \cite{yule}. 
@@ -263,15 +258,17 @@ create_beast2_input_file(
 This code uses an HKY site model, a relaxed log-normal clock model and a birth-death tree prior \cite{kendall1948generalized}.
 Table \ref{tab:functions} shows an overview of all functions to create site models, clock models and tree priors.
 
-The argument names \verb;site_models;, \verb;clock_models; and \verb;tree_priors; are plural, as each of these
+The arguments' names \verb;site_models;, \verb;clock_models; and \verb;tree_priors; are plural, as each of these
 can be (a list of) one or more elements. Each of these arguments must have the same number of elements, so that each alignment has its
 own site model, clock model and tree prior. 
 
-\verb;beautier; creates site models, clock models and tree priors with the same default distributions as BEAUti.
-For example, a Yule tree prior assumes that birth rate likelihoods follow a uniform distribution, from minus infinity
-to infinity. This assumption entails that negative and positive birth rates are just as likely, where a negative birth rate is biologically impossible. 
-One may prefer to have an exponential distribution instead, as this would state that birth rates are always positive, and
-higher values are less likely to occur than lower values. 
+\verb;beautier; also uses the same default distributions as BEAUti for the site models, clock models and tree priors. 
+For example, a Yule tree prior assumes that birth rate likelihoods follow a uniform distribution, from minus infinity to infinity. 
+This assumption entails that negative and positive birth rates are just as likely, 
+where a negative birth rate is biologically impossible\footnote{note that in practice, this works out just fine}.
+One may prefer an exponential distribution instead, as this would assume only positive birth rates, 
+and unlikely high birth rates.
+ 
 Listing \ref{lst:diff_distr} shows how to do so in \verb;beautier;:
 
 \begin{lstlisting}[language=R, caption=Example with Yule tree prior with different birth rate distribution, label=lst:diff_distr, floatplacement=H]
@@ -304,16 +301,18 @@ create_beast2_input_file(
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \verb;beautier; is free, libre and open source software available from the official R package archive at 
-\url{http://cran.r-project.org/src/contrib/PACKAGES.html\#beautier}.  
-\verb;beautier; is licensed under the GNU General Public License.
+\url{http://cran.r-project.org/src/contrib/PACKAGES.html\#beautier}
+and is licensed under the GNU General Public License v3.0.
 
 \verb;beautier;'s development takes place on GitHub \cite{github}, 
-facilitating collaboration \cite{perez2016ten} 
-and improving transparency \cite{gorgolewski2016practical}.
+which facilitates collaboration \cite{perez2016ten} 
+and improves transparency \cite{gorgolewski2016practical}.
+\verb;beautier;'s GitHub facilitates feature requests and has a guidelines how to do so.
 
 \verb;beautier;'s uses the Travis CI \cite{travis} 
 continuous integration service, which is known to significantly 
-increase the the number of bugs exposed \cite{vasilescu2015}.
+increase the the number of bugs exposed \cite{vasilescu2015} and increases
+the speed at which new features are added \cite{vasilescu2015}.
 \verb;beautier; has a 100\% code coverage, which correlates with code quality \cite{horgan1994,del1995correlation}. 
 \verb;beautier; follows Hadley Wickham's style guide \cite{style_guide}, which improves software quality \cite{fang2001}.
 
@@ -336,12 +335,8 @@ increase the the number of bugs exposed \cite{vasilescu2015}.
 in the package's internal documentation. For quick use, each exported function shows a minimal example. 
 For easy exploration, each exported function's documentation links to related functions.
 Additionally, \verb;beautier; has a vignette that demonstrates in a longer form how
-to use it. The integrity of this documentation is tested by Travis CI.
-The GitHub documentation helps to get started, with a dozen examples 
+to use it. The GitHub documentation helps to get started, with a dozen examples 
 of a BEAUti screenshot and the equivalent \verb;beautier; code.
-
-\verb;beautier;'s GitHub facilitates feature requests and has guidelines how to do so.
-Thanks to Travis CI, newly submitted code is expected to be accepted quicker \cite{vasilescu2015}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Citation of beautier}
