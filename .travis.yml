@@ -1,0 +1,2 @@
+script:
+ - wc article.tex --words # Must be below 3000 for applications
