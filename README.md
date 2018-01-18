@@ -12,6 +12,10 @@ From the command line:
 
 See [questions](questions.md).
 
+## Former [feedback](feedback/README.md)
+
+See [Feedback](feedback/README.md).
+
 ## Acknowledgemennts
 
  * MEE LaTeX style from https://github.com/seananderson/bst

@@ -2,6 +2,8 @@
 
 # 2018-01-18: Raphael Scherrer (`RS`)
 
+ * [2018-01-18: Raphael Scherrer feedback (pdf)](20180118RS.pdf)
+
 > Overall it was a good and easy-to-follow read :) concise and to the point. 
 > My remarks are really on minor things such as spelling, grammar or citations 
 > (which in some cases I am not 100% sure about but preferred to point it out if it sounded weird). 
@@ -24,9 +26,9 @@
 > 
 > Hope it helps! 
 
-
-
 ## 2018-01-13 Leonel Herrera-Alsina ('LHA')
+
+ * [2018-01-13 Leonel Herrera-Alsina feedback (PDF)](20180113LHA.pdf)
 
 > I have read your ms. Please find it attached with some comments on it. 
 > I am not sure what sort of journal you have in mind. 
