@@ -1,6 +1,58 @@
 # Feedback
 
-# 2018-01-18: Raphael Scherrer (`RS`)
+## 2018-01-22: RSE
+
+> On 18-Jan-18 15:34, Richel Bilderbeek wrote:
+>
+> Hoi Rampal,
+>
+> Bij deze stuur ik je al het beautier artikel, omdat Raphael ook eerder z'n feeback klaar had.
+>
+> Feedback waar ik het meest bij geholpen ben, is of de vorm van het artikel de juiste is; is de indeling natuurlijk of voelt het verwrongen en kunstmatig? Zijn er onderdelen die je mist? Gedetailleerdere feedback is welkom (kom maar!), maar die kan ik ook na jouw feedback aan andere PhDs vragen.
+>
+> De PDF heeft de beste opmaak [1], de rest heb ik toevoegd opdat jij je favo tool kunt gebruiken voor feedback.
+>
+> Groetjes, Richel
+>
+> [1] opmaak is gemaakt om fijn te lezen, maar ongeschikt om in te dienen bij de journal
+
+
+### Reply Rampal
+
+> Hoi Richel,
+> 
+> Hierbij mijn commentaar. In het algemeen heeft het het juiste perspectief, 
+> dus daarom ben ik er ook maar letter voor letter doorheen gegaan. 
+> Wel vroeg me af of je niet ook meteen lumier en beastier kunt beschrijven in dit artikel. 
+> Ik verwacht eigenlijk dat reviewers dit ook zullen suggereren, ook al omdat het artikel nu wat dun is.
+> 
+> Nog een algemene opmerking: je zet vaak losse paragrafen neer. 
+> Je moet iets meer verband ertussen leggen, en vaak kunnen er wel meerdere paragrafen samengevoegd worden. 
+> Een paragraaf van 1 zin is wel heel minimaal.
+> 
+> Ik zie uit naar de volgende versie. 
+> Wat is overigens het formaat waarmee je zelf werkt? 
+> De Word-versie die ik gepakt hebt, had een paar onderdelen niet (zoals de referenties - die overigens ook opschoning behoeft).
+> 
+> Groet, Rampal
+
+
+### Reply Rampal 2
+
+> Ik neem aan dat je dit gelezen hebt: http://www.methodsinecologyandevolution.org/view/0/authorGuidelines.html ? 
+> Het wordt dan Applications.
+> 
+> Je kunt ook Systematic Biology 
+> overwegen: https://academic.oup.com/sysbio/pages/General_Instructions. Ze hebben een software-rubriek.
+> 
+> Dit tijdschrift is meer gericht op phylogenetics (dus ons publiek leest het) en 
+> heeft een algemeen hogere impact, maar we moeten betalen voor Open Access, en is niet erg snel.
+> 
+> Groet, Rampal
+
+
+
+## 2018-01-18: Raphael Scherrer (`RS`)
 
  * [2018-01-18: Raphael Scherrer feedback (pdf)](20180118RS.pdf)
 
@@ -44,3 +96,4 @@
 Note that I did not send an example article with it, so LHA could not know the article should be short.
 
 
+## 
