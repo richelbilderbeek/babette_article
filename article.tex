@@ -209,6 +209,9 @@ In R, the functions of a package need to be loaded in the global namespace first
 
 \begin{lstlisting}[language=R, caption=Loading, label=lst:loading_babette, floatplacement=H]
 library(babette)
+library(beautier)
+library(beastier)
+library(tracerer)
 \end{lstlisting}
 
 BEAUti, and likewise \verb;babette;, needs at least a FASTA filename
@@ -232,7 +235,6 @@ An example of using a different site model, clock model
 and tree prior is:
 
 \begin{lstlisting}[language=R, caption=Example with different site model and clock model and tree prior, label=lst:all_different, floatplacement=H]
-library(babette)
 create_beast2_input_file(
   "alignment.fas",
   "beast2.xml",
@@ -291,8 +293,7 @@ own site model, clock model and tree prior.
 An example of two alignments, each with its own site model, is:
 
 \begin{lstlisting}[language=R, caption=Two alignments, label=lst:two_alignments, floatplacement=H]
-library(babette)
-babette::create_beast2_input_file(
+create_beast2_input_file(
   c("anthus_aco.fas", "anthus_nd2.fas"),
   "beast2.xml",
   site_models = list(
@@ -326,20 +327,18 @@ create_beast2_input_file(
 )
 \end{lstlisting}
 
+
 % TODO: Mix sentences better
 Our initial motivation to create \verb;babette; 
-is that we wanted to fix the crown age of a phylogeny, but because 
+is that we wanted to fix the crown age of a phylogeny.
 BEAUti assumes that a phylogeny has a crown age that needs to be jointly-estimated
-with the phylogeny and other parameters. it does not allow for fixing
+with the phylogeny and other parameters. It does not allow for fixing
 the crown age. Without \verb;babette;, one needs to manually edit the BEAST2 
 XML configuration file, which is tedious and prone to errors. 
-\verb;babette;, allows for easy setting of a fixed crown age, 
-enabling theoretical experiments with one less source of variation. 
-Setting a fixed crown age is not yet possible in BEAUti directly, 
-but the BEAUti documentation mentions how to 
-manually edit the XML file to allow for a fixed crown age. 
-This is how to specify a fixed crown age with \verb;babette;:
+Fixing the crown ages allows for theoretical experiments 
+with one less source of variation.
 
+This is how to specify a fixed crown age with \verb;babette;:
 
 \begin{lstlisting}[language=R, caption=Example with fixed crown age, label=lst:fixed_crown_age, floatplacement=H]
 create_beast2_input_file(
@@ -347,6 +346,46 @@ create_beast2_input_file(
   "beast2.xml"
   posterior_crown_age = 15
 )
+\end{lstlisting}
+
+Instead of creating a BEAST2 input file and then running BEAST2,
+\verb;babette; allows to do both steps at once:
+
+\begin{lstlisting}[language=R, caption=Run BEAST2, label=lst:run_beast2, floatplacement=H]
+out <- run_beast2(
+  "alignment.fas"
+)
+\end{lstlisting}
+
+\verb;run_beast2; also allows for setting a site model, clock model,
+tree prior and a fixed crown age. The variable \verb;out; 
+is a list that contains the posterior
+parameter estimates, posterior phylogenies (one per alignment)
+and operator acceptances.
+
+\verb;babette; has functionality of both Tracer and
+DensiTree. To calculate the effective sample sizes in \verb;babette;:
+
+\begin{lstlisting}[language=R, caption=Calculate ESSes, label=lst:calc_esses, floatplacement=H]
+traces <- remove_burn_ins(traces = out$estimates, burn_in_fraction = 0.2)
+esses <- calc_esses(traces, sample_interval = 1000)
+\end{lstlisting}
+
+Tracer displays multiple summary statistics for each
+estimated variable. To obtain, for example, the
+summary statistics of the estimated birth rate in \verb;babette;:
+
+sum_stats <- calc_sum_stats(
+  out$estimates$birthRate, 
+  sample_interval = 1000, burn_in_fraction = 0.1
+)
+
+DensiTree displays the phylogenies in a posterior.
+To do the same in \verb;babette;:
+
+\begin{lstlisting}[language=R, caption=Show posterior phylogenies, label=lst:densitree, floatplacement=H]
+library(phangorn)
+densiTree(out$anthus_aco_trees)
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
