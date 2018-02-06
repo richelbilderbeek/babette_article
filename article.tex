@@ -60,22 +60,23 @@
   \textbf{1. }
     In the field of phylogenetics, 
      BEAST2 is one of the most widely used software tools. 
-     It comes with the graphical programs BEAUti 2 and Tracer to 
+     It comes with the graphical programs BEAUti 2 to
      facilitate the creation of input files to BEAST2, and
+     with DensiTree and Tracer 
      to interpret BEAST 2's created output files. 
-     However, when many input files are needed, 
+     However, when many input and output files are required, 
      a workflow of GUI programs is cumbersome. 
      Moreover, many other phygenetics tools are available 
      in R, which requires switching from one platform 
      to the other. \\
   \textbf{2. }
     Here, we present a free, libre and open-source package, \verb;babette;, 
-    'BEAUti, BEAST and Tracer for R', for the R programming language. 
+    'BEAUti 2, BEAST2 and Tracer for R', for the R programming language. 
     \verb;babette; creates BEAST2 input files, runs BEAST2 and parses its results, 
     from an R function call. \\
   \textbf{3. }
     We describe \verb;babette;'s usage, the novel functionality it provides
-    compared to BEAUti, and give some examples. \\
+    compared to BEAUti 2, and give some examples. \\
   \textbf{4. }
     As \verb;babette; is designed to be of high quality and extendable, 
     we conclude by describing the further development of the package \\
@@ -121,25 +122,50 @@ more thorough sensitivity analysis, one would like to loop through
 multiple (simulated) alignments, nucleotide substitution models, 
 clock models and tree priors. 
 
+BEAST2 is also associated with Tracer \cite{tracer} and 
+DensiTree 2 \cite{DensiTree}. Both are desktop applications 
+to analyze the output of BEAST2, each with a user-friendly graphical user interface. 
+
+Tracer's purpose is to analyze the parameter estimates generated
+from a BEAST 2 run. It shows, among
+others, the effective sample size (ESS) and time series ('the trace', 
+hence the name) of each variable in the MCMC run. Both ESS and trace
+are needed to assess the strength of the inference. 
+DensiTree visualizes the phylogenies of a BEAST2 posterior, with
+many options to improve the displayal of those many phylogenies.
+
+However, for exploring the output of many BEAST2 runs, 
+one would like a script to collect all parameter ESSes,
+parameter traces and posterior phylogenies. 
+
 Here, to provide such functionality we present \verb;babette;, 
-’BEAUti, BEAST and Tracer for R’, which creates BEAST2 configuration files 
+’BEAUti 2, BEAST2 and Tracer for R’, 
+which creates BEAST2 configuration files,
+runs BEAST2 and analyzes its results 
 from an R function call and hence
 will save time and tedious mouse clicking and 
 reduces the chances of errors in such repetitive actions.
-The interface of \verb;babette; mimics BEAUti. This
+The interface of \verb;babette; to create BEAST2 configureation
+files closely mimics BEAUti. This
 familiarity helps both beginner and experienced BEAST2 users 
 to create configuration files using \verb;babette;.
-Because there are many R packages for exploring the 
-resulting phylogenetic trees, 
 \verb;babette; enables the creation of a single-script 
 pipeline from sequence alignments to tree analysis in R. 
 
-\verb;babette; has a similar goal as \verb;BEASTmasteR; \cite{beastmaster} (still
-in pre-release), as both
-allow for scripted use of BEAST2. The difference is that \verb;babette; 
+\verb;babette; is the first R package that unifies the
+full workflow of working with BEAST2. An
+example to create a BEAST2 input file is 
+\verb;BEASTmasteR; \cite{beastmaster}.
+Also \verb;BEASTmasteR; allows 
+to create BEAST2 configuration files from R. 
+The difference is that \verb;babette; 
 has its focus on DNA alignments and ultrametric trees, 
 where \verb;BEASTmasteR; is used for 
-morphologucal traits and tip-dating. 
+morphological traits and tip-dating.
+Examples of R packages to parse the BEAST2 output files
+are \verb;rBEAST; \cite{rBEAST}, 
+\verb;RBEAST; \cite{RBEAST} and 
+\verb;rbeast2; \cite{rbeast2}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
@@ -177,29 +203,36 @@ morphologucal traits and tip-dating.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \verb;babette; is written in the R programming language \cite{R}
-and creates a BEAST2 configuration file from an R function call,
-in a similar way that BEAUti does.
+and enables the full BEAST2 workflow from an R function call,
+in a similar way that BEAUti, DensiTree and Tracer do.
 
-\verb;babette;'s main function is \verb;create_beast2_input_file;, which, 
-as the name suggests, creates a BEAST2 configuration file. 
-\verb;create_beast2_input_file; needs at least the name of a 
-FASTA file containing a DNA alignment
-and a name for the to-be-created configuration file. 
-The default settings for the other arguments of \verb;create_beast2_input_file; 
-are identical to BEAUti's default settings.
+\verb;babette;'s main function is \verb;run_beast2;, which, 
+configures BEAST2, runs it and parses its output. 
+\verb;run_beast2; needs at least the name of a 
+FASTA file containing a DNA alignment. 
+The default settings for the other arguments of \verb;run_beast2; 
+are identical to BEAUti's and BEAST2's default settings.
 Per alignment, a site model, clock model and tree prior can be chosen.
-Multiple alignments can be used, each with its own (unlinked) site model, clock model and tree prior.
+Multiple alignments can be used, each with its own (unlinked) site model, 
+clock model and tree prior.
 
-\verb;babette; currently has 61 exported functions to create a BEAST2 configuration file. 
+\verb;babette; currently has 61 exported functions to set up  
+a BEAST2 configuration file. 
 \verb;babette; is an alternative for a majority of BEAUti use cases, 
 but does not yet support the full functionality of BEAUti. 
 Because of BEAUti's high number of plugins, 
 \verb;babette; uses a software architecture that expects te be extended.
 
-\verb;beastier; \cite{beastier} and \verb;lumier; \cite{lumier} are related packages, used to confirm the correct working of verb;babette;.
-\verb;lumier; calls BEAST2 from within R and is used to confirm that the XML files created by \verb;babette; are valid. 
-Additionally, \verb;lumier; is used to run BEAST2 to create posteriors. 
-\verb;beastier; can parse BEAST2 posteriors, and is used to confirm whether posteriors have an estimated or fixed crown age.
+\verb;babette; has 7 exported function to run and help run BEAST2.
+One function is a wrapper function to run BEAST2, others
+allow the user to check if a BEAST2 configuration file is indeed valid.
+
+\verb;babette; has 20 exported function to parse the BEAST2 output
+file and analyse the created posterior. \verb;babette; gives the
+same ESSes and summary statistics as Tracer. The data is formatted
+as such, that it can easily be visualized using ggplot2 (for a trace,
+similar to Tracer)
+or phangorn (for the phylogenies in a posterior, simular to DensiTree). 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
@@ -209,35 +242,38 @@ In R, the functions of a package need to be loaded in the global namespace first
 
 \begin{lstlisting}[language=R, caption=Loading, label=lst:loading_babette, floatplacement=H]
 library(babette)
-library(beautier)
-library(beastier)
-library(tracerer)
 \end{lstlisting}
 
 BEAUti, and likewise \verb;babette;, needs at least a FASTA filename
-and an output filename. In BEAUti, this is achieved by loading a FASTA file, 
+to produce a BEAST2 configuration file. 
+In BEAUti, this is achieved by loading a FASTA file, 
 then saving an output file using a common
-save file dialog. In \verb;babette;, the same is achieved by:
+save file dialog. After this, BEAST2 needs to be invoked
+on the created configuration file to create multiple files
+storing the created posterior. Finally, these output
+files must be parsed by either Tracer of DensiTree.
+
+In \verb;babette;, the same is achieved by:
 
 \begin{lstlisting}[language=R, caption=Simplest example, label=lst:simplest_example, floatplacement=H]
-create_beast2_input_file(
-  "alignment.fas",
-  "beast2.xml"
+out <- run_beast2(
+  "alignment.fas"
 )
 \end{lstlisting}
 
-This code will create a BEAST2 configuration file with name '\verb;beast2.xml;',
+This code will create a (temporary) BEAST2 configuration file,
 using a FASTA file with name \verb;alignment.fas;, using the same default settings as BEAUti.
-The default settings are, among others, to use a Jukes-Cantor site model \cite{cantor1969mammalian}, 
+\verb;babette; will then execute a BEAST2 with that file, and
+parses the output. The default settings are, among others, 
+to use a Jukes-Cantor site model \cite{cantor1969mammalian}, 
 a strict clock, and a Yule birth tree prior \cite{yule}. 
 
 An example of using a different site model, clock model 
 and tree prior is:
 
 \begin{lstlisting}[language=R, caption=Example with different site model and clock model and tree prior, label=lst:all_different, floatplacement=H]
-create_beast2_input_file(
+out <- run_beast2(
   "alignment.fas",
-  "beast2.xml",
   site_models = create_hky_site_model(),
   clock_models = create_rln_clock_model(),
   tree_priors = create_bd_tree_prior()
@@ -293,9 +329,8 @@ own site model, clock model and tree prior.
 An example of two alignments, each with its own site model, is:
 
 \begin{lstlisting}[language=R, caption=Two alignments, label=lst:two_alignments, floatplacement=H]
-create_beast2_input_file(
+out <- run_beast2(
   c("anthus_aco.fas", "anthus_nd2.fas"),
-  "beast2.xml",
   site_models = list(
     create_tn93_site_model(), 
     create_gtr_site_model()
@@ -317,18 +352,14 @@ and makes high birth rates unlikely.
 The following script shows how to do this in \verb;babette;:
 
 \begin{lstlisting}[language=R, caption=Example with Yule tree prior with different birth rate distribution, label=lst:diff_distr, floatplacement=H]
-library(babette)
-create_beast2_input_file(
+out <- run_beast2(
   "alignment.fas",
-  "beast2.xml",
   tree_priors = create_yule_tree_prior(
     birth_rate_distr = create_exp_distr()    
   )
 )
 \end{lstlisting}
 
-
-% TODO: Mix sentences better
 Our initial motivation to create \verb;babette; 
 is that we wanted to fix the crown age of a phylogeny.
 BEAUti assumes that a phylogeny has a crown age that needs to be jointly-estimated
@@ -341,27 +372,11 @@ with one less source of variation.
 This is how to specify a fixed crown age with \verb;babette;:
 
 \begin{lstlisting}[language=R, caption=Example with fixed crown age, label=lst:fixed_crown_age, floatplacement=H]
-create_beast2_input_file(
+out <- run_beast2(
   "alignment.fas",
-  "beast2.xml"
   posterior_crown_age = 15
 )
 \end{lstlisting}
-
-Instead of creating a BEAST2 input file and then running BEAST2,
-\verb;babette; allows to do both steps at once:
-
-\begin{lstlisting}[language=R, caption=Run BEAST2, label=lst:run_beast2, floatplacement=H]
-out <- run_beast2(
-  "alignment.fas"
-)
-\end{lstlisting}
-
-\verb;run_beast2; also allows for setting a site model, clock model,
-tree prior and a fixed crown age. The variable \verb;out; 
-is a list that contains the posterior
-parameter estimates, posterior phylogenies (one per alignment)
-and operator acceptances.
 
 \verb;babette; has functionality of both Tracer and
 DensiTree. To calculate the effective sample sizes in \verb;babette;:
@@ -384,8 +399,7 @@ DensiTree displays the phylogenies in a posterior.
 To do the same in \verb;babette;:
 
 \begin{lstlisting}[language=R, caption=Show posterior phylogenies, label=lst:densitree, floatplacement=H]
-library(phangorn)
-densiTree(out$anthus_aco_trees)
+densitree(out$anthus_aco_trees)
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -404,17 +418,18 @@ the speed at which new features are added \cite{vasilescu2015}.
 \verb;babette; follows Hadley Wickham's style guide \cite{style_guide}, which improves software quality \cite{fang2001}.
 \verb;babette; is dependent on multiple packages, which are 
 \verb;APE; \cite{APE}, 
+\verb;beautier; \cite{beautier},
 \verb;beastier; \cite{beastier},
 \verb;devtools; \cite{devtools},
 \verb;geiger; \cite{GEIGER},
 \verb;ggplot2; \cite{ggplot2},
 \verb;knitr; \cite{knitr},
-\verb;lumier; \cite{lumier},
 \verb;phangorn; \cite{phangorn},
 \verb;rmarkdown; \cite{rmarkdown},
 \verb;seqinr; \cite{seqinr},
 \verb;stringr; \cite{stringr},
 \verb;testit; \cite{testit} and 
+\verb;tracerer; \cite{tracerer},
 \verb;TreeSim; \cite{TreeSim}.
 
 \verb;babette;'s development takes place on GitHub \cite{github},
@@ -424,13 +439,12 @@ and improves transparency \cite{gorgolewski2016practical}.
 \verb;babette;'s GitHub facilitates feature requests and has a guidelines how to do so.
 
 \verb;babette;'s documentation is extensive. All functions are documented
-in the package's internal documentation. For quick use, each exported function shows a minimal example. 
+in the package's internal documentation. For quick use, 
+each exported function shows a minimal example. 
 For easy exploration, each exported function's documentation links to related functions.
 Additionally, \verb;babette; has a vignette that demonstrates extensively how
 to use it. The GitHub documentation helps to get started, with a dozen examples 
 of BEAUti screenshots with equivalent \verb;babette; code.
-
-A roadmap of \verb;babette;'s future extensions can be found on its GitHub.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Citation of babette}
