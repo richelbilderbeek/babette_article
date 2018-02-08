@@ -173,9 +173,8 @@ has its focus on DNA alignments and ultrametric trees,
 where \verb;BEASTmasteR; is used for 
 morphological traits and tip-dating.
 Examples of R packages to parse the BEAST2 output files
-are \verb;rBEAST; \cite{rBEAST}, 
-\verb;RBEAST; \cite{RBEAST} and 
-\verb;rbeast2; \cite{rbeast2}. 
+are \verb;rBEAST; \cite{rBEAST} and 
+\verb;RBEAST; \cite{RBEAST}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
@@ -236,9 +235,10 @@ are \verb;rBEAST; \cite{rBEAST},
     \end{tikzpicture}
   }
   \caption{
-    Workflow using GUI tools. From an alignment, BEAUti is used to create a 
-    BEAST2 configuration file. That file is run by BEAST2. The results
-    are visualized using DensiTree and Tracer.
+    Workflow using GUI tools. From an alignment (1) and BEAUti (2), 
+    a BEAST2 configuration file (3) is created. BEAST2 (4) uses that file
+    to a posterior, storing it in multiple files (5). These results
+    are visualized using DensiTree (6) and Tracer (7).
   }
   \label{fig:workflow}
 \end{figure}
