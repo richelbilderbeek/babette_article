@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\title{babette: BEAUti, BEAST and Tracer for R}
+\title{babette: BEAUti 2, BEAST2 and Tracer for R}
 \author{Rich\`el J.C. Bilderbeek, Rampal S. Etienne}
 
 \usepackage{listings}
@@ -10,6 +10,7 @@
 \usepackage{tikz}
 \usepackage{tkz-graph}
 \usepackage{pgf}
+\usepackage{bm}
 \usetikzlibrary{arrows,automata}
 
 % Style of listings
@@ -42,10 +43,9 @@
 }
 \lstset{style=mystyle}
 
-% Adds numbered lines, thanks to Raphael Scherrer
-% \usepackage[switch]{lineno}
-
-
+% Adds numbered lines
+\usepackage{lineno}
+\linenumbers
 
 \begin{document}
 
@@ -390,10 +390,12 @@ Tracer displays multiple summary statistics for each
 estimated variable. To obtain, for example, the
 summary statistics of the estimated birth rate in \verb;babette;:
 
+\begin{lstlisting}[language=R, caption=Calculate all summary statistics, label=lst:calc_sum_stats, floatplacement=H]
 sum_stats <- calc_sum_stats(
   out$estimates$birthRate, 
   sample_interval = 1000, burn_in_fraction = 0.1
 )
+\end{lstlisting}
 
 DensiTree displays the phylogenies in a posterior.
 To do the same in \verb;babette;:
