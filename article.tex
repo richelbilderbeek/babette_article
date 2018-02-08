@@ -308,10 +308,15 @@ out <- run_beast2(
 \end{lstlisting}
 
 This code will create a (temporary) BEAST2 configuration file,
-using a FASTA file with name \verb;alignment.fas;, using the same default settings as BEAUti.
+using a FASTA file with name \verb;alignment.fas;, 
+using the same default settings as BEAUti.
 \verb;babette; will then execute a BEAST2 with that file, and
-parses the output. The default settings are, among others, 
-to use a Jukes-Cantor site model \cite{cantor1969mammalian}, 
+parses the output. The output, named \verb;out;, is a list of
+parameter estimates, posterior phylogenies (one per alignment)
+and operator acceptances. 
+
+The default settings for BEAUti (and thus \verb;babette;) are, 
+among others, to use a Jukes-Cantor site model \cite{cantor1969mammalian}, 
 a strict clock, and a Yule birth tree prior \cite{yule}. 
 
 An example of using a different site model, clock model 
@@ -328,7 +333,8 @@ out <- run_beast2(
 
 This code uses an HKY site model, a relaxed log-normal clock model and a 
 birth-death tree prior, each with their default settings in BEAUti.
-Table \ref{tab:functions} shows an overview of all functions to create site models, clock models and tree priors.
+Table \ref{tab:functions} shows an overview of all functions to 
+create site models, clock models and tree priors.
 
 \begin{table}[]
 \centering
@@ -368,8 +374,10 @@ Table \ref{tab:functions} shows an overview of all functions to create site mode
 \label{tab:functions}
 \end{table}
 
-Note that the arguments' names \verb;site_models;, \verb;clock_models; and \verb;tree_priors; are plural, as each of these
-can be (a list of) one or more elements. Each of these arguments must have the same number of elements, so that each alignment has its
+Note that the arguments' names \verb;site_models;, \verb;clock_models; 
+and \verb;tree_priors; are plural, as each of these
+can be (a list of) one or more elements. Each of these arguments must 
+have the same number of elements, so that each alignment has its
 own site model, clock model and tree prior. 
 
 An example of two alignments, each with its own site model, is:
@@ -477,7 +485,7 @@ the speed at which new features are added \cite{vasilescu2015}.
 \verb;seqinr; \cite{seqinr},
 \verb;stringr; \cite{stringr},
 \verb;testit; \cite{testit} and 
-\verb;tracerer; \cite{tracerer},
+\verb;tracerer; \cite{tracerer} and
 \verb;TreeSim; \cite{TreeSim}.
 
 \verb;babette;'s development takes place on GitHub \cite{github},
