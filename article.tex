@@ -432,8 +432,8 @@ out <- run_beast2(
 )
 \end{lstlisting}
 
-\verb;babette; has functionality of both Tracer and
-DensiTree. Tracer, among others, shows the effective sample
+\verb;babette; allows for the same functionality of Tracer. 
+Tracer, among others, shows the effective sample
 sizes of each posterior's variables. As an MCMC run needs to
 converge first, Tracer discards the first 10\% of all parameter
 estimates. This is called the burn-in. To calculate the effective
@@ -445,8 +445,10 @@ esses <- calc_esses(traces, sample_interval = 1000)
 \end{lstlisting}
 
 Tracer displays multiple summary statistics for each
-estimated variable. To obtain, for example, the
-summary statistics of the estimated birth rate in \verb;babette;:
+estimated variable: the mean and its standard error, standard deviation,
+variance, median, mode, geometric mean, 95\% HPD interval, auto-correlation
+time and effective sample size. To obtain all these summary statistics 
+of the estimated birth rate in \verb;babette;:
 
 \begin{lstlisting}[language=R, caption=Calculate all summary statistics, label=lst:calc_sum_stats, floatplacement=H]
 sum_stats <- calc_sum_stats(
@@ -456,8 +458,10 @@ sum_stats <- calc_sum_stats(
 )
 \end{lstlisting}
 
-DensiTree displays the phylogenies in a posterior.
-To do the same in \verb;babette;:
+\verb;babette; allows for the same functionality of DensiTree.
+DensiTree displays the phylogenies in a posterior at the same
+time scale over one another, allowing to see the uncertainty in
+topology and branch lengths. To vizualize the same in \verb;babette;:
 
 \begin{lstlisting}[language=R, caption=Show posterior phylogenies, label=lst:densitree, floatplacement=H]
 densitree(out$anthus_aco_trees)
