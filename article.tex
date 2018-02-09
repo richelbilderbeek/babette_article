@@ -24,7 +24,7 @@
   language=R,% set programming language
   basicstyle=\ttfamily\small,% basic font style
   commentstyle=\color{gray},% comment style
-  numbers=left,% display line numbers on the left side
+  % numbers=left,% display line numbers on the left side
   numberstyle=\scriptsize,% use small line numbers
   numbersep=10pt,% space between line numbers and code
   tabsize=2,% sizes of tabs
@@ -286,7 +286,7 @@ or \verb;phangorn; (for the phylogenies in a posterior, simular to DensiTree).
 
 In R, the functions of a package need to be loaded in the global namespace first:
 
-\begin{lstlisting}[language=R, caption=Loading, label=lst:loading_babette, floatplacement=H]
+\begin{lstlisting}[language=R, floatplacement=H]
 library(babette)
 \end{lstlisting}
 
@@ -301,10 +301,8 @@ files must be parsed by either Tracer of DensiTree.
 
 In \verb;babette;, the same is achieved by:
 
-\begin{lstlisting}[language=R, caption=Simplest example, label=lst:simplest_example, floatplacement=H]
-out <- run_beast2(
-  "alignment.fas"
-)
+\begin{lstlisting}[language=R, floatplacement=H]
+out <- run_beast2("alignment.fas")
 \end{lstlisting}
 
 This code will create a (temporary) BEAST2 configuration file,
@@ -322,7 +320,7 @@ a strict clock, and a Yule birth tree prior \cite{yule}.
 An example of using a different site model, clock model 
 and tree prior is:
 
-\begin{lstlisting}[language=R, caption=Example with different site model and clock model and tree prior, label=lst:all_different, floatplacement=H]
+\begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2(
   "alignment.fas",
   site_models = create_hky_site_model(),
@@ -382,7 +380,7 @@ own site model, clock model and tree prior.
 
 An example of two alignments, each with its own site model, is:
 
-\begin{lstlisting}[language=R, caption=Two alignments, label=lst:two_alignments, floatplacement=H]
+\begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2(
   c("anthus_aco.fas", "anthus_nd2.fas"),
   site_models = list(
@@ -405,7 +403,7 @@ and makes high birth rates unlikely.
 
 The following script shows how to do this in \verb;babette;:
 
-\begin{lstlisting}[language=R, caption=Example with Yule tree prior with different birth rate distribution, label=lst:diff_distr, floatplacement=H]
+\begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2(
   "alignment.fas",
   tree_priors = create_yule_tree_prior(
@@ -425,7 +423,7 @@ as this allows for one less source of variation.
 
 This is how to specify a fixed crown age with \verb;babette;:
 
-\begin{lstlisting}[language=R, caption=Example with fixed crown age, label=lst:fixed_crown_age, floatplacement=H]
+\begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2(
   "alignment.fas",
   posterior_crown_age = 15
@@ -439,7 +437,7 @@ converge first, Tracer discards the first 10\% of all parameter
 estimates. This is called the burn-in. To calculate the effective
 sample sizes in \verb;babette;, with the same burn-in of 10\%:
 
-\begin{lstlisting}[language=R, caption=Calculate ESSes, label=lst:calc_esses, floatplacement=H]
+\begin{lstlisting}[language=R, floatplacement=H]
 traces <- remove_burn_ins(traces = out$estimates, burn_in_fraction = 0.1)
 esses <- calc_esses(traces, sample_interval = 1000)
 \end{lstlisting}
@@ -450,7 +448,7 @@ variance, median, mode, geometric mean, 95\% HPD interval, auto-correlation
 time and effective sample size. To obtain all these summary statistics 
 of the estimated birth rate in \verb;babette;:
 
-\begin{lstlisting}[language=R, caption=Calculate all summary statistics, label=lst:calc_sum_stats, floatplacement=H]
+\begin{lstlisting}[language=R, floatplacement=H]
 sum_stats <- calc_sum_stats(
   out$estimates$birthRate, 
   sample_interval = 1000, 
@@ -463,7 +461,7 @@ DensiTree displays the phylogenies in a posterior at the same
 time scale over one another, allowing to see the uncertainty in
 topology and branch lengths. To vizualize the same in \verb;babette;:
 
-\begin{lstlisting}[language=R, caption=Show posterior phylogenies, label=lst:densitree, floatplacement=H]
+\begin{lstlisting}[language=R, floatplacement=H]
 densitree(out$anthus_aco_trees)
 \end{lstlisting}
 
