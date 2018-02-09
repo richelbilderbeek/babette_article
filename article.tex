@@ -66,9 +66,9 @@
      BEAST2 is one of the most widely used software tools. 
      It comes with the graphical programs BEAUti 2 to
      facilitate the creation of input files to BEAST2, and
-     with DensiTree and Tracer 
-     to interpret BEAST 2's created output files. 
-     However, when many input and output files are required, 
+     with DensiTree and Tracer, 
+     to interpret BEAST2's output. 
+     However, when many input files are required, 
      a workflow of GUI programs is cumbersome. 
      Moreover, many other phygenetics tools are available 
      in R, which requires switching from one platform 
@@ -80,7 +80,7 @@
     from an R function call. \\
   \textbf{3. }
     We describe \verb;babette;'s usage, the novel functionality it provides
-    compared to BEAUti 2, and give some examples. \\
+    compared to the tools it replaces, and give some examples. \\
   \textbf{4. }
     As \verb;babette; is designed to be of high quality and extendable, 
     we conclude by describing the further development of the package \\
@@ -133,7 +133,7 @@ multiple (simulated) alignments, nucleotide substitution models,
 clock models and tree priors. 
 
 BEAST2 is also associated with Tracer \cite{tracer} and 
-DensiTree 2 \cite{DensiTree}. Both are desktop applications 
+DensiTree \cite{DensiTree}. Both are desktop applications 
 to analyze the output of BEAST2, each with a user-friendly graphical user interface. 
 
 Tracer's purpose is to analyze the parameter estimates generated
@@ -151,16 +151,16 @@ parameter traces and posterior phylogenies.
 Here, to provide such functionality we present \verb;babette;, 
 ’BEAUti 2, BEAST2 and Tracer for R’, 
 which creates BEAST2 configuration files,
-runs BEAST2 and analyzes its results 
-from an R function call and hence
-will save time and tedious mouse clicking and 
+runs BEAST2, and analyzes its results,
+all from an R function call. This
+will save time, tedious mouse clicking and 
 reduces the chances of errors in such repetitive actions.
-The interface of \verb;babette; to create BEAST2 configureation
-files closely mimics BEAUti. This
+The interface of \verb;babette; mimics the tools it
+is inspired on. This
 familiarity helps both beginner and experienced BEAST2 users 
-to create configuration files using \verb;babette;.
+to make the step from those tools to \verb;babette;.
 \verb;babette; enables the creation of a single-script 
-pipeline from sequence alignments to tree analysis in R. 
+pipeline from sequence alignments to posterior analysis in R. 
 
 \verb;babette; is the first R package that unifies the
 full workflow of working with BEAST2. An
@@ -276,9 +276,9 @@ allow the user to check if a BEAST2 configuration file is indeed valid.
 \verb;babette; has 20 exported function to parse the BEAST2 output
 file and analyse the created posterior. \verb;babette; gives the
 same ESSes and summary statistics as Tracer. The data is formatted
-as such, that it can easily be visualized using ggplot2 (for a trace,
+as such, that it can easily be visualized using \verb;ggplot2; (for a trace,
 similar to Tracer)
-or phangorn (for the phylogenies in a posterior, simular to DensiTree). 
+or \verb;phangorn; (for the phylogenies in a posterior, simular to DensiTree). 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
@@ -419,9 +419,9 @@ is that we wanted to fix the crown age of a phylogeny.
 BEAUti assumes that a phylogeny has a crown age that needs to be jointly-estimated
 with the phylogeny and other parameters. It does not allow for fixing
 the crown age. Without \verb;babette;, one needs to manually edit the BEAST2 
-XML configuration file, which is tedious and prone to errors. 
-Fixing the crown ages allows for theoretical experiments 
-with one less source of variation.
+configuration file, which is tedious and prone to errors. 
+Fixing the crown ages is especially useful for theoretical experiments,
+as this allows for one less source of variation.
 
 This is how to specify a fixed crown age with \verb;babette;:
 
@@ -433,10 +433,14 @@ out <- run_beast2(
 \end{lstlisting}
 
 \verb;babette; has functionality of both Tracer and
-DensiTree. To calculate the effective sample sizes in \verb;babette;:
+DensiTree. Tracer, among others, shows the effective sample
+sizes of each posterior's variables. As an MCMC run needs to
+converge first, Tracer discards the first 10\% of all parameter
+estimates. This is called the burn-in. To calculate the effective
+sample sizes in \verb;babette;, with the same burn-in of 10\%:
 
 \begin{lstlisting}[language=R, caption=Calculate ESSes, label=lst:calc_esses, floatplacement=H]
-traces <- remove_burn_ins(traces = out$estimates, burn_in_fraction = 0.2)
+traces <- remove_burn_ins(traces = out$estimates, burn_in_fraction = 0.1)
 esses <- calc_esses(traces, sample_interval = 1000)
 \end{lstlisting}
 
@@ -447,7 +451,8 @@ summary statistics of the estimated birth rate in \verb;babette;:
 \begin{lstlisting}[language=R, caption=Calculate all summary statistics, label=lst:calc_sum_stats, floatplacement=H]
 sum_stats <- calc_sum_stats(
   out$estimates$birthRate, 
-  sample_interval = 1000, burn_in_fraction = 0.1
+  sample_interval = 1000, 
+  burn_in_fraction = 0.1
 )
 \end{lstlisting}
 
