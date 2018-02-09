@@ -444,9 +444,9 @@ esses <- calc_esses(traces, sample_interval = 1000)
 
 Tracer displays multiple summary statistics for each
 estimated variable: the mean and its standard error, standard deviation,
-variance, median, mode, geometric mean, 95\% HPD interval, auto-correlation
-time and effective sample size. To obtain all these summary statistics 
-of the estimated birth rate in \verb;babette;:
+variance, median, mode, geometric mean, 95\% highest posterior density interval, 
+auto-correlation time and effective sample size. To obtain all these summary statistics 
+of, for example, the estimated birth rate in \verb;babette;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 sum_stats <- calc_sum_stats(
