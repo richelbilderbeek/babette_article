@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\title{babette: BEAUti 2, BEAST2 and Tracer for R}
+\title{rbeast2: BEAUti 2, BEAST2 and Tracer for R}
 \author{Rich\`el J.C. Bilderbeek, Rampal S. Etienne}
 
 \usepackage{listings}
@@ -70,15 +70,15 @@
      However, when many different alignments or model 
      setups are required, a workflow of GUI programs is cumbersome. \\
   \textbf{2. }
-    Here, we present a free, libre and open-source package, \verb;babette;, 
+    Here, we present a free, libre and open-source package, \verb;rbeast2;, 
     'BEAUti 2, BEAST2 and Tracer for R', for the R programming language. 
-    \verb;babette; creates BEAST2 input files, runs BEAST2 and parses its results, 
+    \verb;rbeast2; creates BEAST2 input files, runs BEAST2 and parses its results, 
     all from an R function call. \\
   \textbf{3. }
-    We describe \verb;babette;'s usage, the novel functionality it provides
+    We describe \verb;rbeast2;'s usage, the novel functionality it provides
     compared to the tools it is alternative of, and give some examples. \\
   \textbf{4. }
-    As \verb;babette; is designed to be of high quality and extendable, 
+    As \verb;rbeast2; is designed to be of high quality and extendable, 
     we conclude by describing the further development of the package \\
 \end{abstract}
 
@@ -144,27 +144,27 @@ However, for exploring the output of many BEAST2 runs,
 one would like a script to collect all parameter ESSes,
 parameter traces and posterior phylogenies. 
 
-Here, to provide such functionality we present \verb;babette;, 
+Here, to provide such functionality we present \verb;rbeast2;, 
 ’BEAUti 2, BEAST2 and Tracer for R’, 
 which creates BEAST2 configuration files,
 runs BEAST2, and analyzes its results,
 all from an R function call. This
 will save time, tedious mouse clicking and 
 reduces the chances of errors in such repetitive actions.
-The interface of \verb;babette; mimics the tools it
+The interface of \verb;rbeast2; mimics the tools it
 is inspired on. This
 familiarity helps both beginner and experienced BEAST2 users 
-to make the step from those tools to \verb;babette;.
-\verb;babette; enables the creation of a single-script 
+to make the step from those tools to \verb;rbeast2;.
+\verb;rbeast2; enables the creation of a single-script 
 pipeline from sequence alignments to posterior analysis in R. 
 
-\verb;babette; is the first R package that unifies the
+\verb;rbeast2; is the first R package that unifies the
 full workflow of working with BEAST2. An
 example to create a BEAST2 input file is 
 \verb;BEASTmasteR; \cite{beastmaster}.
 Also \verb;BEASTmasteR; allows 
 to create BEAST2 configuration files from R. 
-The difference is that \verb;babette; 
+The difference is that \verb;rbeast2; 
 has its focus on DNA alignments and ultrametric trees, 
 where \verb;BEASTmasteR; is used for 
 morphological traits and tip-dating.
@@ -234,7 +234,7 @@ are \verb;rBEAST; \cite{rBEAST} and
     Workflow using GUI tools. From an alignment (1) and BEAUti (2), 
     a BEAST2 configuration file (3) is created. BEAST2 (4) uses that file
     to infer a posterior, storing it in multiple files (5). These results
-    are visualized using DensiTree (6) and Tracer (7). babette allows
+    are visualized using DensiTree (6) and Tracer (7). rbeast2 allows
     for the same workflow, all from an R function call.
   }
   \label{fig:workflow}
@@ -245,11 +245,11 @@ are \verb;rBEAST; \cite{rBEAST} and
 \section{Description}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\verb;babette; is written in the R programming language \cite{R}
+\verb;rbeast2; is written in the R programming language \cite{R}
 and enables the full BEAST2 workflow from an R function call,
 in a similar way to what BEAUti, DensiTree and Tracer do.
 
-\verb;babette;'s main function is \verb;run_beast2;, which, 
+\verb;rbeast2;'s main function is \verb;run_beast2;, which, 
 configures BEAST2, runs it and parses its output. 
 \verb;run_beast2; needs at least the name of a 
 FASTA file containing a DNA alignment. 
@@ -259,19 +259,19 @@ Per alignment, a site model, clock model and tree prior can be chosen.
 Multiple alignments can be used, each with its own (unlinked) site model, 
 clock model and tree prior.
 
-\verb;babette; currently has 61 exported functions to set up  
+\verb;rbeast2; currently has 61 exported functions to set up  
 a BEAST2 configuration file. 
-\verb;babette; is an alternative for a majority of BEAUti use cases, 
+\verb;rbeast2; is an alternative for a majority of BEAUti use cases, 
 but does not yet support the full functionality of BEAUti. 
 Because of BEAUti's high number of plugins, 
-\verb;babette; uses a software architecture that expects to be extended.
+\verb;rbeast2; uses a software architecture that expects to be extended.
 
-\verb;babette; has 7 exported function to run and help run BEAST2.
+\verb;rbeast2; has 7 exported function to run and help run BEAST2.
 One function is used to run BEAST2, others
 allow the user to check if a BEAST2 configuration file is indeed valid.
 
-\verb;babette; has 20 exported function to parse the BEAST2 output
-files and analyse the created posterior. \verb;babette; gives the
+\verb;rbeast2; has 20 exported function to parse the BEAST2 output
+files and analyse the created posterior. \verb;rbeast2; gives the
 same ESSes and summary statistics as Tracer. The data is formatted
 as such, that it can easily be visualized using \verb;ggplot2; (for a trace,
 similar to Tracer)
@@ -284,10 +284,10 @@ or \verb;phangorn; \cite{phangorn} (for the phylogenies in a posterior, similar 
 In R, the functions of a package need to be loaded in the global namespace first:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-library(babette)
+library(rbeast2)
 \end{lstlisting}
 
-BEAUti, and likewise \verb;babette;, needs at least a FASTA filename
+BEAUti, and likewise \verb;rbeast2;, needs at least a FASTA filename
 to produce a BEAST2 configuration file. 
 In BEAUti, this is achieved by loading a FASTA file, 
 then saving an output file using a common
@@ -296,7 +296,7 @@ on the created configuration file to create multiple files
 storing the created posterior. Finally, these output
 files must be parsed by either Tracer of DensiTree.
 
-In \verb;babette;, the same is achieved by:
+In \verb;rbeast2;, the same is achieved by:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2("alignment.fas")
@@ -305,12 +305,12 @@ out <- run_beast2("alignment.fas")
 This code will create a (temporary) BEAST2 configuration file,
 using a FASTA file with name \verb;alignment.fas;, 
 using the same default settings as BEAUti.
-\verb;babette; will then execute BEAST2 with that file, and
+\verb;rbeast2; will then execute BEAST2 with that file, and
 parses the output. The output, named \verb;out;, is a list of
 parameter estimates, posterior phylogenies (one for each alignment)
 and operator acceptances. 
 
-The default settings for BEAUti (and thus \verb;babette;) are, 
+The default settings for BEAUti (and thus \verb;rbeast2;) are, 
 among others, to use a Jukes-Cantor site model \cite{cantor1969mammalian}, 
 a strict clock, and a Yule birth tree prior \cite{yule}. 
 
@@ -365,7 +365,7 @@ create site models, clock models and tree priors.
 \verb;create_uniform_distr; & Create a uniform distribution \\
 \hline
 \end{tabular}
-\caption{babette's main functions}
+\caption{rbeast2's main functions}
 \label{tab:functions}
 \end{table}
 
@@ -387,7 +387,7 @@ out <- run_beast2(
 )
 \end{lstlisting}
 
-\verb;babette; also uses the same default prior distributions as BEAUti 
+\verb;rbeast2; also uses the same default prior distributions as BEAUti 
 for each of the site models, clock models and tree priors. 
 For example, by default, a Yule tree prior assumes the birth rate 
 follows a uniform distribution, 
@@ -399,7 +399,7 @@ One may prefer an exponential distribution instead,
 as this would assume only positive birth rates, 
 and makes high birth rates unlikely.
 
-The following script shows how to do this in \verb;babette;:
+The following script shows how to do this in \verb;rbeast2;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2(
@@ -410,16 +410,16 @@ out <- run_beast2(
 )
 \end{lstlisting}
 
-Our initial motivation to create \verb;babette; 
+Our initial motivation to create \verb;rbeast2; 
 is that we wanted to fix the crown age of a phylogeny.
 BEAUti assumes that a phylogeny has a crown age that needs to be jointly-estimated
 with the phylogeny and other parameters. It does not allow for fixing
-the crown age. Without \verb;babette;, one needs to manually edit the BEAST2 
+the crown age. Without \verb;rbeast2;, one needs to manually edit the BEAST2 
 configuration file, which is tedious and prone to errors. 
 Fixing the crown ages is especially useful for theoretical experiments,
 as this allows for one less source of variation.
 
-This is how to specify a fixed crown age with \verb;babette;:
+This is how to specify a fixed crown age with \verb;rbeast2;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2(
@@ -428,18 +428,18 @@ out <- run_beast2(
 )
 \end{lstlisting}
 
-\verb;babette; allows for the same functionality of Tracer. 
+\verb;rbeast2; allows for the same functionality of Tracer. 
 Tracer, among others, shows the effective sample
 sizes of each posterior's variables. As an MCMC run needs to
 converge first, Tracer discards the first 10\% of all parameter
 estimates. This is called the "burn-in". To remove the burn-in
-in \verb;babette;:
+in \verb;rbeast2;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 traces <- remove_burn_ins(out$estimates)
 \end{lstlisting}
 
-Then, to calculate the effective sample sizes in \verb;babette;:
+Then, to calculate the effective sample sizes in \verb;rbeast2;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 esses <- calc_esses(
@@ -452,7 +452,7 @@ Tracer displays multiple summary statistics for each
 estimated variable: the mean and its standard error, standard deviation,
 variance, median, mode, geometric mean, 95\% highest posterior density interval, 
 auto-correlation time and effective sample size. To obtain all these summary statistics 
-of, for example, the estimated birth rate in \verb;babette;:
+of, for example, the estimated birth rate in \verb;rbeast2;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 sum_stats <- calc_summary_stats(
@@ -461,30 +461,30 @@ sum_stats <- calc_summary_stats(
 )
 \end{lstlisting}
 
-\verb;babette; allows for the same functionality of DensiTree.
+\verb;rbeast2; allows for the same functionality of DensiTree.
 DensiTree displays the phylogenies in a posterior at the same
 time scale over one another, allowing to see the uncertainty in
-topology and branch lengths. To visualize the same in \verb;babette;:
+topology and branch lengths. To visualize the same in \verb;rbeast2;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 densitree(out$anthus_aco_trees)
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{babette development and other resources}
+\section{rbeast2 development and other resources}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\verb;babette; is free, libre and open source software available from the official R package archive at 
-\url{http://cran.r-project.org/src/contrib/PACKAGES.html\#babette}
+\verb;rbeast2; is free, libre and open source software available from the official R package archive at 
+\url{http://cran.r-project.org/src/contrib/PACKAGES.html\#rbeast2}
 and is licensed under the GNU General Public License v3.0.
 
-\verb;babette; uses the Travis CI \cite{travis} 
+\verb;rbeast2; uses the Travis CI \cite{travis} 
 continuous integration service, which is known to significantly 
 increase the the number of bugs exposed \cite{vasilescu2015} and increases
 the speed at which new features are added \cite{vasilescu2015}.
-\verb;babette; has a 100\% code coverage, which correlates with code quality \cite{horgan1994,del1995correlation}. 
-\verb;babette; follows Hadley Wickham's style guide \cite{style_guide}, which improves software quality \cite{fang2001}.
-\verb;babette; is dependent on multiple packages, which are 
+\verb;rbeast2; has a 100\% code coverage, which correlates with code quality \cite{horgan1994,del1995correlation}. 
+\verb;rbeast2; follows Hadley Wickham's style guide \cite{style_guide}, which improves software quality \cite{fang2001}.
+\verb;rbeast2; is dependent on multiple packages, which are 
 \verb;APE; \cite{APE}, 
 \verb;beautier; \cite{beautier},
 \verb;beastier; \cite{beastier},
@@ -500,30 +500,30 @@ the speed at which new features are added \cite{vasilescu2015}.
 \verb;tracerer; \cite{tracerer} and
 \verb;TreeSim; \cite{TreeSim}.
 
-\verb;babette;'s development takes place on GitHub \cite{github},
-\url{https://github.com/richelbilderbeek/babette}, 
+\verb;rbeast2;'s development takes place on GitHub \cite{github},
+\url{https://github.com/richelbilderbeek/rbeast2}, 
 which accommodates collaboration \cite{perez2016ten} 
 and improves transparency \cite{gorgolewski2016practical}.
-\verb;babette;'s GitHub facilitates feature requests and has guidelines how to do so.
+\verb;rbeast2;'s GitHub facilitates feature requests and has guidelines how to do so.
 
-\verb;babette;'s documentation is extensive. All functions are documented
+\verb;rbeast2;'s documentation is extensive. All functions are documented
 in the package's internal documentation. For quick use, 
 each exported function shows a minimal example. 
 For easy exploration, each exported function's documentation links to related functions.
-Additionally, \verb;babette; has a vignette that demonstrates extensively how
+Additionally, \verb;rbeast2; has a vignette that demonstrates extensively how
 to use it. The GitHub documentation helps to get started, with a dozen examples 
-of BEAUti screenshots with equivalent \verb;babette; code.
+of BEAUti screenshots with equivalent \verb;rbeast2; code.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Citation of babette}
+\section{Citation of rbeast2}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Scientists using \verb;babette; in a published paper can cite this
-article, and/or cite the \verb;babette; package 
+Scientists using \verb;rbeast2; in a published paper can cite this
+article, and/or cite the \verb;rbeast2; package 
 directly. To obtain this citation from within an R script, use:
 
 \begin{lstlisting}[language=R]
-> citation("babette")
+> citation("rbeast2")
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
