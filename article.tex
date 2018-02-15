@@ -247,7 +247,7 @@ are \verb;rBEAST; \cite{rBEAST} and
 
 \verb;babette; is written in the R programming language \cite{R}
 and enables the full BEAST2 workflow from an R function call,
-in a similar way that BEAUti, DensiTree and Tracer do.
+in a similar way to what BEAUti, DensiTree and Tracer do.
 
 \verb;babette;'s main function is \verb;run_beast2;, which, 
 configures BEAST2, runs it and parses its output. 
@@ -264,10 +264,10 @@ a BEAST2 configuration file.
 \verb;babette; is an alternative for a majority of BEAUti use cases, 
 but does not yet support the full functionality of BEAUti. 
 Because of BEAUti's high number of plugins, 
-\verb;babette; uses a software architecture that expects te be extended.
+\verb;babette; uses a software architecture that expects to be extended.
 
 \verb;babette; has 7 exported function to run and help run BEAST2.
-One function is a wrapper function to run BEAST2, others
+One function is used to run BEAST2, others
 allow the user to check if a BEAST2 configuration file is indeed valid.
 
 \verb;babette; has 20 exported function to parse the BEAST2 output
@@ -305,9 +305,9 @@ out <- run_beast2("alignment.fas")
 This code will create a (temporary) BEAST2 configuration file,
 using a FASTA file with name \verb;alignment.fas;, 
 using the same default settings as BEAUti.
-\verb;babette; will then execute a BEAST2 with that file, and
+\verb;babette; will then execute BEAST2 with that file, and
 parses the output. The output, named \verb;out;, is a list of
-parameter estimates, posterior phylogenies (one per alignment)
+parameter estimates, posterior phylogenies (one for each alignment)
 and operator acceptances. 
 
 The default settings for BEAUti (and thus \verb;babette;) are, 
@@ -387,9 +387,10 @@ out <- run_beast2(
 )
 \end{lstlisting}
 
-\verb;babette; also uses the same default distributions as BEAUti 
-for the site models, clock models and tree priors. 
-For example, a Yule tree prior assumes the birth rate follows a uniform distribution, 
+\verb;babette; also uses the same default prior distributions as BEAUti 
+for each of the site models, clock models and tree priors. 
+For example, by default, a Yule tree prior assumes the birth rate 
+follows a uniform distribution, 
 from minus infinity to plus infinity. 
 This assumption implies that negative and positive birth rates are just as likely, 
 where a negative birth rate is biologically impossible (note that 
@@ -431,12 +432,20 @@ out <- run_beast2(
 Tracer, among others, shows the effective sample
 sizes of each posterior's variables. As an MCMC run needs to
 converge first, Tracer discards the first 10\% of all parameter
-estimates. This is called the burn-in. To calculate the effective
-sample sizes in \verb;babette;, with the same burn-in of 10\%:
+estimates. This is called the "burn-in". To remove the burn-in
+in \verb;babette;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-traces <- remove_burn_ins(traces = out$estimates, burn_in_fraction = 0.1)
-esses <- calc_esses(traces, sample_interval = 1000)
+traces <- remove_burn_ins(out$estimates)
+\end{lstlisting}
+
+Then, to calculate the effective sample sizes in \verb;babette;:
+
+\begin{lstlisting}[language=R, floatplacement=H]
+esses <- calc_esses(
+  traces, 
+  sample_interval = 1000
+)
 \end{lstlisting}
 
 Tracer displays multiple summary statistics for each
@@ -446,10 +455,9 @@ auto-correlation time and effective sample size. To obtain all these summary sta
 of, for example, the estimated birth rate in \verb;babette;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-sum_stats <- calc_sum_stats(
-  out$estimates$birthRate, 
-  sample_interval = 1000, 
-  burn_in_fraction = 0.1
+sum_stats <- calc_summary_stats(
+  traces$birthRate, 
+  sample_interval = 1000
 )
 \end{lstlisting}
 
