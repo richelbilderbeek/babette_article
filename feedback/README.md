@@ -96,4 +96,16 @@
 Note that I did not send an example article with it, so LHA could not know the article should be short.
 
 
-## 
+## 2018-02-15 Giovanni Laudanno ('GL')
+
+```
+Hi Richèl,
+
+These are my opinions. I refer to the PDF file you sent me.
+I hope it will be useful.
+
+Cheers,
+G.
+```
+
+[Feedback GL](20180215GL.pdf)
