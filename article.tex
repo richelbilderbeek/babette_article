@@ -293,7 +293,7 @@ In BEAUti, this is achieved by loading a FASTA file,
 then saving an output file using a common
 save file dialog. After this, BEAST2 needs to be invoked
 on the created configuration file to create multiple files
-storing the created posterior. Finally, these output
+storing the posterior created by BEAST2. Finally, these output
 files must be parsed by either Tracer of DensiTree.
 
 In \verb;rbeast2;, the same is achieved by:
@@ -303,11 +303,11 @@ out <- run_beast2("alignment.fas")
 \end{lstlisting}
 
 This code will create a (temporary) BEAST2 configuration file,
-using a FASTA file with name \verb;alignment.fas;, 
+from the FASTA file with name \verb;alignment.fas;, 
 using the same default settings as BEAUti.
-\verb;rbeast2; will then execute BEAST2 with that file, and
-parses the output. The output, named \verb;out;, is a list of
-parameter estimates, posterior phylogenies (one for each alignment)
+\verb;rbeast2; will then execute BEAST2 using that file, and
+parses the output. The returned data structure, named \verb;out;, 
+is a list of parameter estimates, posterior phylogenies (one for each alignment)
 and operator acceptances. 
 
 The default settings for BEAUti (and thus \verb;rbeast2;) are, 
@@ -399,7 +399,7 @@ One may prefer an exponential distribution instead,
 as this would assume only positive birth rates, 
 and makes high birth rates unlikely.
 
-The following script shows how to do this in \verb;rbeast2;:
+To do this in \verb;rbeast2;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2(
@@ -428,18 +428,28 @@ out <- run_beast2(
 )
 \end{lstlisting}
 
-\verb;rbeast2; allows for the same functionality of Tracer. 
-Tracer, among others, shows the effective sample
-sizes of each posterior's variables. As an MCMC run needs to
-converge first, Tracer discards the first 10\% of all parameter
-estimates. This is called the "burn-in". To remove the burn-in
-in \verb;rbeast2;:
+\verb;rbeast2; allows for the same functionality of Tracer.
+Tracer works on the values of the parameter estimates sampled
+in the BEAST2 run. This is called the "trace" (hence the name).
+The start of the trace is usually discarded, as an MCMC 
+algorithm (such as used by BEAST2) first has to converge to
+its equilibrium. The start of the trace, called the "burn-in", 
+will be removed, as its parameter estimates are not 
+representative. By default, Tracer discards the first 10\% of all 
+the parameter estimates. 
+
+To remove the burn-in from all parameter estimates in \verb;rbeast2;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 traces <- remove_burn_ins(out$estimates)
 \end{lstlisting}
 
-Then, to calculate the effective sample sizes in \verb;rbeast2;:
+Tracer shows the ESSes of each posterior's variables.
+These ESSes are important to determine the strength of the
+inference. As a rule of thumb, an ESS of 200 is acceptable 
+for any parameter estimate.
+
+To calculate the effective sample sizes (of all estimated variables) in \verb;rbeast2;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 esses <- calc_esses(
@@ -451,20 +461,21 @@ esses <- calc_esses(
 Tracer displays multiple summary statistics for each
 estimated variable: the mean and its standard error, standard deviation,
 variance, median, mode, geometric mean, 95\% highest posterior density interval, 
-auto-correlation time and effective sample size. To obtain all these summary statistics 
-of, for example, the estimated birth rate in \verb;rbeast2;:
+auto-correlation time and effective sample size. It displays these statistics per
+variable. In \verb;rbeast2;, these summary statistics are collected for
+all estimated parameters at once: 
 
 \begin{lstlisting}[language=R, floatplacement=H]
 sum_stats <- calc_summary_stats(
-  traces$birthRate, 
+  traces, 
   sample_interval = 1000
 )
 \end{lstlisting}
 
-\verb;rbeast2; allows for the same functionality of DensiTree.
+\verb;rbeast2; allows for the same functionality as DensiTree.
 DensiTree displays the phylogenies in a posterior at the same
-time scale over one another, allowing to see the uncertainty in
-topology and branch lengths. To visualize the same in \verb;rbeast2;:
+time scale, drawn one over one another, allowing to see the uncertainty in
+topology and branch lengths. To do so in \verb;rbeast2;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 densitree(out$anthus_aco_trees)
