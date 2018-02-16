@@ -63,14 +63,13 @@
 
   \textbf{1. }
     In the field of phylogenetics, 
-     BEAST2 is one of the most widely used software tools. 
-     It comes with the graphical programs BEAUti 2 to
-     facilitate the creation of BEAST2 configuration files, and
-     with DensiTree and Tracer, to interpret BEAST2's output files. 
-     However, when many different alignments or model 
-     setups are required, a workflow of GUI programs is cumbersome. \\
+    BEAST2 is one of the most widely used software tools. 
+    It comes with the graphical programs BEAUti 2, DensiTree and Tracer,
+    to create BEAST2 configuration files and to interpret BEAST2's output files. 
+    However, when many different alignments or model 
+    setups are required, a workflow of GUI programs is cumbersome. \\
   \textbf{2. }
-    Here, we present a free, libre and open-source package, \verb;rbeast2;, 
+    Here, we present a free, libre and open-source package, \verb;rbeast2;: 
     'BEAUti 2, BEAST2 and Tracer for R', for the R programming language. 
     \verb;rbeast2; creates BEAST2 input files, runs BEAST2 and parses its results, 
     all from an R function call. \\
@@ -79,7 +78,7 @@
     compared to the tools it is alternative of, and give some examples. \\
   \textbf{4. }
     As \verb;rbeast2; is designed to be of high quality and extendable, 
-    we conclude by describing the further development of the package \\
+    we conclude by describing the further development of the package. \\
 \end{abstract}
 
 % Ideal
@@ -105,7 +104,7 @@ There are many phylogenetics tools available to obtain an estimate
 of the phylogenetic tree of a given set of species. 
 BEAST2 \cite{bouckaert2014beast} is one of the most widely used ones. 
 It creates a posterior of jointly-estimated phylogenies and model parameters, 
-from a DNA, RNA or amino acid alignment (see figure \ref{fig:workflow} 
+from one or more DNA, RNA or amino acid alignments (see figure \ref{fig:workflow} 
 for an overview of the workflow). 
 It is a console application, that needs a configuration file containing 
 alignments and model parameters.
@@ -117,7 +116,7 @@ reasonable default settings.
 As such, BEAUti is an attractive alternative 
 to manual and error-prone editing of BEAST2 configuration files. 
 
-BEAUti cannot be called from a command-line script.
+However, BEAUti cannot be called from a command-line script.
 This implies that when the user 
 wants to explore the consequences of various settings, this must be done manually.
 This is the common workflow when using a few alignments and doing a superficial 
@@ -141,10 +140,10 @@ DensiTree visualizes the phylogenies of a BEAST2 posterior, with
 many options to improve the displayal of those many phylogenies.
 
 However, for exploring the output of many BEAST2 runs, 
-one would like a script to collect all parameter ESSes,
+one would like a script to collect all parameters' ESSes,
 parameter traces and posterior phylogenies. 
 
-Here, to provide such functionality we present \verb;rbeast2;, 
+Here, to provide such functionality we present \verb;rbeast2;:
 ’BEAUti 2, BEAST2 and Tracer for R’, 
 which creates BEAST2 configuration files,
 runs BEAST2, and analyzes its results,
@@ -165,7 +164,8 @@ example to create a BEAST2 input file is
 Also \verb;BEASTmasteR; allows 
 to create BEAST2 configuration files from R. 
 The difference is that \verb;rbeast2; 
-has its focus on DNA alignments and ultrametric trees, 
+has its focus on DNA alignments and ultrametric trees (that
+is, trees that have their tips measured in the present), 
 where \verb;BEASTmasteR; is used for 
 morphological traits and tip-dating.
 Examples of R packages to parse the BEAST2 output files
