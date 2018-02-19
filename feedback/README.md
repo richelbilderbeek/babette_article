@@ -114,10 +114,8 @@ G.
 
 ```
 16 February 2018 22:42 45 KB
-From:
-Rampal S. Etienne
-To:
-richel@richelbilderbeek.nl
+From: Rampal S. Etienne
+To: richel@richelbilderbeek.nl
 
 Ziet er goed uit. Hier mijn commentaar.
 
@@ -132,15 +130,17 @@ Groet, Rampal
 Re: rbeast2 artikel
 
 17 February 2018 08:22 6 KB
-From:
-Etienne, R.S.
-To:
-richel@richelbilderbeek.nl
+From: Etienne, R.S.
+To: richel@richelbilderbeek.nl
 
 Nog twee opmerkingen:
 
-1. Er moet nog iets in over wat het package nog niet kan vergeleken met de original tools. Of heb ik hieroverheen gelezen.
-2. De punten over andere vergelijkbare tools staan nu aan het eind van de intro., Ik zei dat ze meer in een discussie thuishoren, maar er is geen discussie, Dus misschien kun je ze iets eerder introduceren als eerdere pogingen om hetzelfde te doen, maar dan zeggen waarom rbeast2 beter is.
+1. Er moet nog iets in over wat het package nog niet kan vergeleken met de original tools. 
+   Of heb ik hieroverheen gelezen.
+2. De punten over andere vergelijkbare tools staan nu aan het eind van de intro., 
+   Ik zei dat ze meer in een discussie thuishoren, maar er is geen discussie, 
+   Dus misschien kun je ze iets eerder introduceren als eerdere pogingen om hetzelfde te doen, 
+   maar dan zeggen waarom rbeast2 beter is.
 
 Groet, Rampal'
 ```

@@ -121,11 +121,14 @@ This implies that when the user
 wants to explore the consequences of various settings, this must be done manually.
 This is the common workflow when using a few alignments and doing a superficial 
 analysis of sensitivity of the reconstructed tree to model settings. 
-
 For exploring many trees (for instance from simulations) and for
 more thorough sensitivity analysis, one would like to loop through 
 multiple (simulated) alignments, nucleotide substitution models, 
 clock models and tree priors. 
+One such tool to replace 
+BEAUti is \verb;BEASTmasteR; \cite{beastmaster},
+which focuses on morphological traits and tip-dating, but also 
+supports DNA data. 
 
 BEAST2 is also associated with Tracer \cite{tracer} and 
 DensiTree \cite{DensiTree}. Both are desktop applications 
@@ -142,6 +145,9 @@ many options to improve the display of many phylogenies.
 However, for exploring the output of many BEAST2 runs, 
 one would like a script to collect all parameters' ESSes,
 parameter traces and posterior phylogenies. 
+Examples of R packages to do some of these
+are \verb;rBEAST; \cite{rBEAST_ratmann} and 
+\verb;RBeast; \cite{RBeast_faria}. 
 
 Here, we present \verb;rbeast2;:
 ’BEAUti 2, BEAST2 and Tracer for R’, 
@@ -158,19 +164,13 @@ to make the step from those tools to \verb;rbeast2;.
 pipeline from sequence alignments to posterior analysis in R. 
 
 \verb;rbeast2; is the first R package that unifies the
-full workflow of working with BEAST2. An
-example to create a BEAST2 input file is 
-\verb;BEASTmasteR; \cite{beastmaster}.
-Also \verb;BEASTmasteR; allows 
-to create BEAST2 configuration files from R. 
-The difference is that \verb;rbeast2; 
-has its focus on DNA alignments and ultrametric trees (that
-is, trees that have their tips measured in the present), 
-where \verb;BEASTmasteR; is used for 
-morphological traits and tip-dating.
-Examples of R packages to parse the BEAST2 output files
-are \verb;rBEAST; \cite{rBEAST_ratmann} and 
-\verb;RBeast; \cite{RBeast_faria}. 
+full workflow of working with BEAST2. 
+Where \verb;BEASTmasteR; needs dozens for lines to create
+a BEAST2 configuration file, with \verb;rbeast2; the same 
+can be created by a simple one-liner. Unlike \verb;rBEAST; 
+and \verb;RBeast;, \verb;rbeast2; implements all of Tracer's
+primary functionality. This makes \verb;rbeast2; a complete 
+solution for using BEAST2 from R.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
