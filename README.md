@@ -16,6 +16,12 @@ See [questions](questions.md).
 
 See [Feedback](feedback/README.md).
 
+## Name poll
+
+ * `babette`: RSE, FRM
+ * `rbeast2`:
+ * Other:
+
 ## Acknowledgemennts
 
  * MEE LaTeX style from https://github.com/seananderson/bst

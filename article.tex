@@ -64,18 +64,18 @@
   \textbf{1. }
     In the field of phylogenetics, 
     BEAST2 is one of the most widely used software tools. 
-    It comes with the graphical programs BEAUti 2, DensiTree and Tracer,
+    It comes with the graphical user interfaces BEAUti 2, DensiTree and Tracer,
     to create BEAST2 configuration files and to interpret BEAST2's output files. 
     However, when many different alignments or model 
-    setups are required, a workflow of GUI programs is cumbersome. \\
+    setups are required, a workflow of graphical user interfaces is cumbersome. \\
   \textbf{2. }
     Here, we present a free, libre and open-source package, \verb;rbeast2;: 
     'BEAUti 2, BEAST2 and Tracer for R', for the R programming language. 
     \verb;rbeast2; creates BEAST2 input files, runs BEAST2 and parses its results, 
     all from an R function call. \\
   \textbf{3. }
-    We describe \verb;rbeast2;'s usage, the novel functionality it provides
-    compared to the tools it is alternative of, and give some examples. \\
+    We describe \verb;rbeast2;'s usage and the novel functionality it provides
+    compared to the original tools and give some examples. \\
   \textbf{4. }
     As \verb;rbeast2; is designed to be of high quality and extendable, 
     we conclude by describing the further development of the package. \\
@@ -97,8 +97,8 @@
 Phylogenies are commonly used to explore evolutionary hypotheses.
 Not only can phylogenies show us how species (or other
 evolutionary units) relate to each other, 
-but also relevant parameters like extinction and 
-speciation rates can be estimated from them.
+but we also estimate relevant parameters such as extinction and 
+speciation rates.
 
 There are many phylogenetics tools available to obtain an estimate 
 of the phylogenetic tree of a given set of species. 
@@ -122,7 +122,7 @@ wants to explore the consequences of various settings, this must be done manuall
 This is the common workflow when using a few alignments and doing a superficial 
 analysis of sensitivity of the reconstructed tree to model settings. 
 
-However, for exploring many trees (for instance from simulations) and for
+For exploring many trees (for instance from simulations) and for
 more thorough sensitivity analysis, one would like to loop through 
 multiple (simulated) alignments, nucleotide substitution models, 
 clock models and tree priors. 
@@ -137,13 +137,13 @@ others, the effective sample size (ESS) and time series ('the trace',
 hence the name) of each variable in the MCMC run. Both ESS and trace
 are needed to assess the strength of the inference. 
 DensiTree visualizes the phylogenies of a BEAST2 posterior, with
-many options to improve the displayal of those many phylogenies.
+many options to improve the display of many phylogenies.
 
 However, for exploring the output of many BEAST2 runs, 
 one would like a script to collect all parameters' ESSes,
 parameter traces and posterior phylogenies. 
 
-Here, to provide such functionality we present \verb;rbeast2;:
+Here, we present \verb;rbeast2;:
 ’BEAUti 2, BEAST2 and Tracer for R’, 
 which creates BEAST2 configuration files,
 runs BEAST2, and analyzes its results,
@@ -151,7 +151,7 @@ all from an R function call. This
 will save time, tedious mouse clicking and 
 reduces the chances of errors in such repetitive actions.
 The interface of \verb;rbeast2; mimics the tools it
-is inspired on. This
+is based on. This
 familiarity helps both beginner and experienced BEAST2 users 
 to make the step from those tools to \verb;rbeast2;.
 \verb;rbeast2; enables the creation of a single-script 
@@ -266,12 +266,12 @@ but does not yet support the full functionality of BEAUti.
 Because of BEAUti's high number of plugins, 
 \verb;rbeast2; uses a software architecture that expects to be extended.
 
-\verb;rbeast2; has 7 exported function to run and help run BEAST2.
+Furthermore, \verb;rbeast2; has 7 exported function to run and help run BEAST2.
 One function is used to run BEAST2, others
 allow the user to check if a BEAST2 configuration file is indeed valid.
 
-\verb;rbeast2; has 20 exported function to parse the BEAST2 output
-files and analyse the created posterior. \verb;rbeast2; gives the
+Finally, \verb;rbeast2; has 20 exported function to parse the BEAST2 output
+files and analyze the created posterior. \verb;rbeast2; gives the
 same ESSes and summary statistics as Tracer. The data is formatted
 as such, that it can easily be visualized using \verb;ggplot2; (for a trace,
 similar to Tracer)
@@ -304,15 +304,12 @@ out <- run_beast2("alignment.fas")
 
 This code will create a (temporary) BEAST2 configuration file,
 from the FASTA file with name \verb;alignment.fas;, 
-using the same default settings as BEAUti.
+using the same default settings as BEAUti, which are, 
+among others, a Jukes-Cantor site model, a strict clock, and a Yule birth tree prior.
 \verb;rbeast2; will then execute BEAST2 using that file, and
 parses the output. The returned data structure, named \verb;out;, 
 is a list of parameter estimates, posterior phylogenies (one for each alignment)
-and operator acceptances. 
-
-The default settings for BEAUti (and thus \verb;rbeast2;) are, 
-among others, to use a Jukes-Cantor site model \cite{cantor1969mammalian}, 
-a strict clock, and a Yule birth tree prior \cite{yule}. 
+and MCMC operator performance. 
 
 An example of using a different site model, clock model 
 and tree prior is:
@@ -411,7 +408,7 @@ out <- run_beast2(
 \end{lstlisting}
 
 Our initial motivation to create \verb;rbeast2; 
-is that we wanted to fix the crown age of a phylogeny.
+was that we wanted to fix the crown age of a phylogeny.
 BEAUti assumes that a phylogeny has a crown age that needs to be jointly-estimated
 with the phylogeny and other parameters. It does not allow for fixing
 the crown age. Without \verb;rbeast2;, one needs to manually edit the BEAST2 
@@ -428,7 +425,7 @@ out <- run_beast2(
 )
 \end{lstlisting}
 
-\verb;rbeast2; allows for the same functionality of Tracer.
+\verb;rbeast2; allows for the same functionality as Tracer.
 Tracer works on the values of the parameter estimates sampled
 in the BEAST2 run. This is called the "trace" (hence the name).
 The start of the trace is usually discarded, as an MCMC 
@@ -438,7 +435,8 @@ will be removed, as its parameter estimates are not
 representative. By default, Tracer discards the first 10\% of all 
 the parameter estimates. 
 
-To remove the burn-in from all parameter estimates in \verb;rbeast2;:
+To remove the burn-in from all parameter estimates in \verb;rbeast2;,
+the following code can be used:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 traces <- remove_burn_ins(out$estimates)
@@ -482,10 +480,11 @@ densitree(out$anthus_aco_trees)
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{rbeast2 development and other resources}
+\section{rbeast2 resources}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\verb;rbeast2; is free, libre and open source software available from the official R package archive at 
+\verb;rbeast2; is free, libre and open source software available 
+from the official R package archive at 
 \url{http://cran.r-project.org/src/contrib/PACKAGES.html\#rbeast2}
 and is licensed under the GNU General Public License v3.0.
 
@@ -494,8 +493,9 @@ continuous integration service, which is known to significantly
 increase the the number of bugs exposed \cite{vasilescu2015} and increases
 the speed at which new features are added \cite{vasilescu2015}.
 \verb;rbeast2; has a 100\% code coverage, which correlates with code quality \cite{horgan1994,del1995correlation}. 
-\verb;rbeast2; follows Hadley Wickham's style guide \cite{style_guide}, which improves software quality \cite{fang2001}.
-\verb;rbeast2; is dependent on multiple packages, which are 
+\verb;rbeast2; follows Hadley Wickham's style guide \cite{style_guide}, 
+which improves software quality \cite{fang2001}.
+\verb;rbeast2; dependends on multiple packages, which are 
 \verb;APE; \cite{APE}, 
 \verb;beautier; \cite{beautier},
 \verb;beastier; \cite{beastier},
