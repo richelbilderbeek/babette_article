@@ -144,3 +144,21 @@ Nog twee opmerkingen:
 
 Groet, Rampal'
 ```
+
+## 2018-02-16 RSE
+
+```
+Re: Feedback rbeast2/babette manuscript. Bespreken?
+
+20 February 2018 09:27 45 KB
+From:
+Rampal S. Etienne
+To:
+richel@richelbilderbeek.nl
+
+Hierbij alvast mijn commentaar. Tot zo.
+
+Groet, Rampal
+```
+
+![](20180220RSE.docx)

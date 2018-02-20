@@ -19,7 +19,7 @@ See [Feedback](feedback/README.md).
 ## Name poll
 
  * `babette`: RSE, FRM, TP
- * `rbeast2`: GL
+ * `rbeast2`: GL, KB
  * Other:
 
 ## Acknowledgemennts
