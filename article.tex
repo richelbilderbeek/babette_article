@@ -172,6 +172,337 @@ and \verb;RBeast;, \verb;rbeast2; implements all of Tracer's
 primary functionality. This makes \verb;rbeast2; a complete 
 solution for using BEAST2 from R.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Description}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\verb;rbeast2; is written in the R programming language \cite{R}
+and enables the full BEAST2 workflow from an R function call,
+in a similar way to what BEAUti, DensiTree and Tracer do.
+
+\verb;rbeast2;'s main function is \verb;run_beast2;, which
+configures BEAST2, runs it and parses its output. 
+\verb;run_beast2; needs at least the name of a 
+FASTA file containing a DNA alignment. 
+The default settings for the other arguments of \verb;run_beast2; 
+are identical to BEAUti's and BEAST2's default settings.
+Per alignment, a site model, clock model and tree prior can be chosen.
+Multiple alignments can be used, each with its own (unlinked) site model, 
+clock model and tree prior.
+
+\verb;rbeast2; currently has 61 exported functions to set up  
+a BEAST2 configuration file. 
+\verb;rbeast2; is an alternative for a majority of BEAUti use cases, 
+but does not yet support the full functionality of BEAUti. 
+Because of BEAUti's high number of plugins, 
+\verb;rbeast2; uses a software architecture that expects to be extended.
+Furthermore, \verb;rbeast2; has 7 exported function to run and help run BEAST2.
+One function is used to run BEAST2, others
+allow the user to check if a BEAST2 configuration file is indeed valid.
+Finally, \verb;rbeast2; has 20 exported function to parse the BEAST2 output
+files and analyze the created posterior. \verb;rbeast2; gives the
+same ESSes and summary statistics as Tracer. The data is formatted
+as such, that it can easily be visualized using \verb;ggplot2; (for a trace,
+similar to Tracer) or \verb;phangorn; \cite{phangorn} (for 
+the phylogenies in a posterior, similar to DensiTree). 
+
+Currently, \verb;rbeast2; does not replace all functionality in BEAUti,
+as it does not supply 3 out of 7 tree priors, nor does it support RNA
+alignments or use of morphological data. The many plug-ins of BEAUti
+are not supported by \verb;rbeast2;. \verb;rbeast2; does not support
+all command-line arguments of BEAST2, does not supply
+the more specialized Tracer analysis options, nor is it as feature-rich
+in plotting options as DensiTree. Up until now, the \verb;rbeast2; features 
+implemented are those requested by users. Further extension of \verb;rbeast2; 
+will have to come from future user requests.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Usage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In R, the functions of a package need to be loaded in the global namespace first:
+
+\begin{lstlisting}[language=R, floatplacement=H]
+library(rbeast2)
+\end{lstlisting}
+
+BEAUti, and likewise \verb;rbeast2;, needs at least a FASTA filename
+to produce a BEAST2 configuration file. 
+In BEAUti, this is achieved by loading a FASTA file, 
+then saving an output file using a common
+save file dialog. After this, BEAST2 needs to be invoked
+on the created configuration file to create multiple files
+storing the posterior created by BEAST2. Finally, these output
+files must be parsed by either Tracer of DensiTree.
+In \verb;rbeast2;, the same is achieved by:
+
+\begin{lstlisting}[language=R, floatplacement=H]
+out <- run_beast2("anthus_aco.fas")
+\end{lstlisting}
+
+This code will create a (temporary) BEAST2 configuration file,
+from the FASTA file with name \verb;anthus_aco.fas;, 
+using the same default settings as BEAUti, which are, 
+among others, a Jukes-Cantor site model, a strict clock, and a Yule birth tree prior.
+\verb;rbeast2; will then execute BEAST2 using that file, and
+parses the output. The returned data structure, named \verb;out;, 
+is a list of parameter estimates (called \verb;estimates;), posterior 
+phylogenies (called \verb;anthus_aco_trees;)
+and MCMC operator performance (\verb;operators;).
+
+An example of using a different site model, clock model 
+and tree prior is:
+
+\begin{lstlisting}[language=R, floatplacement=H]
+out <- run_beast2(
+  "anthus_aco.fas",
+  site_models = hky_site_model(),
+  clock_models = rln_clock_model(),
+  tree_priors = bd_tree_prior()
+)
+\end{lstlisting}
+
+This code uses an HKY site model, a relaxed log-normal clock model and a 
+birth-death tree prior, each with their default settings in BEAUti.
+Table \ref{tab:functions} shows an overview of all functions to 
+create site models, clock models and tree priors.
+
+Note that the arguments' names \verb;site_models;, \verb;clock_models; 
+and \verb;tree_priors; are plural, as each of these
+can be (a list of) one or more elements. Each of these arguments must 
+have the same number of elements, so that each alignment has its
+own site model, clock model and tree prior. 
+
+An example of two alignments, each with its own site model, is:
+
+\begin{lstlisting}[language=R, floatplacement=H]
+out <- run_beast2(
+  c("anthus_aco.fas", "anthus_nd2.fas"),
+  site_models = list(
+    create_tn93_site_model(), 
+    create_gtr_site_model()
+  )
+)
+\end{lstlisting}
+
+\verb;rbeast2; also uses the same default prior distributions as BEAUti 
+for each of the site models, clock models and tree priors. 
+For example, by default, a Yule tree prior assumes the birth rate 
+follows a uniform distribution, 
+from minus infinity to plus infinity. 
+This assumption implies that negative and positive birth rates are just as likely, 
+where a negative birth rate is biologically impossible (note that 
+in practice, this usually works out just fine).
+One may prefer an exponential distribution instead, 
+as this would assume only positive birth rates, 
+and makes high birth rates unlikely.
+
+To do this in \verb;rbeast2;:
+
+\begin{lstlisting}[language=R, floatplacement=H]
+out <- run_beast2(
+  "anthus_aco.fas",
+  tree_priors = create_yule_tree_prior(
+    birth_rate_distr = create_exp_distr()    
+  )
+)
+\end{lstlisting}
+
+Within this same example, one may specify
+the initial shape parameters of the exponential distribution.
+In BEAST2's implementation, an exponential distribution 
+has one shape parameter: its mean, which can be set to any
+value with \verb;BEAUti;. Within \verb;rbeast2;, to set the 
+initial mean value of the exponential distribution, do: 
+
+\begin{lstlisting}[language=R, floatplacement=H]
+out <- run_beast2(
+  get_path("anthus_aco.fas"),
+  tree_priors = create_yule_tree_prior(
+    birth_rate_distr = create_exp_distr(
+      mean = create_mean_param(value = 1.0)
+    )    
+  )
+)
+\end{lstlisting}
+
+Our initial motivation to create \verb;rbeast2; 
+was that we wanted to fix the crown age of a phylogeny.
+BEAUti assumes that a phylogeny has a crown age that needs to be jointly-estimated
+with the phylogeny and other parameters. It does not allow for fixing
+the crown age. Without \verb;rbeast2;, one needs to manually edit the BEAST2 
+configuration file, which is tedious and prone to errors. 
+Fixing the crown ages is especially useful for theoretical experiments,
+as this allows for one less source of variation.
+
+This is how to specify a fixed crown age with \verb;rbeast2;:
+
+\begin{lstlisting}[language=R, floatplacement=H]
+out <- run_beast2(
+  "anthus_aco.fas",
+  posterior_crown_age = 15
+)
+\end{lstlisting}
+
+\verb;rbeast2; allows for the same functionality as Tracer.
+Tracer works on the values of the parameter estimates sampled
+in the BEAST2 run. This is called the "trace" (hence the name).
+The start of the trace is usually discarded, as an MCMC 
+algorithm (such as used by BEAST2) first has to converge to
+its equilibrium. The start of the trace, called the "burn-in", 
+will be removed, as its parameter estimates are not 
+representative. By default, Tracer discards the first 10\% of all 
+the parameter estimates. 
+
+To remove the burn-in from all parameter estimates in \verb;rbeast2;,
+the following code can be used:
+
+\begin{lstlisting}[language=R, floatplacement=H]
+traces <- remove_burn_ins(out$estimates)
+\end{lstlisting}
+
+Tracer shows the ESSes of each posterior's variables.
+These ESSes are important to determine the strength of the
+inference. As a rule of thumb, an ESS of 200 is acceptable 
+for any parameter estimate.
+
+To calculate the effective sample sizes (of all estimated variables) in \verb;rbeast2;:
+
+\begin{lstlisting}[language=R, floatplacement=H]
+esses <- calc_esses(
+  traces, 
+  sample_interval = 1000
+)
+\end{lstlisting}
+
+Tracer displays multiple summary statistics for each
+estimated variable: the mean and its standard error, standard deviation,
+variance, median, mode, geometric mean, 95\% highest posterior density interval, 
+auto-correlation time and effective sample size. It displays these statistics per
+variable. In \verb;rbeast2;, these summary statistics are collected for
+all estimated parameters at once: 
+
+\begin{lstlisting}[language=R, floatplacement=H]
+sum_stats <- calc_summary_stats(
+  traces, 
+  sample_interval = 1000
+)
+\end{lstlisting}
+
+\verb;rbeast2; allows for the same functionality as DensiTree.
+DensiTree displays the phylogenies in a posterior at the same
+time scale, drawn one over one another, allowing to see the uncertainty in
+topology and branch lengths. Within the object \verb;out;, 
+the posterior phylogenies are stored as \verb;anthus_aco_trees;,
+and can be plotted as such:
+
+\begin{lstlisting}[language=R, floatplacement=H]
+plot_densitree(out$anthus_aco_trees)
+\end{lstlisting}
+
+\begin{table}[]
+\centering
+\begin{tabular}{ | l | l | }
+\hline
+\textbf{Name} & \textbf{Description} \\
+\hline
+\verb;run_beast2; & Run BEAST2 \\
+\hline
+\verb;create_gtr_site_model; & Create a GTR site model \\
+\verb;create_hky_site_model; & Create an HKY site model \\
+\verb;create_jc69_site_model; & Create a Jukes-Cantor site model \\
+\verb;create_tn93_site_model; & Create a TN93 site model \\
+\hline
+\verb;create_rln_clock_model; & Create a relaxed log-normal clock model \\
+\verb;create_strict_clock_model; & Create a strict clock model \\
+\hline
+\verb;create_bd_tree_prior; & Create a birth-death tree prior \\
+\verb;create_cbs_tree_prior; & Create a coalescent Bayesian skyline tree prior \\
+\verb;create_ccp_tree_prior; & Create a coalescent constant-population tree prior \\
+\verb;create_cep_tree_prior; & Create a coalescent exponential-population tree prior \\
+\verb;create_yule_tree_prior; & Create a Yule tree prior \\
+\hline
+\verb;create_beta_distr; & Create a beta distribution \\
+\verb;create_exp_distr; & Create an exponential distribution \\
+\verb;create_gamma_distr; & Create a gamma distribution \\
+\verb;create_inv_gamma_distr; & Create an inverse gamma distribution \\
+\verb;create_laplace_distr; & Create a Laplace distribution \\
+\verb;create_log_normal_distr; & Create a log-normal distribution \\
+\verb;create_normal_distr; & Create a normal distribution \\
+\verb;create_one_div_x_distr; & Create a 1/X distribution \\
+\verb;create_poisson_distr; & Create a Poisson distribution \\
+\verb;create_uniform_distr; & Create a uniform distribution \\
+\hline
+\end{tabular}
+\caption{rbeast2's main functions}
+\label{tab:functions}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{rbeast2 resources}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\verb;rbeast2; is free, libre and open source software available 
+from the official R package archive at 
+\url{http://cran.r-project.org/src/contrib/PACKAGES.html\#rbeast2}
+and is licensed under the GNU General Public License v3.0.
+
+\verb;rbeast2; uses the Travis CI \cite{travis} 
+continuous integration service, which is known to significantly 
+increase the the number of bugs exposed \cite{vasilescu2015} and increases
+the speed at which new features are added \cite{vasilescu2015}.
+\verb;rbeast2; has a 100\% code coverage, which correlates with code quality \cite{horgan1994,del1995correlation}. 
+\verb;rbeast2; follows Hadley Wickham's style guide \cite{style_guide}, 
+which improves software quality \cite{fang2001}.
+\verb;rbeast2; dependends on multiple packages, which are 
+\verb;APE; \cite{APE}, 
+\verb;beautier; \cite{beautier},
+\verb;beastier; \cite{beastier},
+\verb;devtools; \cite{devtools},
+\verb;geiger; \cite{GEIGER},
+\verb;ggplot2; \cite{ggplot2},
+\verb;knitr; \cite{knitr},
+\verb;phangorn; \cite{phangorn},
+\verb;rmarkdown; \cite{rmarkdown},
+\verb;seqinr; \cite{seqinr},
+\verb;stringr; \cite{stringr},
+\verb;testit; \cite{testit} and 
+\verb;tracerer; \cite{tracerer}.
+
+\verb;rbeast2;'s development takes place on GitHub \cite{github},
+\url{https://github.com/richelbilderbeek/rbeast2}, 
+which accommodates collaboration \cite{perez2016ten} 
+and improves transparency \cite{gorgolewski2016practical}.
+\verb;rbeast2;'s GitHub facilitates feature requests and has guidelines how to do so.
+
+\verb;rbeast2;'s documentation is extensive. All functions are documented
+in the package's internal documentation. For quick use, 
+each exported function shows a minimal example. 
+For easy exploration, each exported function's documentation links to related functions.
+Additionally, \verb;rbeast2; has a vignette that demonstrates extensively how
+to use it. The GitHub documentation helps to get started, with a dozen examples 
+of BEAUti screenshots with equivalent \verb;rbeast2; code.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Citation of rbeast2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Scientists using \verb;rbeast2; in a published paper can cite this
+article, and/or cite the \verb;rbeast2; package 
+directly. To obtain this citation from within an R script, use:
+
+\begin{lstlisting}[language=R]
+> citation("rbeast2")
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Acknowledgements}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Thanks to Yacine Ben Chehida and Paul van Els for supplying their 
+BEAST2 use cases. Thanks to Leonel Herrera-Alsina, Raphael Scherrer 
+and Giovanni Laudanno for their contributions to this package and article.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
   \centering
@@ -240,320 +571,6 @@ solution for using BEAST2 from R.
   \label{fig:workflow}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Description}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\verb;rbeast2; is written in the R programming language \cite{R}
-and enables the full BEAST2 workflow from an R function call,
-in a similar way to what BEAUti, DensiTree and Tracer do.
-
-\verb;rbeast2;'s main function is \verb;run_beast2;, which
-configures BEAST2, runs it and parses its output. 
-\verb;run_beast2; needs at least the name of a 
-FASTA file containing a DNA alignment. 
-The default settings for the other arguments of \verb;run_beast2; 
-are identical to BEAUti's and BEAST2's default settings.
-Per alignment, a site model, clock model and tree prior can be chosen.
-Multiple alignments can be used, each with its own (unlinked) site model, 
-clock model and tree prior.
-
-\verb;rbeast2; currently has 61 exported functions to set up  
-a BEAST2 configuration file. 
-\verb;rbeast2; is an alternative for a majority of BEAUti use cases, 
-but does not yet support the full functionality of BEAUti. 
-Because of BEAUti's high number of plugins, 
-\verb;rbeast2; uses a software architecture that expects to be extended.
-Furthermore, \verb;rbeast2; has 7 exported function to run and help run BEAST2.
-One function is used to run BEAST2, others
-allow the user to check if a BEAST2 configuration file is indeed valid.
-Finally, \verb;rbeast2; has 20 exported function to parse the BEAST2 output
-files and analyze the created posterior. \verb;rbeast2; gives the
-same ESSes and summary statistics as Tracer. The data is formatted
-as such, that it can easily be visualized using \verb;ggplot2; (for a trace,
-similar to Tracer) or \verb;phangorn; \cite{phangorn} (for 
-the phylogenies in a posterior, similar to DensiTree). 
-
-Currently, \verb;rbeast2; does not replace all functionality in BEAUti,
-as it does not supply 3 out of 7 tree priors, nor does it support RNA
-alignments or use of morphological data. The many plug-ins of BEAUti
-are not supported by \verb;rbeast2;. \verb;rbeast2; does not support
-all command-line arguments of BEAST2, does not supply
-the more specialized Tracer analysis options, nor is it as feature-rich
-in plotting options as DensiTree. Up until now, the \verb;rbeast2; features 
-implemented are those requested by users. Further extension of \verb;rbeast2; 
-will have to come from future user requests.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Usage}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-In R, the functions of a package need to be loaded in the global namespace first:
-
-\begin{lstlisting}[language=R, floatplacement=H]
-library(rbeast2)
-\end{lstlisting}
-
-BEAUti, and likewise \verb;rbeast2;, needs at least a FASTA filename
-to produce a BEAST2 configuration file. 
-In BEAUti, this is achieved by loading a FASTA file, 
-then saving an output file using a common
-save file dialog. After this, BEAST2 needs to be invoked
-on the created configuration file to create multiple files
-storing the posterior created by BEAST2. Finally, these output
-files must be parsed by either Tracer of DensiTree.
-
-In \verb;rbeast2;, the same is achieved by:
-
-\begin{lstlisting}[language=R, floatplacement=H]
-out <- run_beast2("anthus_aco.fas")
-\end{lstlisting}
-
-This code will create a (temporary) BEAST2 configuration file,
-from the FASTA file with name \verb;anthus_aco.fas;, 
-using the same default settings as BEAUti, which are, 
-among others, a Jukes-Cantor site model, a strict clock, and a Yule birth tree prior.
-\verb;rbeast2; will then execute BEAST2 using that file, and
-parses the output. The returned data structure, named \verb;out;, 
-is a list of parameter estimates (called \verb;estimates;), posterior 
-phylogenies (called \verb;anthus_aco_trees;)
-and MCMC operator performance (\verb;operators;).
-
-An example of using a different site model, clock model 
-and tree prior is:
-
-\begin{lstlisting}[language=R, floatplacement=H]
-out <- run_beast2(
-  "anthus_aco.fas",
-  site_models = hky_site_model(),
-  clock_models = rln_clock_model(),
-  tree_priors = bd_tree_prior()
-)
-\end{lstlisting}
-
-This code uses an HKY site model, a relaxed log-normal clock model and a 
-birth-death tree prior, each with their default settings in BEAUti.
-Table \ref{tab:functions} shows an overview of all functions to 
-create site models, clock models and tree priors.
-
-\begin{table}[]
-\centering
-\begin{tabular}{ | l | l | }
-\hline
-\textbf{Name} & \textbf{Description} \\
-\hline
-\verb;run_beast2; & Run BEAST2 \\
-\hline
-\verb;create_gtr_site_model; & Create a GTR site model \\
-\verb;create_hky_site_model; & Create an HKY site model \\
-\verb;create_jc69_site_model; & Create a Jukes-Cantor site model \\
-\verb;create_tn93_site_model; & Create a TN93 site model \\
-\hline
-\verb;create_rln_clock_model; & Create a relaxed log-normal clock model \\
-\verb;create_strict_clock_model; & Create a strict clock model \\
-\hline
-\verb;create_bd_tree_prior; & Create a birth-death tree prior \\
-\verb;create_cbs_tree_prior; & Create a coalescent Bayesian skyline tree prior \\
-\verb;create_ccp_tree_prior; & Create a coalescent constant-population tree prior \\
-\verb;create_cep_tree_prior; & Create a coalescent exponential-population tree prior \\
-\verb;create_yule_tree_prior; & Create a Yule tree prior \\
-\hline
-\verb;create_beta_distr; & Create a beta distribution \\
-\verb;create_exp_distr; & Create an exponential distribution \\
-\verb;create_gamma_distr; & Create a gamma distribution \\
-\verb;create_inv_gamma_distr; & Create an inverse gamma distribution \\
-\verb;create_laplace_distr; & Create a Laplace distribution \\
-\verb;create_log_normal_distr; & Create a log-normal distribution \\
-\verb;create_normal_distr; & Create a normal distribution \\
-\verb;create_one_div_x_distr; & Create a 1/X distribution \\
-\verb;create_poisson_distr; & Create a Poisson distribution \\
-\verb;create_uniform_distr; & Create a uniform distribution \\
-\hline
-\end{tabular}
-\caption{rbeast2's main functions}
-\label{tab:functions}
-\end{table}
-
-Note that the arguments' names \verb;site_models;, \verb;clock_models; 
-and \verb;tree_priors; are plural, as each of these
-can be (a list of) one or more elements. Each of these arguments must 
-have the same number of elements, so that each alignment has its
-own site model, clock model and tree prior. 
-
-An example of two alignments, each with its own site model, is:
-
-\begin{lstlisting}[language=R, floatplacement=H]
-out <- run_beast2(
-  c("anthus_aco.fas", "anthus_nd2.fas"),
-  site_models = list(
-    create_tn93_site_model(), 
-    create_gtr_site_model()
-  )
-)
-\end{lstlisting}
-
-\verb;rbeast2; also uses the same default prior distributions as BEAUti 
-for each of the site models, clock models and tree priors. 
-For example, by default, a Yule tree prior assumes the birth rate 
-follows a uniform distribution, 
-from minus infinity to plus infinity. 
-This assumption implies that negative and positive birth rates are just as likely, 
-where a negative birth rate is biologically impossible (note that 
-in practice, this usually works out just fine).
-One may prefer an exponential distribution instead, 
-as this would assume only positive birth rates, 
-and makes high birth rates unlikely.
-
-To do this in \verb;rbeast2;:
-
-\begin{lstlisting}[language=R, floatplacement=H]
-out <- run_beast2(
-  "alignment.fas",
-  tree_priors = create_yule_tree_prior(
-    birth_rate_distr = create_exp_distr()    
-  )
-)
-\end{lstlisting}
-
-Our initial motivation to create \verb;rbeast2; 
-was that we wanted to fix the crown age of a phylogeny.
-BEAUti assumes that a phylogeny has a crown age that needs to be jointly-estimated
-with the phylogeny and other parameters. It does not allow for fixing
-the crown age. Without \verb;rbeast2;, one needs to manually edit the BEAST2 
-configuration file, which is tedious and prone to errors. 
-Fixing the crown ages is especially useful for theoretical experiments,
-as this allows for one less source of variation.
-
-This is how to specify a fixed crown age with \verb;rbeast2;:
-
-\begin{lstlisting}[language=R, floatplacement=H]
-out <- run_beast2(
-  "alignment.fas",
-  posterior_crown_age = 15
-)
-\end{lstlisting}
-
-\verb;rbeast2; allows for the same functionality as Tracer.
-Tracer works on the values of the parameter estimates sampled
-in the BEAST2 run. This is called the "trace" (hence the name).
-The start of the trace is usually discarded, as an MCMC 
-algorithm (such as used by BEAST2) first has to converge to
-its equilibrium. The start of the trace, called the "burn-in", 
-will be removed, as its parameter estimates are not 
-representative. By default, Tracer discards the first 10\% of all 
-the parameter estimates. 
-
-To remove the burn-in from all parameter estimates in \verb;rbeast2;,
-the following code can be used:
-
-\begin{lstlisting}[language=R, floatplacement=H]
-traces <- remove_burn_ins(out$estimates)
-\end{lstlisting}
-
-Tracer shows the ESSes of each posterior's variables.
-These ESSes are important to determine the strength of the
-inference. As a rule of thumb, an ESS of 200 is acceptable 
-for any parameter estimate.
-
-To calculate the effective sample sizes (of all estimated variables) in \verb;rbeast2;:
-
-\begin{lstlisting}[language=R, floatplacement=H]
-esses <- calc_esses(
-  traces, 
-  sample_interval = 1000
-)
-\end{lstlisting}
-
-Tracer displays multiple summary statistics for each
-estimated variable: the mean and its standard error, standard deviation,
-variance, median, mode, geometric mean, 95\% highest posterior density interval, 
-auto-correlation time and effective sample size. It displays these statistics per
-variable. In \verb;rbeast2;, these summary statistics are collected for
-all estimated parameters at once: 
-
-\begin{lstlisting}[language=R, floatplacement=H]
-sum_stats <- calc_summary_stats(
-  traces, 
-  sample_interval = 1000
-)
-\end{lstlisting}
-
-\verb;rbeast2; allows for the same functionality as DensiTree.
-DensiTree displays the phylogenies in a posterior at the same
-time scale, drawn one over one another, allowing to see the uncertainty in
-topology and branch lengths. Within the object \verb;out;, 
-the posterior phylogenies are stored as \verb;anthus_aco_trees;,
-and can be plotted as such:
-
-\begin{lstlisting}[language=R, floatplacement=H]
-plot_densitree(out$anthus_aco_trees)
-\end{lstlisting}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{rbeast2 resources}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\verb;rbeast2; is free, libre and open source software available 
-from the official R package archive at 
-\url{http://cran.r-project.org/src/contrib/PACKAGES.html\#rbeast2}
-and is licensed under the GNU General Public License v3.0.
-
-\verb;rbeast2; uses the Travis CI \cite{travis} 
-continuous integration service, which is known to significantly 
-increase the the number of bugs exposed \cite{vasilescu2015} and increases
-the speed at which new features are added \cite{vasilescu2015}.
-\verb;rbeast2; has a 100\% code coverage, which correlates with code quality \cite{horgan1994,del1995correlation}. 
-\verb;rbeast2; follows Hadley Wickham's style guide \cite{style_guide}, 
-which improves software quality \cite{fang2001}.
-\verb;rbeast2; dependends on multiple packages, which are 
-\verb;APE; \cite{APE}, 
-\verb;beautier; \cite{beautier},
-\verb;beastier; \cite{beastier},
-\verb;devtools; \cite{devtools},
-\verb;geiger; \cite{GEIGER},
-\verb;ggplot2; \cite{ggplot2},
-\verb;knitr; \cite{knitr},
-\verb;phangorn; \cite{phangorn},
-\verb;rmarkdown; \cite{rmarkdown},
-\verb;seqinr; \cite{seqinr},
-\verb;stringr; \cite{stringr},
-\verb;testit; \cite{testit} and 
-\verb;tracerer; \cite{tracerer}.
-
-\verb;rbeast2;'s development takes place on GitHub \cite{github},
-\url{https://github.com/richelbilderbeek/rbeast2}, 
-which accommodates collaboration \cite{perez2016ten} 
-and improves transparency \cite{gorgolewski2016practical}.
-\verb;rbeast2;'s GitHub facilitates feature requests and has guidelines how to do so.
-
-\verb;rbeast2;'s documentation is extensive. All functions are documented
-in the package's internal documentation. For quick use, 
-each exported function shows a minimal example. 
-For easy exploration, each exported function's documentation links to related functions.
-Additionally, \verb;rbeast2; has a vignette that demonstrates extensively how
-to use it. The GitHub documentation helps to get started, with a dozen examples 
-of BEAUti screenshots with equivalent \verb;rbeast2; code.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Citation of rbeast2}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Scientists using \verb;rbeast2; in a published paper can cite this
-article, and/or cite the \verb;rbeast2; package 
-directly. To obtain this citation from within an R script, use:
-
-\begin{lstlisting}[language=R]
-> citation("rbeast2")
-\end{lstlisting}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Acknowledgements}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Thanks to Yacine Ben Chehida and Paul van Els for supplying their 
-BEAST2 use cases. Thanks to Leonel Herrera-Alsina, Raphael Scherrer 
-and Giovanni Laudanno for their contributions to this package and article.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{plain}
