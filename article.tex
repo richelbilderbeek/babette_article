@@ -126,10 +126,11 @@ For exploring many trees (for instance from simulations) and for
 more thorough sensitivity analysis, one would like to loop through 
 multiple (simulated) alignments, nucleotide substitution models, 
 clock models and tree priors. 
-One such tool to replace 
-BEAUti is \verb;BEASTmasteR; \cite{beastmaster},
+One such tool to replace BEAUti is \verb;BEASTmasteR; \cite{beastmaster},
 which focuses on morphological traits and tip-dating, but also 
-supports DNA data. 
+supports DNA data. \verb;BEASTmasteR;, however, takes hundreds of
+lines to set up (next to a Miscrosft Excel spreadsheet), 
+resulting in only 7 citations, all before 2017.
 
 BEAST2 is also associated with Tracer \cite{tracer} and 
 DensiTree \cite{DensiTree}. Both are desktop applications 
@@ -144,8 +145,9 @@ many options to improve the display of many phylogenies.
 
 However, for exploring the output of many BEAST2 runs, 
 one would like a script to collect all parameters' ESSes,
-parameter traces and posterior phylogenies. 
-Examples of R packages to do some of these
+parameter traces and posterior phylogenies.
+There is no single package that offers a complete solution,
+but examples of R packages that offer a partial solution
 are \verb;rBEAST; \cite{rBEAST_ratmann} and 
 \verb;RBeast; \cite{RBeast_faria}. 
 
@@ -165,7 +167,7 @@ pipeline from sequence alignments to posterior analysis in R.
 
 \verb;rbeast2; is the first R package that unifies the
 full workflow of working with BEAST2. 
-Where \verb;BEASTmasteR; needs dozens for lines to create
+Whilst \verb;BEASTmasteR; needs hundreds of lines to create
 a BEAST2 configuration file, with \verb;rbeast2; the same 
 can be created by a simple one-liner. Unlike \verb;rBEAST; 
 and \verb;RBeast;, \verb;rbeast2; implements all of Tracer's
@@ -179,7 +181,6 @@ solution for using BEAST2 from R.
 \verb;rbeast2; is written in the R programming language \cite{R}
 and enables the full BEAST2 workflow from an R function call,
 in a similar way to what BEAUti, DensiTree and Tracer do.
-
 \verb;rbeast2;'s main function is \verb;run_beast2;, which
 configures BEAST2, runs it and parses its output. 
 \verb;run_beast2; needs at least the name of a 
@@ -207,14 +208,14 @@ similar to Tracer) or \verb;phangorn; \cite{phangorn} (for
 the phylogenies in a posterior, similar to DensiTree). 
 
 Currently, \verb;rbeast2; does not replace all functionality in BEAUti,
-as it does not supply 3 out of 7 tree priors, nor does it support RNA
+as it does not provide 3 out of 7 tree priors, nor does it support RNA
 alignments or use of morphological data. The many plug-ins of BEAUti
-are not supported by \verb;rbeast2;. \verb;rbeast2; does not support
-all command-line arguments of BEAST2, does not supply
+are not yet supported by \verb;rbeast2;. \verb;rbeast2; does not support
+all command-line arguments of BEAST2, does not provide
 the more specialized Tracer analysis options, nor is it as feature-rich
 in plotting options as DensiTree. Up until now, the \verb;rbeast2; features 
 implemented are those requested by users. Further extension of \verb;rbeast2; 
-will have to come from future user requests.
+will be based on future user requests.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Usage}
@@ -230,11 +231,11 @@ BEAUti, and likewise \verb;rbeast2;, needs at least a FASTA filename
 to produce a BEAST2 configuration file. 
 In BEAUti, this is achieved by loading a FASTA file, 
 then saving an output file using a common
-save file dialog. After this, BEAST2 needs to be invoked
-on the created configuration file to create multiple files
-storing the posterior created by BEAST2. Finally, these output
+save file dialog. After this, BEAST2 needs to be applied to
+the created configuration file. It creates multiple files
+storing the posterior. These output
 files must be parsed by either Tracer of DensiTree.
-In \verb;rbeast2;, the same is achieved by:
+In \verb;rbeast2;, all this is achieved by:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2("anthus_aco.fas")
@@ -249,16 +250,15 @@ parses the output. The returned data structure, named \verb;out;,
 is a list of parameter estimates (called \verb;estimates;), posterior 
 phylogenies (called \verb;anthus_aco_trees;)
 and MCMC operator performance (\verb;operators;).
-
 An example of using a different site model, clock model 
 and tree prior is:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2(
   "anthus_aco.fas",
-  site_models = hky_site_model(),
-  clock_models = rln_clock_model(),
-  tree_priors = bd_tree_prior()
+  site_models = create_hky_site_model(),
+  clock_models = create_rln_clock_model(),
+  tree_priors = create_bd_tree_prior()
 )
 \end{lstlisting}
 
@@ -266,13 +266,11 @@ This code uses an HKY site model, a relaxed log-normal clock model and a
 birth-death tree prior, each with their default settings in BEAUti.
 Table \ref{tab:functions} shows an overview of all functions to 
 create site models, clock models and tree priors.
-
 Note that the arguments' names \verb;site_models;, \verb;clock_models; 
 and \verb;tree_priors; are plural, as each of these
 can be (a list of) one or more elements. Each of these arguments must 
 have the same number of elements, so that each alignment has its
 own site model, clock model and tree prior. 
-
 An example of two alignments, each with its own site model, is:
 
 \begin{lstlisting}[language=R, floatplacement=H]
@@ -287,7 +285,7 @@ out <- run_beast2(
 
 \verb;rbeast2; also uses the same default prior distributions as BEAUti 
 for each of the site models, clock models and tree priors. 
-For example, by default, a Yule tree prior assumes the birth rate 
+For example, by default, a Yule tree prior assumes that the birth rate 
 follows a uniform distribution, 
 from minus infinity to plus infinity. 
 This assumption implies that negative and positive birth rates are just as likely, 
@@ -296,7 +294,6 @@ in practice, this usually works out just fine).
 One may prefer an exponential distribution instead, 
 as this would assume only positive birth rates, 
 and makes high birth rates unlikely.
-
 To do this in \verb;rbeast2;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
@@ -317,7 +314,7 @@ initial mean value of the exponential distribution, do:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2(
-  get_path("anthus_aco.fas"),
+  "anthus_aco.fas",
   tree_priors = create_yule_tree_prior(
     birth_rate_distr = create_exp_distr(
       mean = create_mean_param(value = 1.0)
@@ -334,7 +331,6 @@ the crown age. Without \verb;rbeast2;, one needs to manually edit the BEAST2
 configuration file, which is tedious and prone to errors. 
 Fixing the crown ages is especially useful for theoretical experiments,
 as this allows for one less source of variation.
-
 This is how to specify a fixed crown age with \verb;rbeast2;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
@@ -353,7 +349,6 @@ its equilibrium. The start of the trace, called the "burn-in",
 will be removed, as its parameter estimates are not 
 representative. By default, Tracer discards the first 10\% of all 
 the parameter estimates. 
-
 To remove the burn-in from all parameter estimates in \verb;rbeast2;,
 the following code can be used:
 
@@ -365,7 +360,6 @@ Tracer shows the ESSes of each posterior's variables.
 These ESSes are important to determine the strength of the
 inference. As a rule of thumb, an ESS of 200 is acceptable 
 for any parameter estimate.
-
 To calculate the effective sample sizes (of all estimated variables) in \verb;rbeast2;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
@@ -449,7 +443,7 @@ and is licensed under the GNU General Public License v3.0.
 
 \verb;rbeast2; uses the Travis CI \cite{travis} 
 continuous integration service, which is known to significantly 
-increase the the number of bugs exposed \cite{vasilescu2015} and increases
+increase the number of bugs exposed \cite{vasilescu2015} and increases
 the speed at which new features are added \cite{vasilescu2015}.
 \verb;rbeast2; has a 100\% code coverage, which correlates with code quality \cite{horgan1994,del1995correlation}. 
 \verb;rbeast2; follows Hadley Wickham's style guide \cite{style_guide}, 
