@@ -18,7 +18,7 @@ See [Feedback](feedback/README.md).
 
 ## Name poll
 
- * `babette`: RSE, FRM, TP, RS
+ * `babette`: RSE, FRM, TP, RS, MK, BH, PN
  * `rbeast2`: GL, KB
  * Other:
 

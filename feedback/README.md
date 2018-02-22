@@ -162,3 +162,12 @@ Groet, Rampal
 ```
 
 ![](20180220RSE.docx)
+
+## 2018-02-21 RSE
+
+```
+Ik zou dat van dit citaties niet noemen. Gewoon stoppen bij het feit dat er hundreds of lines of code nodig zijn. Maar doet BEASTmasteR alleen Beauti of ook de rest? Want anders kun je er ook bij zetten dat het geen volledige pipeline is.
+Wat bedoel je met de spreadsheet? Dat is mij (en daarmee ook menig andere lezer) niet duidelijk.
+
+Ten slotte, ik weet niet of ik het al gezegd had, maar er moet ook nog ergens in het artikel staan dat BEAST2 wel geinstalleerd moet zijn. Klinkt wellicht triviaal maar is wel essentieel. Of download en installeer je het als babette het niet kan vinden? Hoe heb je het probleem van het vinden van BEAST2 trouwens opgelost?
+```

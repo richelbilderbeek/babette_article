@@ -129,8 +129,7 @@ clock models and tree priors.
 One such tool to replace BEAUti is \verb;BEASTmasteR; \cite{beastmaster},
 which focuses on morphological traits and tip-dating, but also 
 supports DNA data. \verb;BEASTmasteR;, however, takes hundreds of
-lines to set up (next to a Miscrosft Excel spreadsheet), 
-resulting in only 7 citations, all before 2017.
+lines to R code and a Miscrosft Excel file.
 
 BEAST2 is also associated with Tracer \cite{tracer} and 
 DensiTree \cite{DensiTree}. Both are desktop applications 
@@ -148,7 +147,8 @@ one would like a script to collect all parameters' ESSes,
 parameter traces and posterior phylogenies.
 There is no single package that offers a complete solution,
 but examples of R packages that offer a partial solution
-are \verb;rBEAST; \cite{rBEAST_ratmann} and 
+are \verb;BEASTmasteR;, \verb;rBEAST; 
+\cite{rBEAST_ratmann} and 
 \verb;RBeast; \cite{RBeast_faria}. 
 
 Here, we present \verb;rbeast2;:
@@ -169,10 +169,11 @@ pipeline from sequence alignments to posterior analysis in R.
 full workflow of working with BEAST2. 
 Whilst \verb;BEASTmasteR; needs hundreds of lines to create
 a BEAST2 configuration file, with \verb;rbeast2; the same 
-can be created by a simple one-liner. Unlike \verb;rBEAST; 
-and \verb;RBeast;, \verb;rbeast2; implements all of Tracer's
-primary functionality. This makes \verb;rbeast2; a complete 
-solution for using BEAST2 from R.
+can be created by a simple one-liner. Unlike \verb;BEASTmasteR;,
+\verb;rBEAST; and \verb;RBeast;, \verb;rbeast2; implements all of Tracer's
+primary functionality. There exists no package that calls BEAST2 from R.
+\verb;rbeast2; sets up BEAST2, runs it, and analyzes its
+results, making it a complete solution for using BEAST2 from R.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Description}
