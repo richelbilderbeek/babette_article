@@ -171,3 +171,27 @@ Wat bedoel je met de spreadsheet? Dat is mij (en daarmee ook menig andere lezer)
 
 Ten slotte, ik weet niet of ik het al gezegd had, maar er moet ook nog ergens in het artikel staan dat BEAST2 wel geinstalleerd moet zijn. Klinkt wellicht triviaal maar is wel essentieel. Of download en installeer je het als babette het niet kan vinden? Hoe heb je het probleem van het vinden van BEAST2 trouwens opgelost?
 ```
+
+## 2018-02-26 RSE
+
+```
+Re: 'babette' manuscript
+
+26 February 2018 11:39 559 KB
+From:
+Rampal S. Etienne
+To:
+richel@richelbilderbeek.nl
+
+Hoi Richel,
+
+Hierbij mijn commentaar op de laatste versie. 
+Er staan nog steeds dingen in die ik al eerder heb genoemd. 
+Je mag het met me oneens zijn, maar dan hoor ik dat graag. 
+Anders zie ik het verschil niet tussen oneens zijn en niet gezien hebben.
+
+Groet, Rampal
+```
+
+ * [PDF](20180226RSE.pdf)
+
