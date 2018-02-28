@@ -21,4 +21,4 @@ script:
   # List possible spelling errors
   - spell article.tex
   # Count words, must be below 3000 for 'Applications'
-  - wc article.txt --words 
+  - wc article.tex --words 
