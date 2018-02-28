@@ -4,6 +4,8 @@ Branch|[![Travis CI logo](pics/TravisCI.png)](https://travis-ci.org)|[![Codecov 
 ---|---|---
 master|[![Build Status](https://travis-ci.org/richelbilderbeek/babette_article.svg?branch=master)](https://travis-ci.org/richelbilderbeek/babette_article)|[![codecov.io](https://codecov.io/github/richelbilderbeek/babette_article/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/babette_article/branch/master)
 
+Article about [babette](https://github.com/richelbilderbeek/babette).
+
 ## Downloads
 
  * [bioRxiv pre-print](https://doi.org/10.1101/271866)
