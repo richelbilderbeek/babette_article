@@ -1,7 +1,7 @@
 Dear Editor,
 
 Please consider our manuscript "babette: BEAUti 2, BEAST2 and Tracer for R" 
-for publication in Methods in Ecology & Evolution.
+for publication as an Application in Methods in Ecology & Evolution.
 
 BEAST2 is one of the most widely used phylogenetic software tools. 
 A probable cause for its success is that it is accompanied by 

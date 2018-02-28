@@ -1,6 +1,12 @@
-Klaus Schliep (note: it is written incorrectly on the ME&E list of reviewers)
+Suggested reviewers:
+
 Matt Pennell
-Emmanuel Paradis
 William Pearse
-Simon Blomberg
 Folmer Bokma
+Klaus Schliep (note: it is written incorrectly on the ME&E list of reviewers)
+Simon Blomberg
+
+Suggested editor:
+
+Daniele Silvestro
+
