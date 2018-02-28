@@ -13,10 +13,11 @@ script:
   - ./check_dead_links
   # proselint
   - proselint README.md
-  - proselint article.tex
+  - pandoc article.tex -o article.txt
+  - proselint article.txt
   # Can article be converted to PDF?
   - ./create_article
   # List possible spelling errors
   - spell article.tex
   # Count words, must be below 3000 for 'Applications'
-  - wc article.tex --words 
+  - wc article.txt --words 
