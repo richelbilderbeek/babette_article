@@ -1,2 +1,5 @@
 script:
+ - ./create_article
+ - spell article.tex
+ - proselint article.tex
  - wc article.tex --words # Must be below 3000 for applications
