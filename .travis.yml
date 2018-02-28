@@ -11,7 +11,8 @@ script:
   # Check dead links
   - ./check_dead_links
   # proselint
-  - proselint my_prose.md
+  - proselint README.md
+  - proselint article.tex
   # Can article be converted to PDF?
   - ./create_article
   # List possible spelling errors
