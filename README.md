@@ -1,7 +1,7 @@
 # babette_article
 
 Branch|[![Travis CI logo](pics/TravisCI.png)](https://travis-ci.org)
----|---|---
+---|---
 master|[![Build Status](https://travis-ci.org/richelbilderbeek/babette_article.svg?branch=master)](https://travis-ci.org/richelbilderbeek/babette_article)
 
 Article about [babette](https://github.com/richelbilderbeek/babette).
@@ -12,11 +12,13 @@ Article about [babette](https://github.com/richelbilderbeek/babette).
 
 ## How to build article
 
-From the command line:
+From a GNU/Linux terminal, do:
 
 ```
 ./create_article
 ```
+
+See [.travis.yml](.travis.yml) for the exact installation.
 
 ## Questions the article should answer
 
