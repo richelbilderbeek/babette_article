@@ -1,8 +1,8 @@
 # babette_article
 
-Branch|[![Travis CI logo](pics/TravisCI.png)](https://travis-ci.org)|[![Codecov logo](pics/Codecov.png)](https://www.codecov.io)
+Branch|[![Travis CI logo](pics/TravisCI.png)](https://travis-ci.org)
 ---|---|---
-master|[![Build Status](https://travis-ci.org/richelbilderbeek/babette_article.svg?branch=master)](https://travis-ci.org/richelbilderbeek/babette_article)|[![codecov.io](https://codecov.io/github/richelbilderbeek/babette_article/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/babette_article/branch/master)
+master|[![Build Status](https://travis-ci.org/richelbilderbeek/babette_article.svg?branch=master)](https://travis-ci.org/richelbilderbeek/babette_article)
 
 Article about [babette](https://github.com/richelbilderbeek/babette).
 
