@@ -15,10 +15,13 @@ script:
   - ./check_dead_links
   # proselint
   - proselint README.md
+  - proselint cover_letter/cover_letter.md
   - proselint article.tex || true
   # Can article be converted to PDF?
   # - ./create_article
   # List possible spelling errors
+  - spell README.md
   - spell article.tex
+  - spell cover_letter/cover_letter.md
   # Count words, must be below 3000 for 'Applications'
   - wc article.tex --words 
