@@ -43,7 +43,7 @@ See [.travis.yml](.travis.yml) for the exact installation.
 
 See [Feedback](feedback/README.md).
 
-## Acknowledgemennts
+## Acknowledgements
 
  * MEE LaTeX style from [https://github.com/seananderson/bst](https://github.com/seananderson/bst)
 
