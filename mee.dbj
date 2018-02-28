@@ -27,11 +27,11 @@ End of customized bst file
 %--------------------
 %STYLE OF CITATIONS:
 %   %: (def) Numerical
-  ay,%: Author-year
+%  ay,%: Author-year
 % alph,%: Alpha style, Jon90 or JWB90
 % alph,alf-1,%: Alpha style, Jon90
 % alph,alf-f,%: Alpha style, Jones90
-% cite,%: Cite key
+ cite,%: Cite key
 %--------------------
 %HTML OUTPUT (if non author-year citations)
 %   %: (def) Normal LaTeX
