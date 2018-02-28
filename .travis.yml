@@ -6,7 +6,7 @@ install:
   - sudo pip install proselint
   # LaTex, pandoc
   # No pdflatex?
-  - sudo apt-get install pandoc texlive-latex-recommended texlive-latex-extra texlive-fonts-extra texlive-fonts-recommended texlive-extra-utils texlive-humanities texlive-full pgf
+  - sudo apt-get install pandoc texlive-latex-recommended texlive-latex-extra texlive-fonts-extra texlive-fonts-recommended texlive-extra-utils texlive-humanities texlive-full pgf texlive-games texlive-pictures texlive-science texlive-xetex
 
 script:
   # Check dead links
