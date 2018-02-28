@@ -1,41 +1,31 @@
 Dear Editor,
 
-Please consider our manuscript “babette: BEAUti 2, BEAST2 and Tracer for R” for 
+Please consider our manuscript "babette: BEAUti 2, BEAST2 and Tracer for R" for 
 publication in Methods in Ecology & Evolution.
 
-Ecological limits to diversification are currently widely studied, 
-and hotly debated (see for instance two contrasting opinion papers 
-published in a recent issue of the 
-American Naturalist: Harmon & Harrison 2015, Rabosky & Hurlbert 2015, 
-both cited in our manuscript). A few years ago two of the authors of 
-the current submission co-developed a method to detect 
-diversity-dependence in diversification from molecular phylogenies, 
-and to estimate the parameters (speciation, extinction, carrying 
-capacity) underlying these dynamics. This method has since been 
-employed to argue for diversity-dependence in various clades. 
-However, the reliability of these tests (i.e. whether they 
-correctly infer diversity-dependent or diversity-independent 
-diversification dynamics) and the accuracy of their inferences 
-remain largely unknown. Here we conduct an extensive simulation 
-study to address these issues. We find severe biases in 
-parameter estimates, the direction of which differs depending 
-on the conditioning applied to the likelihood procedure (i.e. 
-on crown age, tree size, or both). For the most unbiased 
-approach (dual conditioning), we find large uncertainty in parameter 
-estimates. Furthermore, regarding model selection reliability we 
-arrive at the important conclusion that standard model selection 
-tools are inappropriate. On the basis of these results we 
-recommend the use of a bootstrap approach that resolves this 
-issue and simultaneously leads to an estimate of parameter 
-uncertainty, illustrating this approach for the 
-diversification of Dendroica warblers.
+BEAST2 is one of the most widely used phylogentic software tools.
+One of the likely causes for its success is that it is
+accompanied with some programs that have a user-friendly graphical 
+user interface. However, when doing an intensive theoretical exploration,
+with thousands of DNA alignments and/or model settings, 
+a workflow of graphical user interfaces would be repetitive,
+plain dumb or impossible. 
 
-We believe that our manuscript has important 
-consequences for many studies performing diversification 
-analyses and should therefore appeal to a wide audience. 
+This manuscript describes `babette`, an R package that solves this problem.
+There have been many partial solutions to work with BEAST2 from R.
+Next to the partial solutions cited in this manuscript, there are
+many more (uncitable) code snippets that automate part of the BEAST2 workflow.
+`babette` unifies this scattered landscape of partial BEAST2 solutions,
+as it is the first R package that offers a complete end-to-end workflow
+to work with BEAST2 from R. This manuscript gives the reader an
+idea of the scope and ease of use of `babette`, thanks to the examples supplied.
+
+We believe that our manuscript helps increase the joy 
+and thoroughness of future studies within phylogentics 
+and should therefore appeal to a wide audience. 
 Hence, we feel that Methods in Ecology & Evolution is 
 the ideal platform for our manuscript.
 
 Kind regards,
 
-Richel Bilderbeek and Rampal S. Etienne
+Richèl J.C. Bilderbeek and Rampal S. Etienne
