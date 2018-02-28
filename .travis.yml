@@ -4,7 +4,8 @@ install:
   - sudo npm install -g markdown-link-check
   # proselint
   - sudo pip install proselint
-  
+  # LaTex, pandoc
+  - sudo apt-get install pandoc texlive-latex-recommended texlive-latex-extra texlive-fonts-extra texlive-fonts-recommended
 
 script:
   # Check dead links
