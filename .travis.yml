@@ -3,7 +3,7 @@ install:
   - sudo apt-get install npm
   - sudo npm install -g markdown-link-check
   # spell
-  - sudo pip install spell
+  - sudo pip install aspell
   # proselint
   - sudo pip install proselint
   # LaTex, pandoc
