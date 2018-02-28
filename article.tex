@@ -116,14 +116,14 @@ but we also estimate relevant parameters such as extinction and
 speciation rates.
 There are many phylogenetics tools available to obtain an estimate 
 of the phylogenetic tree of a given set of species. 
-BEAST2 \cite{bouckaert2014beast} is one of the most widely used ones. 
+BEAST2 (\cite{bouckaert2014beast}) is one of the most widely used ones. 
 It creates a posterior of jointly-estimated phylogenies and model parameters, 
 from one or more DNA, RNA or amino acid alignments (see figure \ref{fig:workflow} 
 for an overview of the workflow). 
 It has a graphical and a command-line interface, 
 that both need a configuration file containing 
 alignments and model parameters.
-BEAST2 is bundled with BEAUti 2 \cite{drummond2012bayesian} ('BEAUti' from now on), 
+BEAST2 is bundled with BEAUti 2 (\cite{drummond2012bayesian}) ('BEAUti' from now on), 
 a desktop application to create a BEAST2 configuration file.
 BEAUti has a user-friendly graphical user interface, with helpful
 default settings.
@@ -139,14 +139,14 @@ For exploring many trees (for instance from simulations) and for
 more thorough sensitivity analysis, one would like to loop through 
 multiple (simulated) alignments, nucleotide substitution models, 
 clock models and tree priors. 
-One such tool to replace BEAUti is \verb;BEASTmasteR; \cite{beastmaster},
+One such tool to replace BEAUti is \verb;BEASTmasteR; (\cite{beastmaster}),
 which focuses on morphological traits and tip-dating, but also 
 supports DNA data. \verb;BEASTmasteR;, however, takes hundreds of
 lines of R code to setup the BEAST2 model configuration 
 and a Microsoft Excel file to specify alignment files.
 
-BEAST2 is also associated with Tracer \cite{tracer} and 
-DensiTree \cite{DensiTree}. Both are desktop applications 
+BEAST2 is also associated with Tracer (\cite{tracer}) and 
+DensiTree (\cite{DensiTree}). Both are desktop applications 
 to analyze the output of BEAST2, each with a user-friendly graphical user interface. 
 Tracer's purpose is to analyze the parameter estimates generated
 from a BEAST 2 run. It shows, among
@@ -162,8 +162,8 @@ parameter traces and posterior phylogenies.
 There is no single package that offers a complete solution,
 but examples of R packages that offer a partial solution
 are \verb;BEASTmasteR;, \verb;rBEAST; 
-\cite{rBEAST_ratmann} and 
-\verb;RBeast; \cite{RBeast_faria}. 
+(\cite{rBEAST_ratmann}) and 
+\verb;RBeast; (\cite{RBeast_faria}). 
 \verb;BEASTmasteR; and \verb;RBeast; are incomplete
 packages, where \verb;rBEAST; does not aim to be a 
 package to be used by most BEAST2 users.
@@ -186,7 +186,7 @@ pipeline from sequence alignments to posterior analysis in R.
 \section{Description}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\verb;babette; is written in the R programming language \cite{R}
+\verb;babette; is written in the R programming language (\cite{R})
 and enables the full BEAST2 workflow from an R function call,
 in a similar way to what BEAUti, DensiTree and Tracer do.
 \verb;babette;'s main function is \verb;run_beast2;, which
@@ -211,7 +211,7 @@ Finally, \verb;babette; has 20 exported function to parse the BEAST2 output
 files and analyze the created posterior. \verb;babette; gives the
 same ESSes and summary statistics as Tracer. The data is formatted
 as such, that it can easily be visualized using \verb;ggplot2; (for a trace,
-similar to Tracer) or \verb;phangorn; \cite{phangorn} (for 
+similar to Tracer) or \verb;phangorn; (\cite{phangorn}) (for 
 the phylogenies in a posterior, similar to DensiTree). 
 
 Currently, \verb;babette; does not replace all functionality in BEAUti,
@@ -248,7 +248,7 @@ out <- run_beast2("anthus_aco.fas")
 \end{lstlisting}
 This code will create a (temporary) BEAST2 configuration file,
 from the FASTA file with name \verb;anthus_aco.fas; (which
-is supplied with the package, from \cite{VanEls2018}), 
+is supplied with the package, from (\cite{VanEls2018})), 
 using the same default settings as BEAUti, which are, 
 among others, a Jukes-Cantor site model, a strict clock, and a Yule birth tree prior.
 \verb;babette; will then execute BEAST2 using that file, and
@@ -334,7 +334,7 @@ was that we wanted to fix the crown age of a phylogeny.
 BEAUti assumes that a phylogeny has a crown age that needs to be jointly-estimated
 with the phylogeny and other parameters. It does not allow for fixing
 the crown age. Without \verb;babette;, one needs to manually edit the BEAST2 
-configuration file \cite{fix_starting_tree}, which is tedious and prone to errors. 
+configuration file (\cite{fix_starting_tree}), which is tedious and prone to errors. 
 Fixing the crown ages is especially useful for theoretical experiments,
 as this allows for one less source of variation.
 This is how to specify a fixed crown age with \verb;babette;:
@@ -442,32 +442,33 @@ plot_densitree(out$anthus_aco_trees)
 from the official R package archive at 
 \url{http://cran.r-project.org/src/contrib/PACKAGES.html\#babette}
 and is licensed under the GNU General Public License v3.0.
-\verb;babette; uses the Travis CI \cite{travis}
+\verb;babette; uses the Travis CI (\cite{travis})
 continuous integration service, which is known to significantly 
-increase the number of bugs exposed \cite{vasilescu2015} and increases
-the speed at which new features are added \cite{vasilescu2015}.
-\verb;babette; has a 100\% code coverage, which correlates with code quality \cite{horgan1994,del1995correlation}. 
-\verb;babette; follows Hadley Wickham's style guide \cite{style_guide}, 
-which improves software quality \cite{fang2001}.
+increase the number of bugs exposed (\cite{vasilescu2015}) and increases
+the speed at which new features are added (\cite{vasilescu2015}).
+\verb;babette; has a 100\% code coverage, which correlates with 
+code quality (\cite{horgan1994,del1995correlation}). 
+\verb;babette; follows Hadley Wickham's style guide (\cite{style_guide}), 
+which improves software quality (\cite{fang2001}).
 \verb;babette; dependends on multiple packages, which are 
-\verb;ape; \cite{APE}, 
-\verb;beautier; \cite{beautier},
-\verb;beastier; \cite{beastier},
-\verb;devtools; \cite{devtools},
-\verb;geiger; \cite{GEIGER},
-\verb;ggplot2; \cite{ggplot2},
-\verb;knitr; \cite{knitr},
-\verb;phangorn; \cite{phangorn},
-\verb;rmarkdown; \cite{rmarkdown},
-\verb;seqinr; \cite{seqinr},
-\verb;stringr; \cite{stringr},
-\verb;testit; \cite{testit} and 
-\verb;tracerer; \cite{tracerer}.
+\verb;ape; (\cite{APE}), 
+\verb;beautier; (\cite{beautier}),
+\verb;beastier; (\cite{beastier}),
+\verb;devtools; (\cite{devtools}),
+\verb;geiger; (\cite{GEIGER}),
+\verb;ggplot2; (\cite{ggplot2}),
+\verb;knitr; (\cite{knitr}),
+\verb;phangorn; (\cite{phangorn}),
+\verb;rmarkdown; (\cite{rmarkdown}),
+\verb;seqinr; (\cite{seqinr}),
+\verb;stringr; (\cite{stringr}),
+\verb;testit; (\cite{testit}) and 
+\verb;tracerer; (\cite{tracerer}).
 
-\verb;babette;'s development takes place on GitHub \cite{github},
+\verb;babette;'s development takes place on GitHub (\cite{github}),
 \url{https://github.com/richelbilderbeek/babette}, 
-which accommodates collaboration \cite{perez2016ten} 
-and improves transparency \cite{gorgolewski2016practical}.
+which accommodates collaboration (\cite{perez2016ten}) 
+and improves transparency (\cite{gorgolewski2016practical}).
 \verb;babette;'s GitHub facilitates feature requests and has guidelines how to do so.
 
 \verb;babette;'s documentation is extensive. All functions are documented
