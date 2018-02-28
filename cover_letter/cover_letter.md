@@ -4,7 +4,7 @@ Please consider our manuscript "babette: BEAUti 2, BEAST2 and Tracer for R"
 for publication in Methods in Ecology & Evolution.
 
 BEAST2 is one of the most widely used phylogenetic software tools. 
-A probably cause for its success is that it is accompanied by 
+A probable cause for its success is that it is accompanied by 
 programs that have a user-friendly graphical user interface. 
 However, when doing an intensive exploration, with thousands of DNA 
 alignments and/or model settings, a workflow of graphical user interfaces 
