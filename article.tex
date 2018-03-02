@@ -4,13 +4,11 @@
 \usepackage{natbib}
 \bibpunct{(}{)}{;}{a}{}{;}
 
-% Use 'Name 1234' style
+% Use 'It was found that A is B (Name 1234)' style
 \setcitestyle{authoryear,open={},close={}}
 
 % Affiliations
 \usepackage{authblk}
-
-
 \title{babette: BEAUti 2, BEAST2 and Tracer for R}
 \author[1]{Rich\`el J.C. Bilderbeek}
 \author[1]{Rampal S. Etienne}
@@ -64,9 +62,6 @@
 \usepackage[english]{babel}
 \addto{\captionsenglish}{\renewcommand{\abstractname}{Summary}}
 
-% Keywords
-% \usepackage{spconf}
-
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows.meta}
 
@@ -96,14 +91,7 @@
     we conclude by describing the further development of the package. \\
 \end{abstract}
 
-% Ideal
-%\begin{keywords}
-%  computational biology, evolution, phylogenetics, BEAST2, R
-%\end{keywords}
-
-% Dirty hack
 {\bf Keywords:} computational biology, evolution, phylogenetics, BEAST2, R
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
@@ -358,7 +346,10 @@ To remove a 20\% burn-in from all parameter estimates
 in \verb;babette;, the following code can be used:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-traces <- remove_burn_ins(out$estimates, burn_in_fraction = 0.2)
+traces <- remove_burn_ins(
+  out$estimates, 
+  burn_in_fraction = 0.2
+)
 \end{lstlisting}
 Tracer shows the ESSes of each posterior's variables.
 These ESSes are important to determine the strength of the
@@ -395,44 +386,6 @@ and can be plotted as such:
 \begin{lstlisting}[language=R, floatplacement=H]
 plot_densitree(out$anthus_aco_trees)
 \end{lstlisting}
-
-\begin{table}[]
-\centering
-\begin{tabular}{ | l | l | }
-\hline
-\textbf{Name} & \textbf{Description} \\
-\hline
-\verb;run_beast2; & Run BEAST2 \\
-\hline
-\verb;create_gtr_site_model; & Create a GTR site model \\
-\verb;create_hky_site_model; & Create an HKY site model \\
-\verb;create_jc69_site_model; & Create a Jukes-Cantor site model \\
-\verb;create_tn93_site_model; & Create a TN93 site model \\
-\hline
-\verb;create_rln_clock_model; & Create a relaxed log-normal clock model \\
-\verb;create_strict_clock_model; & Create a strict clock model \\
-\hline
-\verb;create_bd_tree_prior; & Create a birth-death tree prior \\
-\verb;create_cbs_tree_prior; & Create a coalescent Bayesian skyline tree prior \\
-\verb;create_ccp_tree_prior; & Create a coalescent constant-population tree prior \\
-\verb;create_cep_tree_prior; & Create a coalescent exponential-population tree prior \\
-\verb;create_yule_tree_prior; & Create a Yule tree prior \\
-\hline
-\verb;create_beta_distr; & Create a beta distribution \\
-\verb;create_exp_distr; & Create an exponential distribution \\
-\verb;create_gamma_distr; & Create a gamma distribution \\
-\verb;create_inv_gamma_distr; & Create an inverse gamma distribution \\
-\verb;create_laplace_distr; & Create a Laplace distribution \\
-\verb;create_log_normal_distr; & Create a log-normal distribution \\
-\verb;create_normal_distr; & Create a normal distribution \\
-\verb;create_one_div_x_distr; & Create a 1/X distribution \\
-\verb;create_poisson_distr; & Create a Poisson distribution \\
-\verb;create_uniform_distr; & Create a uniform distribution \\
-\hline
-\end{tabular}
-\caption{babette's main functions}
-\label{tab:functions}
-\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{babette resources}
@@ -503,6 +456,19 @@ We would like to thank the Center for Information Technology of the University
 of Groningen for their support and for providing access to the Peregrine 
 high performance computing cluster.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MEE style
+\bibliographystyle{mee}
+\bibliography{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figures at the end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
   \centering
@@ -573,14 +539,47 @@ high performance computing cluster.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% MEE styles
-%\input{mee.bst}
-%\input{mee.dbj}
-\bibliographystyle{mee}
-% \bibliographystyle{plain}
-
-\bibliography{article}
+% Tables at the end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[]
+\centering
+\begin{tabular}{ | l | l | }
+\hline
+\textbf{Name} & \textbf{Description} \\
+\hline
+\verb;run_beast2; & Run BEAST2 \\
+\hline
+\verb;create_gtr_site_model; & Create a GTR site model \\
+\verb;create_hky_site_model; & Create an HKY site model \\
+\verb;create_jc69_site_model; & Create a Jukes-Cantor site model \\
+\verb;create_tn93_site_model; & Create a TN93 site model \\
+\hline
+\verb;create_rln_clock_model; & Create a relaxed log-normal clock model \\
+\verb;create_strict_clock_model; & Create a strict clock model \\
+\hline
+\verb;create_bd_tree_prior; & Create a birth-death tree prior \\
+\verb;create_cbs_tree_prior; & Create a coalescent Bayesian skyline tree prior \\
+\verb;create_ccp_tree_prior; & Create a coalescent constant-population tree prior \\
+\verb;create_cep_tree_prior; & Create a coalescent exponential-population tree prior \\
+\verb;create_yule_tree_prior; & Create a Yule tree prior \\
+\hline
+\verb;create_beta_distr; & Create a beta distribution \\
+\verb;create_exp_distr; & Create an exponential distribution \\
+\verb;create_gamma_distr; & Create a gamma distribution \\
+\verb;create_inv_gamma_distr; & Create an inverse gamma distribution \\
+\verb;create_laplace_distr; & Create a Laplace distribution \\
+\verb;create_log_normal_distr; & Create a log-normal distribution \\
+\verb;create_normal_distr; & Create a normal distribution \\
+\verb;create_one_div_x_distr; & Create a 1/X distribution \\
+\verb;create_poisson_distr; & Create a Poisson distribution \\
+\verb;create_uniform_distr; & Create a uniform distribution \\
+\hline
+\end{tabular}
+\caption{babette's main functions}
+\label{tab:functions}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \end{document}
 \grid
