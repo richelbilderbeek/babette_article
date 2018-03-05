@@ -18,7 +18,6 @@
 \usepackage{setspace}
 \doublespacing
 
-
 \usepackage{listings}
 \usepackage{hyperref}
 \usepackage{todonotes}
@@ -103,13 +102,13 @@
 
 Phylogenies are commonly used to explore evolutionary hypotheses.
 Not only can phylogenies show us how species (or other
-evolutionary units) relate to each other, 
+evolutionary units) are related to each other, 
 but we also estimate relevant parameters such as extinction and 
 speciation rates.
 There are many phylogenetics tools available to obtain an estimate 
 of the phylogenetic tree of a given set of species. 
 BEAST2 (\cite{bouckaert2014beast}) is one of the most widely used ones. 
-It creates a posterior of jointly-estimated phylogenies and model parameters, 
+It creates a posterior of jointly estimated phylogenies and model parameters, 
 from one or more DNA, RNA or amino acid alignments (see figure \ref{fig:workflow} 
 for an overview of the workflow). 
 It has a graphical and a command-line interface, 
@@ -125,7 +124,7 @@ to manual and error-prone editing of BEAST2 configuration files.
 However, BEAUti cannot be called from a command-line script.
 This implies that when the user 
 wants to explore the consequences of various settings, this must be done manually.
-This is the common workflow when using a few alignments and doing a superficial 
+This is the managable workflow when using a few alignments and doing a superficial 
 analysis of sensitivity of the reconstructed tree to model settings. 
 For exploring many trees (for instance from simulations) and for
 more thorough sensitivity analysis, one would like to loop through 
@@ -133,7 +132,7 @@ multiple (simulated) alignments, nucleotide substitution models,
 clock models and tree priors. 
 One such tool to replace BEAUti is \verb;BEASTmasteR; (\cite{beastmaster}),
 which focuses on morphological traits and tip-dating, but also 
-supports DNA data. \verb;BEASTmasteR;, however, takes hundreds of
+supports DNA data. \verb;BEASTmasteR;, however, requires hundreds of
 lines of R code to setup the BEAST2 model configuration 
 and a Microsoft Excel file to specify alignment files.
 
@@ -146,7 +145,7 @@ others, the effective sample size (ESS) and time series ('the trace',
 hence the name) of each variable in the MCMC run. Both ESS and trace
 are needed to assess the strength of the inference. 
 DensiTree visualizes the phylogenies of a BEAST2 posterior, with
-many options to improve the display of many phylogenies.
+many options to improve the simultaneous display of many phylogenies.
 
 However, for exploring the output of many BEAST2 runs, 
 one would like a script to collect all parameters' ESSes,
@@ -156,9 +155,13 @@ but examples of R packages that offer a partial solution
 are \verb;BEASTmasteR;, \verb;rBEAST; 
 (\cite{rBEAST_ratmann}) and 
 \verb;RBeast; (\cite{RBeast_faria}). 
-\verb;BEASTmasteR; and \verb;RBeast; are incomplete
-packages, where \verb;rBEAST; does not aim to be a 
-package to be used by most BEAST2 users.
+\verb;BEASTmasteR; is a partial BEAUti alternative,
+does not offer a way to call BEAST2, 
+nor allows for the same data analysis as done by Tracer. 
+\verb;RBeast; provides some plotting options and parsing
+of BEAST2 output files. \verb;rBEAST; is a package developed
+around testing a biological hypothesis, 
+that does not aim to be a generally used package.
 
 Here, we present \verb;babette;:
 ’BEAUti 2, BEAST2 and Tracer for R’, 
@@ -193,16 +196,16 @@ clock model and tree prior.
 
 \verb;babette; currently has 61 exported functions to set up  
 a BEAST2 configuration file. 
-\verb;babette; is an alternative for a majority of BEAUti use cases.
+\verb;babette; can currently handle a majority of BEAUti use cases.
 Because of BEAUti's high number of plugins, 
 \verb;babette; uses a software architecture that is designed to be extended.
-Furthermore, \verb;babette; has 7 exported function to run and help run BEAST2.
+Furthermore, \verb;babette; has 7 exported functions to run and help run BEAST2.
 One function is used to run BEAST2, others
 allow the user to check if a BEAST2 configuration file is indeed valid.
 Finally, \verb;babette; has 20 exported function to parse the BEAST2 output
 files and analyze the created posterior. \verb;babette; gives the
 same ESSes and summary statistics as Tracer. The data is formatted
-as such, that it can easily be visualized using \verb;ggplot2; (for a trace,
+such that it can easily be visualized using \verb;ggplot2; (for a trace,
 similar to Tracer) or \verb;phangorn; (\cite{phangorn}) (for 
 the phylogenies in a posterior, similar to DensiTree). 
 
@@ -300,7 +303,7 @@ out <- run_beast2(
   )
 )
 \end{lstlisting}
-Within this same example, one may specify
+In this same example, one may specify
 the initial shape parameters of the exponential distribution.
 In BEAST2's implementation, an exponential distribution 
 has one shape parameter: its mean, which can be set to any
@@ -323,8 +326,9 @@ out <- run_beast2(
 \end{lstlisting}
 Our initial motivation to create \verb;babette; 
 was that we wanted to fix the crown age of a phylogeny.
-BEAUti assumes that a phylogeny has a crown age that needs to be jointly-estimated
-with the phylogeny and other parameters. It does not allow for fixing
+BEAUti assumes that a phylogeny has a crown age that needs to be 
+jointly estimated with the phylogeny and other parameters. 
+It does not allow for fixing
 the crown age. Without \verb;babette;, one needs to manually edit the BEAST2 
 configuration file (\cite{fix_starting_tree}), which is tedious and prone to errors. 
 Fixing the crown ages is especially useful for theoretical experiments,
@@ -343,7 +347,7 @@ in the BEAST2 run. This is called the "trace" (hence the name).
 The start of the trace is usually discarded, as an MCMC 
 algorithm (such as used by BEAST2) first has to converge to
 its equilibrium. The start of the trace, called the "burn-in", 
-will be removed, as its parameter estimates are not 
+will be removed, because its parameter estimates are not 
 representative. By default, Tracer discards the first 10\% of all 
 the parameter estimates. 
 To remove a 20\% burn-in from all parameter estimates 
@@ -421,20 +425,29 @@ which improves software quality (\cite{fang2001}).
 \verb;stringr; (\cite{stringr}),
 \verb;testit; (\cite{testit}) and 
 \verb;tracerer; (\cite{tracerer}).
+\verb;babette; is tested to give a clean 
+error message for incorrect input, by
+calling \verb;babette; one million times
+with random or random sensible inputs, 
+using the Peregrine high performance computer cluster. 
+The scripts to do so, are supplied with \verb;babette;.
 
 \verb;babette;'s development takes place on GitHub,
 \url{https://github.com/richelbilderbeek/babette}, 
 which accommodates collaboration (\cite{perez2016ten}) 
 and improves transparency (\cite{gorgolewski2016practical}).
-\verb;babette;'s GitHub facilitates feature requests and has guidelines how to do so.
+\verb;babette;'s GitHub facilitates feature requests and 
+has guidelines how to do so.
 
 \verb;babette;'s documentation is extensive. All functions are documented
 in the package's internal documentation. For quick use, 
 each exported function shows a minimal example. 
 For easy exploration, each exported function's documentation links to related functions.
 Additionally, \verb;babette; has a vignette that demonstrates extensively how
-to use it. The GitHub documentation helps to get started, with a dozen examples 
-of BEAUti screenshots with equivalent \verb;babette; code.
+to use it. There is documentation on the GitHub to get started, 
+with a dozen examples of BEAUti screenshots with equivalent \verb;babette; code.
+Finally, \verb;babette; has some tutorial video's that can 
+be downloaded or viewed on YouTube, \url{https://goo.gl/weKaaU}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Citation of babette}
