@@ -153,7 +153,7 @@ phylogenies. There is no single package that offers a complete solution,
 but examples of R packages that offer a partial solution are rBEAST
 (\cite{rBEAST_ratmann}) and RBeast (\cite{RBeast_faria}). RBeast provides some
 plotting options and parsing of BEAST2 output files, but the plotting
-functions are too specific for general use, where the functions for parsing
+functions are too specific for general use, whilst the functions for parsing
 call those of \verb;babette;. rBEAST was developed to test a 
 particular biological hypothesis (\cite{ratmann2016}), 
 and hence was not designed for general use.
@@ -234,7 +234,7 @@ files must be parsed by either Tracer of DensiTree.
 In \verb;babette;, all this is achieved by:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-out <- run_beast2("anthus_aco.fas")
+out <- run_beast2(fasta_filenames = "anthus_aco.fas")
 \end{lstlisting}
 This code will create a (temporary) BEAST2 configuration file,
 from the FASTA file with name \verb;anthus_aco.fas; (which
@@ -251,7 +251,7 @@ and tree prior is:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2(
-  "anthus_aco.fas",
+  fasta_filenames = "anthus_aco.fas",
   site_models = create_hky_site_model(),
   clock_models = create_rln_clock_model(),
   tree_priors = create_bd_tree_prior()
@@ -270,7 +270,10 @@ An example of two alignments, each with its own site model, is:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2(
-  c("anthus_aco.fas", "anthus_nd2.fas"),
+  fasta_filenames = c(
+    "anthus_aco.fas", 
+    "anthus_nd2.fas"
+  ),
   site_models = list(
     create_tn93_site_model(), 
     create_gtr_site_model()
@@ -292,7 +295,7 @@ To do this in \verb;babette;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2(
-  "anthus_aco.fas",
+  fasta_filenames = "anthus_aco.fas",
   tree_priors = create_yule_tree_prior(
     birth_rate_distr = create_exp_distr()    
   )
@@ -308,7 +311,7 @@ fixed (non-estimated) value, do:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2(
-  "anthus_aco.fas",
+  fasta_filenames = "anthus_aco.fas",
   tree_priors = create_yule_tree_prior(
     birth_rate_distr = create_exp_distr(
       mean = create_mean_param(
@@ -332,7 +335,7 @@ This is how to specify a fixed crown age with \verb;babette;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- run_beast2(
-  "anthus_aco.fas",
+  fasta_filenames = "anthus_aco.fas",
   posterior_crown_age = 15
 )
 \end{lstlisting}
@@ -350,7 +353,7 @@ in \verb;babette;, the following code can be used:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 traces <- remove_burn_ins(
-  out$estimates, 
+  traces = out$estimates, 
   burn_in_fraction = 0.2
 )
 \end{lstlisting}
@@ -362,7 +365,7 @@ To calculate the effective sample sizes (of all estimated variables) in \verb;ba
 
 \begin{lstlisting}[language=R, floatplacement=H]
 esses <- calc_esses(
-  traces, 
+  traces = traces, 
   sample_interval = 1000
 )
 \end{lstlisting}
@@ -375,7 +378,7 @@ all estimated parameters at once:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 sum_stats <- calc_summary_stats(
-  traces, 
+  traces = traces, 
   sample_interval = 1000
 )
 \end{lstlisting}
@@ -387,7 +390,7 @@ the posterior phylogenies are stored as \verb;anthus_aco_trees;,
 and can be plotted as such:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-plot_densitree(out$anthus_aco_trees)
+plot_densitree(phylos = out$anthus_aco_trees)
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
