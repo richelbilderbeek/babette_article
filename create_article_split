@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# ./create_article
+
+pdfseparate -f 1 -l 15 article.pdf article-%d.pdf
+pdfunite article-1.pdf article-2.pdf article-3.pdf article-4.pdf article-5.pdf article-6.pdf article-7.pdf article-8.pdf article-9.pdf article-10.pdf article-11.pdf article-12.pdf article-13.pdf article-14.pdf article-15.pdf article_body.pdf
+pdfseparate -f 16 -l 16 article.pdf article_figures.pdf
+rm article-*.pdf

@@ -487,13 +487,50 @@ All authors critically revised the text and gave approval for publication.
 \bibliography{article}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[h]
+\centering
+\begin{tabular}{ | l | l | }
+\hline
+\textbf{Name} & \textbf{Description} \\
+\hline
+\verb;run; & Run BEAST2 \\
+\hline
+\verb;create_gtr_site_model; & Create a GTR site model \\
+\verb;create_hky_site_model; & Create an HKY site model \\
+\verb;create_jc69_site_model; & Create a Jukes-Cantor site model \\
+\verb;create_tn93_site_model; & Create a TN93 site model \\
+\hline
+\verb;create_rln_clock_model; & Create a relaxed log-normal clock model \\
+\verb;create_strict_clock_model; & Create a strict clock model \\
+\hline
+\verb;create_bd_tree_prior; & Create a birth-death tree prior \\
+\verb;create_cbs_tree_prior; & Create a coalescent Bayesian skyline tree prior \\
+\verb;create_ccp_tree_prior; & Create a coalescent constant-population tree prior \\
+\verb;create_cep_tree_prior; & Create a coalescent exponential-population tree prior \\
+\verb;create_yule_tree_prior; & Create a Yule tree prior \\
+\hline
+\verb;create_beta_distr; & Create a beta distribution \\
+\verb;create_exp_distr; & Create an exponential distribution \\
+\verb;create_gamma_distr; & Create a gamma distribution \\
+\verb;create_inv_gamma_distr; & Create an inverse gamma distribution \\
+\verb;create_laplace_distr; & Create a Laplace distribution \\
+\verb;create_log_normal_distr; & Create a log-normal distribution \\
+\verb;create_normal_distr; & Create a normal distribution \\
+\verb;create_one_div_x_distr; & Create a 1/X distribution \\
+\verb;create_poisson_distr; & Create a Poisson distribution \\
+\verb;create_uniform_distr; & Create a uniform distribution \\
+\hline
+\end{tabular}
+\caption{babette's main functions}
+\label{tab:functions}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Figures at the end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}
+\begin{figure}[h]
   \centering
   \resizebox {0.8\columnwidth} {!} {
     \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=6cm, semithick]   
@@ -561,47 +598,8 @@ All authors critically revised the text and gave approval for publication.
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[h]
-\centering
-\begin{tabular}{ | l | l | }
-\hline
-\textbf{Name} & \textbf{Description} \\
-\hline
-\verb;run; & Run BEAST2 \\
-\hline
-\verb;create_gtr_site_model; & Create a GTR site model \\
-\verb;create_hky_site_model; & Create an HKY site model \\
-\verb;create_jc69_site_model; & Create a Jukes-Cantor site model \\
-\verb;create_tn93_site_model; & Create a TN93 site model \\
-\hline
-\verb;create_rln_clock_model; & Create a relaxed log-normal clock model \\
-\verb;create_strict_clock_model; & Create a strict clock model \\
-\hline
-\verb;create_bd_tree_prior; & Create a birth-death tree prior \\
-\verb;create_cbs_tree_prior; & Create a coalescent Bayesian skyline tree prior \\
-\verb;create_ccp_tree_prior; & Create a coalescent constant-population tree prior \\
-\verb;create_cep_tree_prior; & Create a coalescent exponential-population tree prior \\
-\verb;create_yule_tree_prior; & Create a Yule tree prior \\
-\hline
-\verb;create_beta_distr; & Create a beta distribution \\
-\verb;create_exp_distr; & Create an exponential distribution \\
-\verb;create_gamma_distr; & Create a gamma distribution \\
-\verb;create_inv_gamma_distr; & Create an inverse gamma distribution \\
-\verb;create_laplace_distr; & Create a Laplace distribution \\
-\verb;create_log_normal_distr; & Create a log-normal distribution \\
-\verb;create_normal_distr; & Create a normal distribution \\
-\verb;create_one_div_x_distr; & Create a 1/X distribution \\
-\verb;create_poisson_distr; & Create a Poisson distribution \\
-\verb;create_uniform_distr; & Create a uniform distribution \\
-\hline
-\end{tabular}
-\caption{babette's main functions}
-\label{tab:functions}
-\end{table}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \end{document}
+\grid
 \grid
 \grid
 \grid
