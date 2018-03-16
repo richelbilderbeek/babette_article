@@ -179,22 +179,22 @@ pipeline from sequence alignments to posterior analysis in R.
 \verb;babette; is written in the R programming language (\cite{R})
 and enables the full BEAST2 workflow from an R function call,
 in a similar way to what BEAUti, DensiTree and Tracer do.
-\verb;babette;'s main function is \verb;run_beast2;, which
+\verb;babette;'s main function is \verb;run;, which
 configures BEAST2, runs it and parses its output. 
-\verb;run_beast2; needs at least the name of a 
+\verb;run; needs at least the name of a 
 FASTA file containing a DNA alignment. 
-The default settings for the other arguments of \verb;run_beast2; 
+The default settings for the other arguments of \verb;run; 
 are identical to BEAUti's and BEAST2's default settings.
 Per alignment, a site model, clock model and tree prior can be chosen.
 Multiple alignments can be used, each with its own (unlinked) site model, 
 clock model and tree prior.
 
-\verb;babette; currently has 100 exported functions to set up  
+\verb;babette; currently has 108 exported functions to set up  
 a BEAST2 configuration file. 
 \verb;babette; can currently handle a majority of BEAUti use cases.
 Because of BEAUti's high number of plugins, 
 \verb;babette; uses a software architecture that is designed to be extended.
-Furthermore, \verb;babette; has 12 exported functions to run and help run BEAST2.
+Furthermore, \verb;babette; has 13 exported functions to run and help run BEAST2.
 One function is used to run BEAST2, others
 allow the user to check if a BEAST2 configuration file is indeed valid.
 Finally, \verb;babette; has 21 exported function to parse the BEAST2 output
@@ -234,7 +234,7 @@ files must be parsed by either Tracer of DensiTree.
 In \verb;babette;, all this is achieved by:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-out <- run_beast2(fasta_filenames = "anthus_aco.fas")
+out <- run(fasta_filenames = "anthus_aco.fas")
 \end{lstlisting}
 This code will create a (temporary) BEAST2 configuration file,
 from the FASTA file with name \verb;anthus_aco.fas; (which
@@ -250,7 +250,7 @@ An example of using a different site model, clock model
 and tree prior is:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-out <- run_beast2(
+out <- run(
   fasta_filenames = "anthus_aco.fas",
   site_models = create_hky_site_model(),
   clock_models = create_rln_clock_model(),
@@ -269,7 +269,7 @@ own site model, clock model and tree prior.
 An example of two alignments, each with its own site model, is:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-out <- run_beast2(
+out <- run(
   fasta_filenames = c(
     "anthus_aco.fas", 
     "anthus_nd2.fas"
@@ -294,7 +294,7 @@ and makes high birth rates unlikely.
 To do this in \verb;babette;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-out <- run_beast2(
+out <- run(
   fasta_filenames = "anthus_aco.fas",
   tree_priors = create_yule_tree_prior(
     birth_rate_distr = create_exp_distr()    
@@ -310,7 +310,7 @@ mean value of the exponential distribution to a
 fixed (non-estimated) value, do: 
 
 \begin{lstlisting}[language=R, floatplacement=H]
-out <- run_beast2(
+out <- run(
   fasta_filenames = "anthus_aco.fas",
   tree_priors = create_yule_tree_prior(
     birth_rate_distr = create_exp_distr(
@@ -334,7 +334,7 @@ as this allows for one less source of variation.
 This is how to specify a fixed crown age with \verb;babette;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-out <- run_beast2(
+out <- run(
   fasta_filenames = "anthus_aco.fas",
   posterior_crown_age = 15
 )
@@ -472,6 +472,14 @@ of Groningen for their support and for providing access to the Peregrine
 high performance computing cluster.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Authors' contributions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+RJCB created the package. 
+RJCB wrote the first manuscript draft. 
+All authors critically revised the text and gave approval for publication.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MEE style
@@ -560,7 +568,7 @@ high performance computing cluster.
 \hline
 \textbf{Name} & \textbf{Description} \\
 \hline
-\verb;run_beast2; & Run BEAST2 \\
+\verb;run; & Run BEAST2 \\
 \hline
 \verb;create_gtr_site_model; & Create a GTR site model \\
 \verb;create_hky_site_model; & Create an HKY site model \\
