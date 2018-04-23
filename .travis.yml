@@ -1,7 +1,8 @@
 install:
   # Check dead links
-  - sudo apt-get install npm
-  - sudo npm install -g markdown-link-check
+  # Temporarily disabled due to error CERT_UNTRUSTED
+  #- sudo apt-get install npm
+  #- sudo npm install -g markdown-link-check
   # spell
   - sudo apt-get install spell
   # proselint
@@ -12,7 +13,8 @@ install:
 
 script:
   # Check dead links
-  - ./check_dead_links
+  # Temporarily disabled due to error CERT_UNTRUSTED
+  #- ./check_dead_links
   # proselint
   - proselint README.md
   - proselint cover_letter/cover_letter.md
