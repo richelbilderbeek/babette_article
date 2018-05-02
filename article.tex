@@ -213,7 +213,13 @@ will be based on future user requests.
 \section{Usage}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In R, the functions of a package need to be loaded in the global namespace first:
+\verb;babette; can be installed easily with the \verb;devtools; package (\cite{devtools}):
+
+\begin{lstlisting}[language=R, floatplacement=H]
+library(devtools)
+install_github("richelbilderbeek/babette")
+\end{lstlisting}
+To start using \verb;babette;, load its functions in the global namespace first:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 library(babette)
@@ -408,6 +414,17 @@ and can be plotted as such:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 plot_densitree(phylos = out$anthus_aco_trees)
+\end{lstlisting}
+Instead of running the full pipeline, 
+\verb;babette; also allows to only create a BEAST2 configuration file.
+This file can be loaded and edited by BEAUti. To create a BEAST2 configuration
+file, with all settings to default, use:
+
+\begin{lstlisting}[language=R, floatplacement=H]
+create_beast2_input_file(
+  input_filenames = "anthus_aco.fas",
+  output_filename = "my_beast2_input.xml"
+)
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

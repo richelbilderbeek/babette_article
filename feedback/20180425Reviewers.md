@@ -86,11 +86,14 @@ Minor comments:
 >     Likewise I imagine babette will be improved upon and that when someone reads the paper in the future, 
 >     it may support more than 3 tree priors.
 > 
-> [ ] Section 3, Usage: there should be some indiciation of how to install babette, 
+> [x] Section 3, Usage: there should be some indiciation of how to install babette, 
 >     or where to go to find out how to install it. 
 >     There seems to be a minor bug in the installation script: 
 >     when I installed babette using devtools as recommended, a bunch of dependencies were installed, 
->     but when I ran "run" it required an R package "testthat" which was not one of those dependencies. Also, is it possible to export the XML without running babette, or to export the trees after babette has finished running? Those would be two useful examples to include in this section.
+>     but when I ran "run" it required an R package "testthat" which was not one of those dependencies. 
+>     Also, is it possible to export the XML without running babette, 
+>     or to export the trees after babette has finished running? 
+>     Those would be two useful examples to include in this section.
 > 
 > Page 5, line 114: "run" is an extremely generic name for a function and is likely to result in namespace conflicts with other packages. Maybe there is a good reason to use this name that I am not aware of, but if not, consider a more informative name. Also the "beast2_jar_path" default is hardcoded to "~/Programs/beast2/lib/beast.jar", which will be wrong for everyone except the authors of the program, so I suggest that this argument should be required rather than optional. At least here in "Usage" a value for this argument should be included.
 > 

@@ -5,3 +5,6 @@ pdflatex article.tex --shell-escape
 bibtex article.aux
 pdflatex article.tex --shell-escape
 pdflatex article.tex --shell-escape
+
+# Copy to more descriptive name
+# date --iso-8601
