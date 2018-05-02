@@ -90,12 +90,19 @@ Minor comments:
 >     or where to go to find out how to install it. 
 >     There seems to be a minor bug in the installation script: 
 >     when I installed babette using devtools as recommended, a bunch of dependencies were installed, 
->     but when I ran "run" it required an R package "testthat" which was not one of those dependencies. 
->     Also, is it possible to export the XML without running babette, 
+> [x] but when I ran "run" it required an R package "testthat" which was not one of those dependencies. 
+> [x] Also, is it possible to export the XML without running babette, 
 >     or to export the trees after babette has finished running? 
->     Those would be two useful examples to include in this section.
+> [x] Those would be two useful examples to include in this section.
 > 
-> Page 5, line 114: "run" is an extremely generic name for a function and is likely to result in namespace conflicts with other packages. Maybe there is a good reason to use this name that I am not aware of, but if not, consider a more informative name. Also the "beast2_jar_path" default is hardcoded to "~/Programs/beast2/lib/beast.jar", which will be wrong for everyone except the authors of the program, so I suggest that this argument should be required rather than optional. At least here in "Usage" a value for this argument should be included.
+> [ ] Page 5, line 114: "run" is an extremely generic name for a function 
+>     and is likely to result in namespace conflicts with other packages. 
+>     Maybe there is a good reason to use this name that I am not aware of, 
+>     but if not, consider a more informative name. 
+> [x] Also the "beast2_jar_path" default is hardcoded to "~/Programs/beast2/lib/beast.jar", 
+>     which will be wrong for everyone except the authors of the program, 
+>     so I suggest that this argument should be required rather than optional. 
+>     At least here in "Usage" a value for this argument should be included.
 > 
 > Page 6, lines 151-155: For parameters which are changed only using a scale operator, and not a random walk or uniform operator, values less than 0 are never proposed. So effectively the prior probability density for something like birth rate with an unbounded uniform prior is 0 to infinity, and having a non-zero probability on negative values is not a valid reason to use an exponential prior.
 > 
@@ -124,7 +131,7 @@ Comments to the Corresponding Author
 > 
 > L28. Tools exist for species phylogenies that are not trees as well, so substitute "phylogenetic tree" with "phylogeny".
 > 
-> L31. "Figure ??" ?
+> [x] L31. "Figure ??" ?
 > 
 > L91. Is this the equivalent of running BEAST2 with an empty alignment?
 > 

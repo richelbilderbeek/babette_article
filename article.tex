@@ -224,6 +224,11 @@ To start using \verb;babette;, load its functions in the global namespace first:
 \begin{lstlisting}[language=R, floatplacement=H]
 library(babette)
 \end{lstlisting}
+For most convenience, let \verb;babette; install BEAST2 to a default location:
+
+\begin{lstlisting}[language=R, floatplacement=H]
+install_beast2()
+\end{lstlisting}
 BEAUti, and likewise \verb;babette;, needs at least a FASTA filename
 to produce a BEAST2 configuration file. 
 In BEAUti, this is achieved by loading a FASTA file, 
