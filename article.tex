@@ -99,7 +99,7 @@ evolutionary units) are related to each other,
 but we also estimate relevant parameters such as extinction and 
 speciation rates.
 There are many phylogenetics tools available to obtain an estimate 
-of the phylogenetic tree of a given set of species. 
+of the phylogeny of a given set of species. 
 BEAST2 (\cite{bouckaert2014beast}) is one of the most widely used ones.
 It uses a Bayesian statistical framework to estimate 
 the joint posterior distribution of estimated phylogenies and model parameters, 
@@ -190,8 +190,8 @@ a BEAST2 configuration file.
 Because of BEAUti's high number of plugins, 
 \verb;babette; uses a software architecture that is designed to be extended.
 Furthermore, \verb;babette; has 13 exported functions to run and help run BEAST2.
-One function is used to run BEAST2, others
-allow the user to check if a BEAST2 configuration file is indeed valid.
+One function is used to run BEAST2, another
+one installs BEAST2 to a default location.
 Finally, \verb;babette; has 21 exported function to parse the BEAST2 output
 files and analyze the created posterior. \verb;babette; gives the
 same ESSes and summary statistics as Tracer. The data is formatted
@@ -236,7 +236,7 @@ then saving an output file using a common
 save file dialog. After this, BEAST2 needs to be applied to
 the created configuration file. It creates multiple files
 storing the posterior. These output
-files must be parsed by either Tracer of DensiTree.
+files must be parsed by either Tracer or DensiTree.
 In \verb;babette;, all this is achieved by:
 
 \begin{lstlisting}[language=R, floatplacement=H]
@@ -291,13 +291,9 @@ for each of the site models, clock models and tree priors.
 For example, by default, a Yule tree prior assumes that the birth rate 
 follows a uniform distribution, 
 from minus infinity to plus infinity. 
-This assumption implies that negative and positive birth rates are just as likely, 
-where a negative birth rate is biologically impossible (note that 
-in practice, this usually works out just fine).
-One may prefer an exponential distribution instead, 
-as this would assume only positive birth rates, 
-and makes high birth rates unlikely.
-To do this in \verb;babette;:
+One may prefer a different ddistribution instead. 
+Here is an example how to specify an exponential distribution for
+the birth rate in a Yule tree prior in \verb;babette;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- run(
@@ -328,15 +324,17 @@ out <- run(
   )
 )
 \end{lstlisting}
+\textbf{NOTE: suggest to remove this paragraph until node dating}
 Our initial motivation to create \verb;babette; 
-was that we wanted to fix the crown age of a phylogeny.
+was that we wanted to fix the crown age (the time of first divergence) of a phylogeny.
 BEAUti assumes that a phylogeny has a crown age that needs to be 
 jointly estimated with the phylogeny and other parameters. 
-It does not allow for fixing
-the crown age. Without \verb;babette;, one needs to manually edit the BEAST2 
-configuration file (\cite{fix_starting_tree}), which is tedious and prone to errors. 
-Fixing the crown ages is especially useful for theoretical experiments,
-as this allows for one less source of variation.
+It does not allow for fixing the crown age. 
+Without \verb;babette;, one needs to manually edit the BEAST2 
+configuration file, to remove all tree operators that change the height of the root node,
+which is tedious and prone to errors.
+Fixing the crown ages is useful when it is unnecessary 
+to accurately model the uncertainty of absolute divergence times.
 This is how to specify a fixed crown age with \verb;babette;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
@@ -451,9 +449,8 @@ and these files are put in a temporary folder by default.
 \section{babette resources}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\verb;babette; is free, libre and open source software available 
-from the official R package archive at 
-\url{http://cran.r-project.org/src/contrib/PACKAGES.html\#babette}
+\verb;babette; is free, libre and open source software available at 
+\url{http://github.com/richelbilderbeek/babette}
 and is licensed under the GNU General Public License v3.0.
 \verb;babette; uses the Travis CI (\url{https://travis-ci.org})
 continuous integration service, which is known to significantly 
@@ -583,9 +580,3 @@ RJCB and RSE conceived the idea for the package. RJCB created and tested the pac
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
-\grid
-\grid
-\grid
-\grid
-\grid
-\grid

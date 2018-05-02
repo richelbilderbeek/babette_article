@@ -99,18 +99,42 @@ Minor comments:
 >     and is likely to result in namespace conflicts with other packages. 
 >     Maybe there is a good reason to use this name that I am not aware of, 
 >     but if not, consider a more informative name. 
+>     [RJCB NOTE: agreed. I am hesitant to modify this function in this manuscript,
+>     as the code is under review by rOpenSci as well. I assume they
+>     will also point out this too general function name, and I assume they will also
+>     suggest a better name, e.g. 'bbt_run'. 
+>
 > [x] Also the "beast2_jar_path" default is hardcoded to "~/Programs/beast2/lib/beast.jar", 
 >     which will be wrong for everyone except the authors of the program, 
 >     so I suggest that this argument should be required rather than optional. 
 >     At least here in "Usage" a value for this argument should be included.
 > 
-> Page 6, lines 151-155: For parameters which are changed only using a scale operator, and not a random walk or uniform operator, values less than 0 are never proposed. So effectively the prior probability density for something like birth rate with an unbounded uniform prior is 0 to infinity, and having a non-zero probability on negative values is not a valid reason to use an exponential prior.
+> [x] Page 6, lines 151-155: For parameters which are changed only using a scale operator, 
+>     and not a random walk or uniform operator, values less than 0 are never proposed. 
+>     So effectively the prior probability density for something like birth rate 
+>     with an unbounded uniform prior is 0 to infinity, 
+>     and having a non-zero probability on negative values is not a valid reason to use an exponential prior.
 > 
-> Page 7, line 182: Reference to the Bouckaert & Vaughan blog post doesn't seem relevant to this feature of babette. How does babette fix the crown age? Is it by scaling the root node of the tree to that age, and removing all operators that can change the height of the root node? However it is done, adding a brief explanation in the main text would be good.
+> [x] Page 7, line 182: Reference to the Bouckaert & Vaughan blog post 
+>     doesn't seem relevant to this feature of babette. 
+>     How does babette fix the crown age? 
+>     Is it by scaling the root node of the tree to that age, 
+>     and removing all operators that can change the height of the root node? 
+>     However it is done, adding a brief explanation in the main text would be good.
 > 
-> Page 7, lines 178-184: Fixing the crown age and estimating the clock is an alternative to fixing the clock and estimating the crown age. I would guess that for some studies this is a useful feature. But in either case the same number of parameters are estimated, so I don't think the overall variation across parameters will be reduced. Also "theoretical" experiments is too vague. Instead you could describe these experiments as "where it is unnecessary to accurately model the uncertainty of absolute divergence times".
+> [x] Page 7, lines 178-184: Fixing the crown age 
+>     and estimating the clock is an alternative to fixing the clock 
+>     and estimating the crown age. 
+>     I would guess that for some studies this is a useful feature. 
+>     But in either case the same number of parameters are estimated, 
+>     so I don't think the overall variation across parameters will be reduced. 
+>     Also "theoretical" experiments is too vague. 
+>     Instead you could describe these experiments as 
+>     "where it is unnecessary to accurately model the uncertainty of absolute divergence times".
 > 
-> Again, I would like to thank Bilderbeek and Etienne for their software and paper. I am sure babette will be used by others researchers in the future, and they will find it a valuable program.
+> Again, I would like to thank Bilderbeek and Etienne for their software and paper. 
+> I am sure babette will be used by others researchers in the future, 
+> and they will find it a valuable program.
 > 
 > Sincerely,
 > 
@@ -120,21 +144,36 @@ Reviewer: 2
 
 Comments to the Corresponding Author
 
-> As a user of both BEAST2 and R, I agree here is a need for an implementation of BEAST2 in R. My review is based solely on the documentation given by the authors, including the youtube videos, as neither link nor package is available and could therefore not be tested by me. The proposed package babette package combines the base features of BEAST2, including standard models and priors, and the associates BEAUti and Tracer. My judgement is that babette appears to be a useful tool, especially when numerous replicates with slighly different settings are to be run.
+> As a user of both BEAST2 and R, 
+> I agree here is a need for an implementation of BEAST2 in R. 
+> My review is based solely on the documentation given by the authors, 
+> including the youtube videos, as neither link nor package is available 
+> and could therefore not be tested by me. 
+> The proposed package babette package combines the base features of BEAST2,
+> including standard models and priors, and the associates BEAUti and Tracer. 
+> My judgement is that babette appears to be a useful tool, 
+> especially when numerous replicates with slighly different settings are to be run.
 > 
-> Personally I would like to see node dating, the multispecies coalescent, and ancestral state reconstruction implemented in babette, but I suppose this is for future versions of the package.
+> Personally I would like to see 
+> [x] node dating, 
+> [ ] the multispecies coalescent, [NOTE: put as Issue on GitHub]
+> [ ] and ancestral state reconstruction implemented in babette, [NOTE: put as Issue on GitHub] 
+> but I suppose this is for future versions of the package.
 > 
-> I did not understand the "fix crown age option". How exactly is the crown defined? From the output it seems that it is the root age that is fixed, which is confusing.
+> [x] I did not understand the "fix crown age option". 
+>     How exactly is the crown defined? 
+>     From the output it seems that it is the root age that is fixed, which is confusing.
 > 
 > 
 > Minor comments to the text:
 > 
-> L28. Tools exist for species phylogenies that are not trees as well, so substitute "phylogenetic tree" with "phylogeny".
+> [x] L28. Tools exist for species phylogenies that are not trees as well, 
+>     so substitute "phylogenetic tree" with "phylogeny".
 > 
 > [x] L31. "Figure ??" ?
 > 
-> L91. Is this the equivalent of running BEAST2 with an empty alignment?
+> [x] L91. Is this the equivalent of running BEAST2 with an empty alignment?
 > 
-> L112. "or"
+> [x] L112. "or"
 > 
-> L227. Link to babette is not working.
+> [x] L227. Link to babette is not working.

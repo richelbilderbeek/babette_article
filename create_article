@@ -7,4 +7,4 @@ pdflatex article.tex --shell-escape
 pdflatex article.tex --shell-escape
 
 # Copy to more descriptive name
-# date --iso-8601
+cp article.pdf article_babette_20180502.pdf
