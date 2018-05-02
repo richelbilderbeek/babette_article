@@ -72,7 +72,7 @@ Minor comments:
 >     especially in 2018, especially from two male authors. 
 >     Sorry if this point gets interpreted as not having a sense of humor, but I think it should be addressed.
 > 
-> [ ] Page 3, line 29: "creates a posterior" is a bit of a glib description, 
+> [x] Page 3, line 29: "creates a posterior" is a bit of a glib description, 
 >     and could be reworded as "it uses a Bayesian statistical framework to estimate 
 >     the joint posterior distribution of estimated phylogenies and..."
 > 
