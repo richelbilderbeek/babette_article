@@ -76,7 +76,15 @@ Minor comments:
 >     and could be reworded as "it uses a Bayesian statistical framework to estimate 
 >     the joint posterior distribution of estimated phylogenies and..."
 > 
-> Page 4, lines 97-104: I think the authors are under-selling their own product here. Of course babette does not support everything BEAUTi does at the moment, but instead of highlighting all the things it cannot do, maybe focus more on what it can do. For example, elucidate the 3 prior priors that are supported, instead of saying that only 3 of 7 tree priors are not supported. BEAST2 is very dynamic, and new tree priors are added all the time, so it's likely that 7 will not be the correct number in the future. Likewise I imagine babette will be improved upon and that when someone reads the paper in the future, it may support more than 3 tree priors.
+> [x] Page 4, lines 97-104: I think the authors are under-selling their own product here. 
+>     Of course babette does not support everything BEAUTi does at the moment, 
+>     but instead of highlighting all the things it cannot do, maybe focus more on what it can do. 
+>     For example, elucidate the 3 prior priors that are supported, 
+>     instead of saying that only 3 of 7 tree priors are not supported. 
+>     BEAST2 is very dynamic, and new tree priors are added all the time, 
+>     so it's likely that 7 will not be the correct number in the future. 
+>     Likewise I imagine babette will be improved upon and that when someone reads the paper in the future, 
+>     it may support more than 3 tree priors.
 > 
 > Section 3, Usage: there should be some indiciation of how to install babette, or where to go to find out how to install it. There seems to be a minor bug in the installation script: when I installed babette using devtools as recommended, a bunch of dependencies were installed, but when I ran "run" it required an R package "testthat" which was not one of those dependencies. Also, is it possible to export the XML without running babette, or to export the trees after babette has finished running? Those would be two useful examples to include in this section.
 > 
