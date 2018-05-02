@@ -36,11 +36,19 @@ Comments to the Author:
 
 > Dear Richèl, dear Rampal,
 > 
-> we have now received two very qualified reviews for your manuscript on babette. Overall, both reviews are very positive and consider your software and article worthy of publication in Methods in Ecology and Evolution. I agree with the reviewers' assessment. Nevertheless, before your manuscript can be accepted for publication, I ask you to follow the advice of the two reviewers carefully to address the minor issues raised by them.
+> we have now received two very qualified reviews for your manuscript on babette. 
+> Overall, both reviews are very positive and consider your software and article worthy of publication in Methods in Ecology and Evolution. I agree with the reviewers' assessment. Nevertheless, before your manuscript can be accepted for publication, I ask you to follow the advice of the two reviewers carefully to address the minor issues raised by them.
 > 
-> I agree with reviewer 2 that more flexible node dating would be an worthwhile feature to add to babette but that this addition could be left for future development. Nevertheless I would find it helpful if implemented options for node dating could be described in slightly more detail in the manuscript; e.g. is an age constraint on the root the only option for node dating, and can it be constrained by prior distributions, or only with a fixed age?
-> 
-> In addition I suggest to rephrase line 190 as babette does not allow all the functionality of Tracer (as stated on line 101), and to fix a small error in the Acknowledgements, "for the sharing his FASTA files".
+> [x] I agree with reviewer 2 that 
+>     more flexible node dating would be an worthwhile feature 
+>     to add to babette but that this addition could be left for future development. 
+>     Nevertheless I would find it helpful if implemented options for node dating could be described 
+>     in slightly more detail in the manuscript; 
+>     e.g. is an age constraint on the root the only option for node dating, 
+>     and can it be constrained by prior distributions, or only with a fixed age?
+
+> [x] In addition I suggest to rephrase line 190 as babette does not allow all the functionality of Tracer (as stated on line 101), 
+> [x] and to fix a small error in the Acknowledgements, "for the sharing his FASTA files".
 > 
 > I am looking forward to receive your revised manuscript.
 
@@ -53,9 +61,20 @@ Comments to the Corresponding Author
 
 Minor comments:
 
-> Continuing the grand tradition of picking alliterative puns for BEAST program names, the authors have gone with "babette". I guess that this is in reference to one of the maids that cleans up after The Beast in the famous fairy tale. I think the name is logical and clever. However in the older Disney animated versions of the fairy tale the maid is a "sexy maid" stereotype, and the authors seem to have directly copied the babette logo from the animation. The authors should reconsider this, not only because of the notorious litigousness of Disney lawyers, but also because the optics of using a "sexy maid" logo for scientific software is bad, especially in 2018, especially from two male authors. Sorry if this point gets interpreted as not having a sense of humor, but I think it should be addressed.
+> [x] Continuing the grand tradition of picking alliterative puns for BEAST program names, 
+>     the authors have gone with "babette". 
+>     I guess that this is in reference to one of the maids that cleans up after The Beast in the famous fairy tale. 
+>     I think the name is logical and clever. 
+>     However in the older Disney animated versions of the fairy tale the maid is a "sexy maid" stereotype, 
+>     and the authors seem to have directly copied the babette logo from the animation. 
+>     The authors should reconsider this, not only because of the notorious litigousness of Disney lawyers, 
+>     but also because the optics of using a "sexy maid" logo for scientific software is bad, 
+>     especially in 2018, especially from two male authors. 
+>     Sorry if this point gets interpreted as not having a sense of humor, but I think it should be addressed.
 > 
-> Page 3, line 29: "creates a posterior" is a bit of a glib description, and could be reworded as "it uses a Bayesian statistical framework to estimate the joint posterior distribution of estimated phylogenies and..."
+> [ ] Page 3, line 29: "creates a posterior" is a bit of a glib description, 
+>     and could be reworded as "it uses a Bayesian statistical framework to estimate 
+>     the joint posterior distribution of estimated phylogenies and..."
 > 
 > Page 4, lines 97-104: I think the authors are under-selling their own product here. Of course babette does not support everything BEAUTi does at the moment, but instead of highlighting all the things it cannot do, maybe focus more on what it can do. For example, elucidate the 3 prior priors that are supported, instead of saying that only 3 of 7 tree priors are not supported. BEAST2 is very dynamic, and new tree priors are added all the time, so it's likely that 7 will not be the correct number in the future. Likewise I imagine babette will be improved upon and that when someone reads the paper in the future, it may support more than 3 tree priors.
 > 
