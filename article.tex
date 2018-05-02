@@ -417,15 +417,30 @@ plot_densitree(phylos = out$anthus_aco_trees)
 \end{lstlisting}
 Instead of running the full pipeline, 
 \verb;babette; also allows to only create a BEAST2 configuration file.
-This file can be loaded and edited by BEAUti. To create a BEAST2 configuration
-file, with all settings to default, use:
+To create a BEAST2 configuration file, with all settings to default, use:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 create_beast2_input_file(
-  input_filenames = "anthus_aco.fas",
-  output_filename = "my_beast2_input.xml"
+  input_filenames = babette::get_babette_path("anthus_aco.fas"),
+  output_filename = "beast2.xml"
 )
 \end{lstlisting}
+This file can then be loaded and edited by BEAUti, or run by BEAST2.
+\verb;babette; also allows to only run BEAST2 from a BEAST2 configuration
+file: 
+
+\begin{lstlisting}[language=R, floatplacement=H]
+run_beast2(
+  input_filename = "beast2.xml",
+  output_log_filename = "run.log",
+  output_trees_filenames = "posterior.trees",
+  output_state_filename = "final.xml.state"
+)
+\end{lstlisting}
+In this example, we specify the names of the desired BEAST2 output files.
+These output files can then be inspected with other tools, or to be used
+to continue a BEAST2 run. Also \verb;run; supports to specify these filenames,
+and these files are put in a temporary folder by default. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{babette resources}
