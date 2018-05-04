@@ -240,7 +240,7 @@ files must be parsed by either Tracer or DensiTree.
 In \verb;babette;, all this is achieved by:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-out <- run(fasta_filenames = "anthus_aco.fas")
+out <- bbt_run(fasta_filenames = "anthus_aco.fas")
 \end{lstlisting}
 This code will create a (temporary) BEAST2 configuration file,
 from the FASTA file with name \verb;anthus_aco.fas; (which
@@ -256,7 +256,7 @@ An example of using a different site model, clock model
 and tree prior is:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-out <- run(
+out <- bbt_run(
   fasta_filenames = "anthus_aco.fas",
   site_models = create_hky_site_model(),
   clock_models = create_rln_clock_model(),
@@ -275,7 +275,7 @@ own site model, clock model and tree prior.
 An example of two alignments, each with its own site model, is:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-out <- run(
+out <- bbt_run(
   fasta_filenames = c(
     "anthus_aco.fas", 
     "anthus_nd2.fas"
@@ -296,7 +296,7 @@ Here is an example how to specify an exponential distribution for
 the birth rate in a Yule tree prior in \verb;babette;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-out <- run(
+out <- bbt_run(
   fasta_filenames = "anthus_aco.fas",
   tree_priors = create_yule_tree_prior(
     birth_rate_distr = create_exp_distr()    
@@ -312,7 +312,7 @@ mean value of the exponential distribution to a
 fixed (non-estimated) value, do: 
 
 \begin{lstlisting}[language=R, floatplacement=H]
-out <- run(
+out <- bbt_run(
   fasta_filenames = "anthus_aco.fas",
   tree_priors = create_yule_tree_prior(
     birth_rate_distr = create_exp_distr(
@@ -338,7 +338,7 @@ to accurately model the uncertainty of absolute divergence times.
 This is how to specify a fixed crown age with \verb;babette;:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-out <- run(
+out <- bbt_run(
   fasta_filenames = "anthus_aco.fas",
   posterior_crown_age = 15
 )
@@ -353,7 +353,7 @@ normal distribution around the desired crown age.
 Within \verb;babette;, this is achieved as such:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-posterior <- run(
+out <- bbt_run(
   fasta_filenames = "anthus_aco.fas",
   mrca_priors = create_mrca_prior(
     taxa_names = get_taxa_names("anthus_aco.fas"),
@@ -442,7 +442,7 @@ run_beast2(
 \end{lstlisting}
 In this example, we specify the names of the desired BEAST2 output files.
 These output files can then be inspected with other tools, or to be used
-to continue a BEAST2 run. Also \verb;run; supports to specify these filenames,
+to continue a BEAST2 run. Also \verb;bbt_run; supports to specify these filenames,
 and these files are put in a temporary folder by default. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -545,7 +545,7 @@ RJCB and RSE conceived the idea for the package. RJCB created and tested the pac
 \hline
 \textbf{Name} & \textbf{Description} \\
 \hline
-\verb;run; & Run BEAST2 \\
+\verb;bbt_run; & Run BEAST2 \\
 \hline
 \verb;create_gtr_site_model; & Create a GTR site model \\
 \verb;create_hky_site_model; & Create an HKY site model \\
