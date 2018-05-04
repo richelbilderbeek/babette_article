@@ -8,6 +8,3 @@ pdflatex article.tex --shell-escape
 mv article.pdf article_body.pdf
 
 pdfunite article_body.pdf article_figures.pdf article.pdf
-
-# Copy to more descriptive name
-cp article.pdf article_babette_20180502.pdf
