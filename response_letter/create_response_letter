@@ -1,2 +1,8 @@
 #!/bin/bash
-pandoc response_letter.md -o response_letter_babette.pdf
+
+pandoc response_letter.md -o response_letter.pdf
+
+# Specific names and proprietary formats for communication
+pandoc response_letter.md -o response_letter_babette_20180504.pdf
+pandoc response_letter.md -o response_letter_babette_20180504.docx
+pandoc response_letter.md -o response_letter_babette_20180504.doc
