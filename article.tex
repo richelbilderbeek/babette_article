@@ -335,26 +335,24 @@ out <- bbt_run(
 can specify Most Recent Common Ancestor ('MRCA') priors.
 An MRCA prior allows to specify taxa having a common ancestor,
 including a distribution for the date of that ancestor.
-An application of such a prior is to specify a (close to) fixed
-crown age, by including all taxa and assuming a tight 
-normal distribution around the desired crown age. 
 With \verb;babette;, this is achieved as follows:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- bbt_run(
   fasta_filenames = "anthus_aco.fas",
   mrca_priors = create_mrca_prior(
-    taxa_names = get_taxa_names("anthus_aco.fas"),
+    taxa_names = sample(get_taxa_names("anthus_aco.fas"), size = 2),
     alignment_id = get_alignment_id("anthus_aco.fas"),
+    is_monophyletic = TRUE,
     mrca_distr = create_normal_distr(
       mean = create_mean_param(value = 15.0, estimate = FALSE),
-      sigma = create_sigma_param(value = 0.01, estimate = FALSE)
+      sigma = create_sigma_param(value = 0.025, estimate = FALSE)
     )
   )
 )
 \end{lstlisting}
-Instead of using all taxa, any subset of taxa can be selected 
-to have a dated common ancestor.
+Instead of dating the ancestor of two random taxa, any subset of taxa can be selected,
+and multiple sets are allowed.
 \verb;babette; allows for the same core functionality as Tracer to show the values of the parameter estimates sampled
 in the BEAST2 run. This is called the "trace" (hence the name).
 The start of the trace, called the "burn-in", is usually discarded, as an MCMC 
