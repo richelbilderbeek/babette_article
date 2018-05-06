@@ -1,6 +1,4 @@
 # Associate Editor Comments to Author:
-# Associate Editor
-# Comments to the Author:
 
 > we have now received two very qualified reviews for your manuscript on babette. 
 > Overall, both reviews are very positive and consider your software and article worthy of publication in Methods in Ecology and Evolution. I agree with the reviewers' assessment. Nevertheless, before your manuscript can be accepted for publication, I ask you to follow the advice of the two reviewers carefully to address the minor issues raised by them.
@@ -15,11 +13,8 @@ Thank you for these nice words. We are happy to inform you we took care of all t
 > e.g. is an age constraint on the root the only option for node dating, 
 > and can it be constrained by prior distributions, or only with a fixed age?
 
-We are happy to announce, that while this manuscript was under review, node dating has been
-added the package. Additionally, an example how to use this is added to the manuscript,
-where we constrain the crown age by a tight normal distribution. The way to do so, using what is called
-an MRCA prior, does have the option to specify monophyly, but we did not an example to demonstrate
-this feature. 
+While this manuscript was under review, we already added node dating to the package. Additionally, an example how to use this is added to the manuscript,
+where we data the ancestor node of three random taxa assuming monophyly.
 
 > In addition I suggest to rephrase line 190 as babette does not allow all the functionality of Tracer (as stated on line 101), 
 > and to fix a small error in the Acknowledgements, "for the sharing his FASTA files".
@@ -28,13 +23,10 @@ Fully agree, we did as suggested.
 
 # Reviewer(s)' Comments to Author:
 # Reviewer: 1
-#
-# Comments to the Corresponding Author
 
 > Bilderbeek and Etienne have created a useful tool in babette, and have written a concise and informative paper describing what they have done and how it works. For this reason I am recommending acceptance with minor revisions, and would like to thank the authors for their contribution to phylogenetic software and the BEAST universe.
 
-We are happy to hear our work is appreciated, as great care was taken to make the
-article as short as possible, and the tool `babette` as useful as possible 
+We are happy to hear our work is appreciated.
 
 > Continuing the grand tradition of picking alliterative puns for BEAST program names, 
 > the authors have gone with "babette". 
@@ -49,7 +41,7 @@ article as short as possible, and the tool `babette` as useful as possible
 
 Thanks for mentioning this issue in such careful words. We thought it would be indeed a good idea
 to follow this advice. All logo's (`babette` and the packages it relies on) have been redesigned (by
-a girl actually) to be more neutral.  
+a girl actually) to be more gender-neutral.  
 
 > Page 3, line 29: "creates a posterior" is a bit of a glib description, 
 > and could be reworded as "it uses a Bayesian statistical framework to estimate 
@@ -67,7 +59,7 @@ Agreed. We use your words to improve the accuracy of the original wording.
 > Likewise I imagine babette will be improved upon and that when someone reads the paper in the future, 
 > it may support more than 3 tree priors.
 
-Thanks for pointing this out! Upon a re-read, the original wording did sound rather pessimistic.
+Thanks for pointing this out! Upon a re-read, the original wording did sound rather negative.
 The new wording specifies what has been done in a way that would still be correct for future readers.
 
 > Section 3, Usage: there should be some indiciation of how to install babette, 
@@ -79,11 +71,11 @@ The new wording specifies what has been done in a way that would still be correc
 > or to export the trees after babette has finished running? 
 > Those would be two useful examples to include in this section.
 
-How to install `babette` and BEAST2 (to a default location to be found by `babette`) are
-added. The lack of `testthat` was embarassing, which proves that even a rigid testing
-scheme cannot catch all mistakes. An early adopter of `babette` already pointed out
+We added text on how to install `babette` and BEAST2 (to a default location to be found by `babette`) are
+added. The missing `testthat` dependency in the DESCRIPTION file (under `Suggests`) was embarassing, which proves that even a rigid testing
+scheme cannot catch all mistakes. An early `babette` user already pointed out
 this error and it has been fixed. As, indeed, it is possible to only export the XML
-normally created by BEAUti, this has been added, as we expect more people to desire this.
+normally created by BEAUti, this has been added, as we expect more people to want this feature.
 
 > Page 5, line 114: "run" is an extremely generic name for a function 
 > and is likely to result in namespace conflicts with other packages. 
@@ -98,9 +90,9 @@ like `stringr`.
 > so I suggest that this argument should be required rather than optional. 
 > At least here in "Usage" a value for this argument should be included.
 
-This point has been mentioned by the rOpenSci code reviewers and has already been
-addressed. Using the `rappdirs` package, folder names can be made paltform independent.
-Since then, `babette` is tested to build and pass all test under both Windows and Linux.
+This point was also mentioned by rOpenSci code reviewers and has been
+addressed. Using the `rappdirs` package, folder names can be made platform independent.
+Since then, `babette` has been tested to build and pass all tests under both Windows and Linux.
 
 > Page 6, lines 151-155: For parameters which are changed only using a scale operator, 
 > and not a random walk or uniform operator, values less than 0 are never proposed. 
@@ -120,8 +112,8 @@ prior distribution.
 > and removing all operators that can change the height of the root node? 
 > However it is done, adding a brief explanation in the main text would be good.
 
-The reference to the blog post has been removed. As per this comment, we describe how `babette`
-fixes a phylogeny crown age, by -indeed- removing all operators that can change the height of the root node.
+The reference to the blog post has been removed. As per this comment, we described how `babette`
+fixes a phylogeny crown age, by -indeed- removing all operators that can change the height of the root node. We use the past tense here, as we decided to remove this paragraph althogether: the posteriors produced by BEAST2 have remarkably different branch length distributions, for unknown reasons. Using a dated note on the crown does give the regular branch length distributions.
 
 > Page 7, lines 178-184: Fixing the crown age 
 > and estimating the clock is an alternative to fixing the clock 
@@ -133,7 +125,7 @@ fixes a phylogeny crown age, by -indeed- removing all operators that can change 
 > Instead you could describe these experiments as 
 > "where it is unnecessary to accurately model the uncertainty of absolute divergence times".
 
-Agree. We added this superior wording to the manuscipt.
+Agreed. We added this superior wording to the manuscipt, before removing the entire paragraph, as clarified above.
 
 > Again, I would like to thank Bilderbeek and Etienne for their software and paper. 
 > I am sure babette will be used by others researchers in the future, 
@@ -147,7 +139,6 @@ We would like to thank Ogilvie for his constructive feedback, that improved the
 manuscript in ways that will make it more useful for more readers.
 
 # Reviewer: 2
-# Comments to the Corresponding Author
 
 > As a user of both BEAST2 and R, 
 > I agree here is a need for an implementation of BEAST2 in R. 
@@ -170,11 +161,7 @@ help the -overly busy- CRAN maintainers judge `babette` for its high-quality cod
 > and ancestral state reconstruction implemented in babette,
 > but I suppose this is for future versions of the package.
 
-We are happy to announce, that while this manuscript was under review, node dating has been
-added the package. Additionally, an example how to use this is added to the manuscript,
-where we constrain the crown age by a tight normal distribution. The way to do so, using what is called
-an MRCA prior, does have the option to specify monophyly, but we did not an example to demonstrate
-this feature.
+While this manuscript was under review, we added node dating and an example how to do so. As the first reviewer also suggested this feature, we refer to the comments there.
 
 The other features have been added as feature requests on the `babette` GitHub. Which features
 will first be added to `babette` is unsure, and will depend -as mentioned in the manuscript-
@@ -195,11 +182,11 @@ the root age would be the time a first species is observed, which we would call 
 > L28. Tools exist for species phylogenies that are not trees as well, 
 > so substitute "phylogenetic tree" with "phylogeny".
 
-Agree. Fixed.
+Agreed. Fixed.
 
 > [x] L31. "Figure ??" ?
 
-Completely agree. Fixed.
+We completely agree. Fixed.
 
 > [x] L91. Is this the equivalent of running BEAST2 with an empty alignment?
 
