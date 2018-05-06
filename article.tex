@@ -148,8 +148,7 @@ phylogenies. There is no single package that offers a complete solution,
 but examples of R packages that offer a partial solution are rBEAST
 (\cite{rBEAST_ratmann}) and RBeast (\cite{RBeast_faria}). RBeast provides some
 plotting options and parsing of BEAST2 output files, but the plotting
-functions are too specific for general use, whilst the functions for parsing
-call those of \verb;babette;. rBEAST was developed to test a 
+functions are too specific for general use. rBEAST was developed to test a 
 particular biological hypothesis (\cite{ratmann2016}), 
 and hence was not designed for general use.
 
@@ -172,13 +171,13 @@ pipeline from sequence alignments to posterior analysis in R.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \verb;babette; is written in the R programming language (\cite{R})
-and enables the full BEAST2 workflow from an R function call,
-in a similar way to what BEAUti, DensiTree and Tracer do.
-\verb;babette;'s main function is \verb;run;, which
+and enables the full BEAST2 workflow from a single R function call,
+in a similar way to what subsequent usage of BEAUti, DensiTree and Tracer would produce.
+\verb;babette;'s main function is \verb;bbt_run;, which
 configures BEAST2, runs it and parses its output. 
-\verb;run; needs at least the name of a 
+\verb;bbt_run; needs at least the name of a 
 FASTA file containing a DNA alignment. 
-The default settings for the other arguments of \verb;run; 
+The default settings for the other arguments of \verb;bbt_run; 
 are identical to BEAUti's and BEAST2's default settings.
 Per alignment, a site model, clock model and tree prior can be chosen.
 Multiple alignments can be used, each with its own (unlinked) site model, 
@@ -186,7 +185,7 @@ clock model and tree prior.
 
 \verb;babette; currently has 108 exported functions to set up  
 a BEAST2 configuration file. 
-\verb;babette; can currently handle a majority of BEAUti use cases.
+\verb;babette; can currently handle the majority of BEAUti use cases.
 Because of BEAUti's high number of plugins, 
 \verb;babette; uses a software architecture that is designed to be extended.
 Furthermore, \verb;babette; has 13 exported functions to run and help run BEAST2.
@@ -199,13 +198,14 @@ such that it can easily be visualized using \verb;ggplot2; (for a trace,
 similar to Tracer) or \verb;phangorn; (\cite{phangorn}) (for 
 the phylogenies in a posterior, similar to DensiTree). 
 
-Currently, \verb;babette; does not replace all functionality 
-in BEAUti, BEAST2 and their many plug-ins.
-This is reasonable, as these themselves also change in time.
-\verb;babette; provides the majority of default tree priors and works only on DNA data. 
-\verb;babette; supports the most important command-line arguments of BEAST2, provides
+Currently, \verb;babette; does not contain all functionality 
+in BEAUti, BEAST2 and their many plug-ins, 
+because these tools themselves also change in time.
+\verb;babette; currently works only on DNA data,
+because this is the most common use case. 
+Nevertheless, \verb;babette; provides the majority of default tree priors and supports the most important command-line arguments of BEAST2, provides
 the core Tracer analysis options, and has the most basic subset of 
-plotting options of DensiTree. Up until now, the \verb;babette; features 
+plotting options of DensiTree. Up till now, the \verb;babette; features 
 implemented are those requested by users. Further extension of \verb;babette; 
 will be based on future user requests.
 
@@ -213,22 +213,29 @@ will be based on future user requests.
 \section{Usage}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\verb;babette; can be installed easily with the \verb;devtools; package (\cite{devtools}):
+\verb;babette; can be installed easily from CRAN \textbf{NOTE: This is not true yet: 
+we are still in the process of submitting to CRAN}:
 
 \begin{lstlisting}[language=R, floatplacement=H]
-library(devtools)
-install_github("richelbilderbeek/babette")
+install.packages("babette")
+\end{lstlisting}
+For the most up-to-date version, 
+one can download and install the package from \verb;babette;'s GitHub repository:
+
+\begin{lstlisting}[language=R, floatplacement=H]
+devtools::install_github("richelbilderbeek/babette")
 \end{lstlisting}
 To start using \verb;babette;, load its functions in the global namespace first:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 library(babette)
 \end{lstlisting}
-For most convenience, let \verb;babette; install BEAST2 to a default location:
+Because babette calls BEAST2, BEAST2 must be installed. This can be done from R, using:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 install_beast2()
 \end{lstlisting}
+This will install BEAST2 to the default user data folder, but a different path can be specified as well.
 BEAUti, and likewise \verb;babette;, needs at least a FASTA filename
 to produce a BEAST2 configuration file. 
 In BEAUti, this is achieved by loading a FASTA file, 
@@ -307,7 +314,7 @@ In this same example, one may specify
 the initial shape parameters of the exponential distribution.
 In BEAST2's implementation, an exponential distribution 
 has one shape parameter: its mean, which can be set to any
-value with \verb;BEAUti;. Within \verb;babette;, to set the 
+value with \verb;BEAUti;. To set the 
 mean value of the exponential distribution to a 
 fixed (non-estimated) value, do: 
 
@@ -324,25 +331,6 @@ out <- bbt_run(
   )
 )
 \end{lstlisting}
-\textbf{NOTE: suggest to remove this paragraph until node dating}
-Our initial motivation to create \verb;babette; 
-was that we wanted to fix the crown age (the time of first divergence) of a phylogeny.
-BEAUti assumes that a phylogeny has a crown age that needs to be 
-jointly estimated with the phylogeny and other parameters. 
-It does not allow for fixing the crown age. 
-Without \verb;babette;, one needs to manually edit the BEAST2 
-configuration file, to remove all tree operators that change the height of the root node,
-which is tedious and prone to errors.
-Fixing the crown ages is useful when it is unnecessary 
-to accurately model the uncertainty of absolute divergence times.
-This is how to specify a fixed crown age with \verb;babette;:
-
-\begin{lstlisting}[language=R, floatplacement=H]
-out <- bbt_run(
-  fasta_filenames = "anthus_aco.fas",
-  posterior_crown_age = 15
-)
-\end{lstlisting}
 \verb;babette; also supports node dating. Like BEAUti, one
 can specify Most Recent Common Ancestor ('MRCA') priors.
 An MRCA prior allows to specify taxa having a common ancestor,
@@ -350,7 +338,7 @@ including a distribution for the date of that ancestor.
 An application of such a prior is to specify a (close to) fixed
 crown age, by including all taxa and assuming a tight 
 normal distribution around the desired crown age. 
-Within \verb;babette;, this is achieved as such:
+With \verb;babette;, this is achieved as follows:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 out <- bbt_run(
@@ -365,13 +353,13 @@ out <- bbt_run(
   )
 )
 \end{lstlisting}
-\verb;babette; allows for the same core functionality as Tracer,
-in which it works on the values of the parameter estimates sampled
+Instead of using all taxa, any subset of taxa can be selected 
+to have a dated common ancestor.
+\verb;babette; allows for the same core functionality as Tracer to show the values of the parameter estimates sampled
 in the BEAST2 run. This is called the "trace" (hence the name).
-The start of the trace is usually discarded, as an MCMC 
+The start of the trace, called the "burn-in", is usually discarded, as an MCMC 
 algorithm (such as used by BEAST2) first has to converge to
-its equilibrium. The start of the trace, called the "burn-in", 
-will be removed, because its parameter estimates are not 
+its equilibrium and hence the parameter estimates are not 
 representative. By default, Tracer discards the first 10\% of all 
 the parameter estimates. 
 To remove a 20\% burn-in from all parameter estimates 
@@ -411,9 +399,9 @@ sum_stats <- calc_summary_stats(
 \verb;babette; allows for the same functionality as DensiTree.
 DensiTree displays the phylogenies in a posterior at the same
 time scale, drawn one over one another, allowing to see the uncertainty in
-topology and branch lengths. Within the object \verb;out;, 
-the posterior phylogenies are stored as \verb;anthus_aco_trees;,
-and can be plotted as such:
+topology and branch lengths. 
+The posterior phylogenies are stored as \verb;anthus_aco_trees; in the object \verb;out;,
+and can be plotted as follows:
 
 \begin{lstlisting}[language=R, floatplacement=H]
 plot_densitree(phylos = out$anthus_aco_trees)
@@ -428,9 +416,7 @@ create_beast2_input_file(
   output_filename = "beast2.xml"
 )
 \end{lstlisting}
-This file can then be loaded and edited by BEAUti, or run by BEAST2.
-\verb;babette; also allows to only run BEAST2 from a BEAST2 configuration
-file: 
+This file can then be loaded and edited by BEAUti, run by BEAST2, or run by \verb;babette;: 
 
 \begin{lstlisting}[language=R, floatplacement=H]
 run_beast2(
@@ -441,9 +427,11 @@ run_beast2(
 )
 \end{lstlisting}
 In this example, we specify the names of the desired BEAST2 output files.
-These output files can then be inspected with other tools, or to be used
-to continue a BEAST2 run. Also \verb;bbt_run; supports to specify these filenames,
-and these files are put in a temporary folder by default. 
+These output files can then be inspected with other tools, or used
+to continue a BEAST2 run. \verb;bbt_run; supports specifying the folder and name of these files,
+which defaults to a temporary folder to keep
+the working directory clean of intermediate and
+temporary files. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{babette resources}
@@ -479,7 +467,7 @@ error message for incorrect input, by
 calling \verb;babette; one million times
 with random or random sensible inputs, 
 using the Peregrine high performance computer cluster. 
-The scripts to do so are supplied with \verb;babette;.
+The test scripts are supplied with \verb;babette;.
 
 \verb;babette;'s development takes place on GitHub,
 \url{https://github.com/richelbilderbeek/babette}, 
