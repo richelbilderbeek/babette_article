@@ -19,7 +19,7 @@ where we date the ancestral node of three random taxa assuming monophyly.
 > In addition I suggest to rephrase line 190 as babette does not allow all the functionality of Tracer (as stated on line 101), 
 > and to fix a small error in the Acknowledgements, "for the sharing his FASTA files".
 
-Fully agree, we did as suggested.
+We fully agree, we did as suggested.
 
 # Reviewer(s)' Comments to Author:
 # Reviewer: 1
@@ -126,7 +126,7 @@ fixes a phylogeny crown age, by -indeed- removing all operators that can change 
 > Instead you could describe these experiments as 
 > "where it is unnecessary to accurately model the uncertainty of absolute divergence times".
 
-Agreed. We added this superior wording to the manuscipt, but eventuallt removed the entire paragraph, as clarified above.
+Agreed. We added this superior wording to the manuscipt, but eventually removed the entire paragraph, as clarified above.
 
 > Again, I would like to thank Bilderbeek and Etienne for their software and paper. 
 > I am sure babette will be used by others researchers in the future, 
@@ -192,8 +192,8 @@ We completely agree. Fixed.
 
 No, that option mentioned was to validate a file to be valid (i.e. not corrupted or
 have an incorrect XML structure). We decided to remove mentioning file validation,
-as it would be only of minor interest to most. Instead, we mention the option
-of installing BEAST2 from R.
+as it would be only of minor interest to most (it has been moved to a vignette). 
+Instead, we mention the option of installing BEAST2 from R. 
 
 > [x] L112. "or"
 
