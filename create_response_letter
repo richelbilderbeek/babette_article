@@ -9,5 +9,5 @@ cd ..
 
 pdfunite \
   cover_letter_resubmission/cover_letter_resubmission.pdf \
-  response_letter/response_letter.pdf article_full.pdf \
+  response_letter/response_letter.pdf \
   response_letter.pdf
