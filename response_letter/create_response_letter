@@ -5,4 +5,3 @@ pandoc response_letter.md -o response_letter.pdf
 # Specific names and proprietary formats for communication
 pandoc response_letter.md -o response_letter_babette_20180506.pdf
 pandoc response_letter.md -o response_letter_babette_20180506.docx
-pandoc response_letter.md -o response_letter_babette_20180506.doc
