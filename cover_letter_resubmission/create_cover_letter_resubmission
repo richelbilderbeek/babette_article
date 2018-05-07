@@ -1,2 +1,2 @@
 #!/bin/bash
-pandoc cover_letter.md -o cover_letter.pdf
+pandoc cover_letter_resubmission.md -o cover_letter_resubmission.pdf
