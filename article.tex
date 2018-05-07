@@ -96,17 +96,17 @@
 Phylogenies are commonly used to explore evolutionary hypotheses.
 Not only can phylogenies show us how species (or other
 evolutionary units) are related to each other, 
-but we also estimate relevant parameters such as extinction and 
-speciation rates.
+but we can also estimate relevant parameters such as extinction and 
+speciation rates from them.
 There are many phylogenetics tools available to obtain an estimate 
 of the phylogeny of a given set of species. 
 BEAST2 (\cite{bouckaert2014beast}) is one of the most widely used ones.
 It uses a Bayesian statistical framework to estimate 
-the joint posterior distribution of estimated phylogenies and model parameters, 
+the joint posterior distribution of phylogenies and model parameters, 
 from one or more DNA, RNA or amino acid alignments (see figure 1 
 for an overview of the workflow). 
 
-It has a graphical and a command-line interface, 
+BEAST2 has a graphical and a command-line interface, 
 that both need a configuration file containing 
 alignments and model parameters.
 BEAST2 is bundled with BEAUti 2 (\cite{drummond2012bayesian}) ('BEAUti' from now on), 
@@ -413,7 +413,8 @@ create_beast2_input_file(
   output_filename = "beast2.xml"
 )
 \end{lstlisting}
-This file can then be loaded and edited by BEAUti, run by BEAST2, or run by \verb;babette;: 
+This file can then be loaded and edited by BEAUti, 
+run by BEAST2, or run by \verb;babette;: 
 
 \begin{lstlisting}[language=R, floatplacement=H]
 run_beast2(
@@ -423,12 +424,17 @@ run_beast2(
   output_state_filename = "final.xml.state"
 )
 \end{lstlisting}
-In this example, we specify the names of the desired BEAST2 output files.
-These output files can then be inspected with other tools, or used
-to continue a BEAST2 run. \verb;bbt_run; supports specifying the folder and name of these files,
-which defaults to a temporary folder to keep
-the working directory clean of intermediate and
-temporary files. 
+\verb;run_beast2; is a function that only runs BEAST2, 
+and does not parse the output files (unlike \verb;bbt_run;). 
+In the example above, 
+we specify the names of the desired BEAST2 
+output files explicitly, and these will be created in the
+R working directory, after which thay can be inspected 
+with other tools, or used to continue a BEAST2 run.
+By default, both \verb;bbt_run; and \verb;run_beast2;
+put these files in the default temporary folder (as
+created by \verb;temp.dir();) to keep
+the working directory clean of intermediate files. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{babette resources}
@@ -463,7 +469,7 @@ We tested \verb;babette; to give a clean
 error message for incorrect input, by
 calling \verb;babette; one million times
 with random or random sensible inputs, 
-using the Peregrine high performance computer cluster. 
+using a high performance computer cluster. 
 The test scripts are supplied with \verb;babette;.
 
 \verb;babette;'s development takes place on GitHub,
@@ -507,7 +513,9 @@ Thanks to Huw Ogilvie and one anonymous reviewer for reviewing this article.
 Thanks to rOpenSci, and especially Noam Ross and Guangchuang Yu for reviewing the package's source code.
 We would like to thank the Center for Information Technology of the University 
 of Groningen for their support and for providing access to the Peregrine 
-high performance computing cluster.
+high performance computing cluster. We thank the Netherlands 
+Organization for Scientific Research (NWO) for financial support 
+through a VICI grant awarded to RSE.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Authors' contributions}
