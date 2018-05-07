@@ -1,3 +1,5 @@
 #!/bin/bash
-pandoc cover_letter_resubmission.md -o cover_letter_resubmission_20180507.pdf
-pandoc cover_letter_resubmission.md -o cover_letter_resubmission_20180507.docx
+pandoc cover_letter_resubmission.md -o cover_letter_resubmission.pdf
+
+pandoc cover_letter_resubmission.md -o ~/babette_cover_letter_resubmission_20180507.pdf
+pandoc cover_letter_resubmission.md -o ~/babette_cover_letter_resubmission_20180507.docx
