@@ -5,6 +5,4 @@ bibtex article.aux
 pdflatex article.tex --shell-escape
 pdflatex article.tex --shell-escape
 
-mv article.pdf article_body.pdf
-
-pdfunite article_body.pdf article_figures.pdf article.pdf
+pdfunite article.pdf article_figures.pdf article_full.pdf

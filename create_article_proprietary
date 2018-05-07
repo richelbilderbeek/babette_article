@@ -1,4 +1,7 @@
 #!/bin/bash
 ./create_article
+
 cp article.pdf article_babette_revised_20180506.pdf
+cp article_full.pdf article_babette_full_revised_20180506.pdf
+
 pandoc article.tex -o article_babette_revised_20180506.docx

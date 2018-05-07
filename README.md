@@ -8,8 +8,9 @@ Article about [babette](https://github.com/richelbilderbeek/babette).
 
 ## Downloads
 
- * [PDF](article.pdf)
+ * [full article (PDF)](article_full.pdf)
  * [bioRxiv pre-print](https://doi.org/10.1101/271866)
+ * [article, no figures (PDF)](article.pdf)
 
 ## How to build article
 
