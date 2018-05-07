@@ -113,8 +113,12 @@ prior distribution.
 > and removing all operators that can change the height of the root node? 
 > However it is done, adding a brief explanation in the main text would be good.
 
-The reference to the blog post has been removed. Indeed, we described how `babette`
-fixes a phylogeny crown age, by -indeed- removing all operators that can change the height of the root node. But, we decided to remove this paragraph althogether: the posteriors produced by BEAST2 with this setting have remarkably different branch length distributions, for unknown reasons. Using a dated node on the crown does give the regular branch length distributions.
+The reference to the blog post has been removed. 
+Indeed, we described how `babette`
+fixes a phylogeny crown age, by -indeed- removing 
+all operators that can change the height of the root node. 
+But, we decided to remove this paragraph altogether, 
+because the posteriors produced by BEAST2 with this setting have remarkably different branch length distributions, for unknown reasons. Using a dated node on the crown does give the regular branch length distributions.
 
 > Page 7, lines 178-184: Fixing the crown age 
 > and estimating the clock is an alternative to fixing the clock 
@@ -191,7 +195,8 @@ We completely agree. Fixed.
 > [x] L91. Is this the equivalent of running BEAST2 with an empty alignment?
 
 No, that option mentioned was to validate a file to be valid (i.e. not corrupted or
-have an incorrect XML structure). We decided to remove mentioning file validation,
+have an incorrect XML structure). We decided to remove 
+mentioning file validation in the manuscript,
 as it would be only of minor interest to most (it has been moved to a vignette). 
 Instead, we mention the option of installing BEAST2 from R. 
 
