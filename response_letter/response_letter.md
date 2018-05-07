@@ -13,8 +13,8 @@ Thank you for these nice words. We are happy to inform you we took care of all t
 > e.g. is an age constraint on the root the only option for node dating, 
 > and can it be constrained by prior distributions, or only with a fixed age?
 
-While this manuscript was under review, we already added node dating to the package. Additionally, an example how to use this is added to the manuscript,
-where we data the ancestor node of three random taxa assuming monophyly.
+While this manuscript was under review, we already added node dating to the package. Additionally, we added an example how to to the manuscript,
+where we date the ancestral node of three random taxa assuming monophyly.
 
 > In addition I suggest to rephrase line 190 as babette does not allow all the functionality of Tracer (as stated on line 101), 
 > and to fix a small error in the Acknowledgements, "for the sharing his FASTA files".
@@ -67,14 +67,17 @@ The new wording specifies what has been done in a way that would still be correc
 > There seems to be a minor bug in the installation script: 
 > when I installed babette using devtools as recommended, a bunch of dependencies were installed, 
 > but when I ran "run" it required an R package "testthat" which was not one of those dependencies. 
-> Also, is it possible to export the XML without running babette, 
-> or to export the trees after babette has finished running? 
-> Those would be two useful examples to include in this section.
 
 We added text on how to install `babette` and BEAST2 (to a default location to be found by `babette`) are
 added. The missing `testthat` dependency in the DESCRIPTION file (under `Suggests`) was embarassing, which proves that even a rigid testing
 scheme cannot catch all mistakes. An early `babette` user already pointed out
-this error and it has been fixed. As, indeed, it is possible to only export the XML
+this error and it has been fixed. 
+
+> Also, is it possible to export the XML without running babette, 
+> or to export the trees after babette has finished running? 
+> Those would be two useful examples to include in this section.
+
+As, indeed, it is possible to only export the XML
 normally created by BEAUti, this has been added, as we expect more people to want this feature.
 
 > Page 5, line 114: "run" is an extremely generic name for a function 
@@ -100,9 +103,7 @@ Since then, `babette` has been tested to build and pass all tests under both Win
 > with an unbounded uniform prior is 0 to infinity, 
 > and having a non-zero probability on negative values is not a valid reason to use an exponential prior.
 
-We agree and wrote down that indeed this is an invalid 
-reason ('In practice, this [reasoning] does not matter'). As apparently we did not do a good enough job,
-we decided to remove the incorrect reasoning altogether and only demonstrate how to use a different
+We agree and decided to remove the incorrect reasoning altogether and only demonstrate how to use a different
 prior distribution.
 
 > Page 7, line 182: Reference to the Bouckaert & Vaughan blog post 
@@ -112,8 +113,8 @@ prior distribution.
 > and removing all operators that can change the height of the root node? 
 > However it is done, adding a brief explanation in the main text would be good.
 
-The reference to the blog post has been removed. As per this comment, we described how `babette`
-fixes a phylogeny crown age, by -indeed- removing all operators that can change the height of the root node. We use the past tense here, as we decided to remove this paragraph althogether: the posteriors produced by BEAST2 have remarkably different branch length distributions, for unknown reasons. Using a dated note on the crown does give the regular branch length distributions.
+The reference to the blog post has been removed. Indeed, we described how `babette`
+fixes a phylogeny crown age, by -indeed- removing all operators that can change the height of the root node. But, we decided to remove this paragraph althogether: the posteriors produced by BEAST2 with this setting have remarkably different branch length distributions, for unknown reasons. Using a dated node on the crown does give the regular branch length distributions.
 
 > Page 7, lines 178-184: Fixing the crown age 
 > and estimating the clock is an alternative to fixing the clock 
@@ -125,7 +126,7 @@ fixes a phylogeny crown age, by -indeed- removing all operators that can change 
 > Instead you could describe these experiments as 
 > "where it is unnecessary to accurately model the uncertainty of absolute divergence times".
 
-Agreed. We added this superior wording to the manuscipt, before removing the entire paragraph, as clarified above.
+Agreed. We added this superior wording to the manuscipt, but eventuallt removed the entire paragraph, as clarified above.
 
 > Again, I would like to thank Bilderbeek and Etienne for their software and paper. 
 > I am sure babette will be used by others researchers in the future, 
@@ -135,7 +136,7 @@ Agreed. We added this superior wording to the manuscipt, before removing the ent
 > 
 > Huw Ogilvie
 
-We would like to thank Ogilvie for his constructive feedback, that improved the
+We would like to thank Huw Ogilvie for his constructive feedback, that improved the
 manuscript in ways that will make it more useful for more readers.
 
 # Reviewer: 2
@@ -151,8 +152,7 @@ manuscript in ways that will make it more useful for more readers.
 > especially when numerous replicates with slighly different settings are to be run.
 
 We are happy to hear the reviewer sees the utility to the package. The reason
-the link to CRAN did not work, is as it has not yet been accepted by CRAN. `babette` intends
-to be submitted to CRAN, but only after an rOpenSci code review. Such a code review will
+the link to CRAN did not work, is that it has not yet been accepted by CRAN. We intend to submit `babette` to CRAN, but only after an rOpenSci code review, which ends at May 18th. Such a code review will
 help the -overly busy- CRAN maintainers judge `babette` for its high-quality code.
 
 > Personally I would like to see 
