@@ -91,27 +91,25 @@
 \end{abstract}
 
 \begin{abstract}
-
   \textbf{1. }
-    In het onderzoeksveld van de fylogenetica is BEAST2 een van de meest gebruikte 
-    hulpprogramma's. Het is gebundeld met de grafische gebruikers interface
-    BEAUti 2, DensiTree en Tracer, om BEAST2 configuratiebestanden te maken
-    en om BEAST2 output bestanden te interpreteren.
-    Echter, als veel verschillende aligneringen of modelopzetten nodig zijn,
+    In de fylogenetica is BEAST2 een van de meest gebruikte hulpprogramma's. 
+    Het is gebundeld met de grafische gebruiksinterface BEAUti 2, DensiTree en Tracer, 
+    om BEAST2-configuratiebestanden te maken en om BEAST2-outputbestanden te interpreteren. 
+    Echter, als veel verschillende aligneringen of modelopzetten nodig zijn, 
     is een werkvolgorde van meerdere grafische gebruiksinterfaces onhandig. \\
   \textbf{2. }
-    Hier presenteren wij een gratis, vrij en open-source package, \verb;babette;:
+    Hier presenteren we een gratis, vrij en open-source package, \verb;babette;: 
     'BEAUti 2, BEAST2 en Tracer voor R', voor de programmeertaal R. 
-    \verb;babette; schrijft BEAST2 configuratiebestanden, start BEAST2 and verwerkt de resultaten, 
+    \verb;babette; schrijft BEAST2-configuratiebestanden, start BEAST2 and verwerkt de resultaten, 
     alles met een enkele R functie-aanroep. \\
   \textbf{3. }
-    Wij beschrijven hoe \verb;babette; te gebruiken is en de nieuwe mogelijkheden die het biedt
-    vergeleken met de originele programma's, begeleidt met enkele voorbeelden. \\
+    We beschrijven hoe \verb;babette; te gebruiken is 
+    en de nieuwe mogelijkheden die het biedt vergeleken met de originele programma's, 
+    aan de hand van enkele voorbeelden. \\
   \textbf{4. }
-    Omdat \verb;babette; ontworpen is om van hoge kwaliteit en uitbreidbaar te zijn, 
-    sluiten wij af met het beschrijven van de verdere ontwikkeling van dit package. \\
+    Omdat \verb;babette; ontworpen is voor uitbreidbaarheid en hoge kwaliteit, 
+    sluiten we af met het beschrijven van de verdere ontwikkeling van dit package. \\
 \end{abstract}
-
 
 {\bf Keywords:} computational biology, evolution, phylogenetics, BEAST2, R
 
@@ -147,8 +145,9 @@ This implies that when the user
 wants to explore the consequences of various settings, this must be done manually.
 This is the managable workflow when using a few alignments and doing a superficial 
 analysis of sensitivity of the reconstructed tree to model settings. 
-For exploring many trees (for instance from simulations), when doing a sliding-window
-analysis, or for a more thorough sensitivity analysis, one would like to loop through 
+For exploring many trees (for instance from simulations), 
+when doing when doing a sliding-window analysis on a genomic alignment, 
+or for a more thorough sensitivity analysis, one would like to loop through 
 multiple (simulated or shortened) alignments, nucleotide substitution models, 
 clock models and tree priors. 
 One such tool to replace BEAUti is \verb;BEASTmasteR; (\cite{beastmaster}),
