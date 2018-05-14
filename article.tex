@@ -121,9 +121,9 @@ This implies that when the user
 wants to explore the consequences of various settings, this must be done manually.
 This is the managable workflow when using a few alignments and doing a superficial 
 analysis of sensitivity of the reconstructed tree to model settings. 
-For exploring many trees (for instance from simulations) and for
-more thorough sensitivity analysis, one would like to loop through 
-multiple (simulated) alignments, nucleotide substitution models, 
+For exploring many trees (for instance from simulations), when doing a sliding-window
+analysis, or for a more thorough sensitivity analysis, one would like to loop through 
+multiple (simulated or shortened) alignments, nucleotide substitution models, 
 clock models and tree priors. 
 One such tool to replace BEAUti is \verb;BEASTmasteR; (\cite{beastmaster}),
 which focuses on morphological traits and tip-dating, but also 
@@ -135,7 +135,7 @@ BEAST2 is also associated with Tracer (\cite{tracer}) and
 DensiTree (\cite{DensiTree}). Both are desktop applications 
 to analyze the output of BEAST2, each with a user-friendly graphical user interface. 
 Tracer's purpose is to analyze the parameter estimates generated
-from a BEAST2 run. It shows, among
+from a (BEAST1 and) BEAST2 run. It shows, among
 others, the effective sample size (ESS) and time series ('the trace', 
 hence the name) of each variable in the MCMC run. Both ESS and trace
 are needed to assess the strength of the inference. 
@@ -250,7 +250,7 @@ out <- bbt_run(fasta_filenames = "anthus_aco.fas")
 \end{lstlisting}
 This code will create a (temporary) BEAST2 configuration file,
 from the FASTA file with name \verb;anthus_aco.fas; (which
-is supplied with the package, from (\cite{VanEls2018})), 
+is supplied with the package, from \cite{VanEls2018}), 
 using the same default settings as BEAUti, which are, 
 among others, a Jukes-Cantor site model, a strict clock, and a Yule birth tree prior.
 \verb;babette; will then execute BEAST2 using that file, and
