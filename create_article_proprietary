@@ -1,6 +1,6 @@
 #!/bin/bash
 ./create_article
 
-cp article.pdf "~/babette_article_revised_$(date +"%Y%m%d").pdf"
-cp article_full.pdf "~/babette_article_full_revised_$(date +"%Y%m%d").pdf"
-pandoc article.tex -o "~/babette_article_revised_$(date +"%Y%m%d").docx"
+cp article.pdf ~/babette_article_accepted_"$(date +"%Y%m%d")".pdf
+cp article_full.pdf ~/babette_article_full_accepted_$(date +"%Y%m%d").pdf
+pandoc article.tex -o ~/babette_article_accepted_$(date +"%Y%m%d").docx
