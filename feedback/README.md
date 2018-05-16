@@ -195,3 +195,16 @@ Groet, Rampal
 
  * [PDF](20180226RSE.pdf)
 
+## 2018-05-15
+
+```
+Vervang "when doing when doing" door "for" en submit het ms.
+
+Reden: 1. twee keer when doing was natuurlijk niet de bedoeling. 2. Maar ook als je het een keer schrijft, kan het verwarrend zijn, alsof when doing terugslaat op het eerste deel van de zin. Vervangen door "for" lost dat probleem op.
+
+Groet, Rampal
+```
+
+```
+O ja, vervang ook nog de tweede "summary" door "samenvatting".
+```
