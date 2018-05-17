@@ -4,47 +4,28 @@ Branch|[![Travis CI logo](pics/TravisCI.png)](https://travis-ci.org)
 ---|---
 master|[![Build Status](https://travis-ci.org/richelbilderbeek/babette_article.svg?branch=master)](https://travis-ci.org/richelbilderbeek/babette_article)
 
+![](pics/babette_logo.png)
+
 Article about [babette](https://github.com/richelbilderbeek/babette).
 
 ## Downloads
 
- * [full article (PDF)](article_full.pdf)
  * [bioRxiv pre-print](https://doi.org/10.1101/271866)
- * [article, no figures (PDF)](article.pdf)
+ * [full article (PDF)](article/article_full.pdf)
+ * [article, no figures (PDF)](article/article.pdf)
 
-## How to build article
+## Content
 
-From a GNU/Linux terminal, do:
-
-```
-cd article
-./create_article
-```
-
-See [.travis.yml](.travis.yml) for the exact installation.
-
-## Questions the article should answer
-
- * What is `babette`?
- * What is `babette`'s licence?
- * Who can run `babette`? 
- * Why is `babette` useful?
- * Has something similar already been done? If yes, what is novel about `babette`?
- * How to use `babette`?
- * What is a minimal example of `babette`?
- * What is a more complex example of `babette`?
- * What is an example of `babette`'s novelty?
- * How is `babette` documented?
-   * How is the within-R help of `babette`?
-   * How is the manual of `babette`? 
- * What is the quality of `babette`'s code?
-  * Code coverage
-  * Style
- * What is the future of `babette`?
-
-## Former [feedback](feedback/README.md)
-
-See [Feedback](feedback/README.md).
+Folder|Description
+---|---
+[article](article/README.md)|Manuscript
+[cover_letter_resubmission](cover_letter_resubmission/README.md)|Cover letter for resubmission
+[cover_letter_submission](cover_letter_submission/README.md)|Cover letter for submission
+[data](data/README.md)|Data
+[feedback](feedback/README.md)|Feedback
+[figures](figures/README.md)|Figures (as used in manuscript)
+[pics](pics/README.md)|Pictures (not used in manuscript)
+[response_letter](response_letter/README.md)|Response letter
 
 ## Acknowledgements
 
