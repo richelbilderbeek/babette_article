@@ -1,4 +1,0 @@
-#!/bin/bash
-cd cover_letter_submission
-./create_cover_letter_submission
-cd ..
