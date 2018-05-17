@@ -20,9 +20,9 @@ Could we please ask you to make the following adjustments and resubmit your manu
 
 -----------------------------------------------------------
 
- * [ ] 1. Please add a ‘Data Accessibility’ section after the acknowledgements, to indicate what data and code has been used, and where it is publicly available. For more information here is a link to our data archiving policy: http://bit.ly/2qAm76w and also to a list of recommended repositories: http://bit.ly/2rU0s93. Please note, code should also be archived in accordance with our policy on publishing code: http://bit.ly/2IjO8rK
+ * [x] 1. Please add a ‘Data Accessibility’ section after the acknowledgements, to indicate what data and code has been used, and where it is publicly available. For more information here is a link to our data archiving policy: http://bit.ly/2qAm76w and also to a list of recommended repositories: http://bit.ly/2rU0s93. Please note, code should also be archived in accordance with our policy on publishing code: http://bit.ly/2IjO8rK
 
- * [ ] babette v1.2.4
+ * [x] babette v1.2.4
  * [x] beautier v1.13.3
  * [x] beastier v1.4.3
  * [x] tracerer v1.4.3
