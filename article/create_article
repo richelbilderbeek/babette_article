@@ -1,8 +1,12 @@
 #!/bin/bash
 
+cd ../figures
+./create_figures
+cd ../article
+
 pdflatex article.tex --shell-escape
 bibtex article.aux
 pdflatex article.tex --shell-escape
 pdflatex article.tex --shell-escape
 
-pdfunite article.pdf article_figures.pdf article_full.pdf
+pdfunite article.pdf ../figures/figures.pdf article_full.pdf
