@@ -1,6 +1,3 @@
 #!/bin/bash
 
 pdflatex figures.tex --shell-escape
-bibtex figures.aux
-pdflatex figures.tex --shell-escape
-pdflatex figures.tex --shell-escape
