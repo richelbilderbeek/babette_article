@@ -1,22 +1,8 @@
 \documentclass{article}
 
-% Bibliography
-\usepackage{natbib}
-\bibpunct{(}{)}{;}{a}{}{;}
-
-% Use 'It was found that A is B (Name 1234)' style
-\setcitestyle{authoryear,open={},close={}}
-
-% Affiliations
-\usepackage{authblk}
-\title{babette: BEAUti 2, BEAST2 and Tracer for R}
-\author[1]{Rich\`el J.C. Bilderbeek}
-\author[1]{Rampal S. Etienne}
-\affil[1]{Groningen Institute for Evolutionary Life Sciences, University of Groningen, Groningen, The Netherlands}
-
-% Use double spacing
-\usepackage{setspace}
-\doublespacing
+% 300 DPI
+\usepackage[vcentering,dvips]{geometry}
+\geometry{papersize={7.444in,9.681in},total={4.8in,6.8in}}
 
 \usepackage{listings}
 \usepackage{hyperref}
@@ -57,14 +43,6 @@
 }
 \lstset{style=mystyle}
 
-% Adds numbered lines
-\usepackage{lineno}
-\linenumbers
-
-% Rename 'Abstract' to 'Summary 
-\usepackage[english]{babel}
-\addto{\captionsenglish}{\renewcommand{\abstractname}{Summary}}
-
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows.meta}
 
@@ -85,7 +63,7 @@
       1
     };   
     \node[state] (B) [right of = A, rectangle] {
-      \includegraphics[height=0.15\textheight]{BeautiSiteModel.png}
+      \includegraphics[height=0.15\textheight]{beauti_site_model.png}
     };   
     \node[state] (BL) [above left=-0.25cm and -0.25cm of B, fill=white] {
       2
