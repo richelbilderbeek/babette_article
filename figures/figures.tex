@@ -1,7 +1,13 @@
 \documentclass[]{article}
 
+% Bad idea
+%\usepackage{fullpage}
+
 %\documentclass[a0paper]{article}
-% 300 DPI
+% Must be at least 300 DPI
+
+% No page numbering
+\pagenumbering{gobble} 
 
 \usepackage{listings}
 \usepackage{hyperref}
@@ -78,14 +84,6 @@
     \path [-o,draw] (C) -- ($ (E) !.5! (F) $);
     \end{tikzpicture}
   }
-  \caption{
-    Workflow using GUI tools. From an alignment (1) and BEAUti (2), 
-    a BEAST2 configuration file (3) is created. BEAST2 (4) uses that file
-    to infer a posterior, storing it in multiple files (5). These results
-    are visualized using DensiTree (6) and Tracer (7). babette allows
-    for the same workflow, all from an R function call.
-  }
-  \label{fig:workflow}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

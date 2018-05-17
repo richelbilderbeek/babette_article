@@ -26,7 +26,7 @@ Could we please ask you to make the following adjustments and resubmit your manu
 
  * [ ] 3. Please upload your final document as a Word file. Unfortunately, our typesetters are unable to work with PDFs. LaTex files are also acceptable, however Word documents are preferred.
 
- * [ ] 4. Please ensure that all figures are at least 300dpi in resolution.
+ * [x] 4. Please ensure that all figures are at least 300dpi in resolution.
 
 -----------------------------------------------------------
 

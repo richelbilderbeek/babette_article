@@ -9,7 +9,11 @@ convert           \
     figures.pdf   \
    -quality 100   \
    -flatten       \
-    figures.jpg
+    figures_untrimmed.jpg
+
+./autotrim figures_untrimmed.jpg figures.jpg
+
+identify -format '%x,%y\n' figures.jpg -units PixelsPerInch
 
 # Convert images to 300 dpi
 
