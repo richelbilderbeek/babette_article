@@ -17,6 +17,7 @@ Article about [babette](https://github.com/richelbilderbeek/babette).
 From a GNU/Linux terminal, do:
 
 ```
+cd article
 ./create_article
 ```
 

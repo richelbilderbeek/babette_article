@@ -27,3 +27,5 @@ script:
   - spell cover_letter/cover_letter.md
   # Count words, must be below 3000 for 'Applications'
   - wc article.tex --words 
+  # Figures must have at least 300 dpi
+  # - ?
