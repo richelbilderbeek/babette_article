@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Convert PDF
+
+convert           \
+   -verbose       \
+   -density 600   \
+   -trim          \
+    figures.pdf   \
+   -quality 100   \
+   -flatten       \
+    figures.jpg
+
+# Convert images to 300 dpi
+
+# No need to do so here, convert PDF
+
+#convert -density 300 -units pixelsperinch alignment.png alignment.jpg
+#convert -density 300 -units pixelsperinch beast_logo.png beast_logo.jpg
+#convert -density 300 -units pixelsperinch beauti_site_model.png beauti_site_model.jpg
+
+#identify -format '%x,%y\n' alignment.jpg -units PixelsPerInch
+#convert -scale 300% alignment_original.png alignment_big.png
+#convert -density 300 -units pixelsperinch alignment_big.png alignment.jpg
