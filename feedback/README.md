@@ -208,3 +208,25 @@ Groet, Rampal
 ```
 O ja, vervang ook nog de tweede "summary" door "samenvatting".
 ```
+
+## 2018-05-17
+
+```
+Manuscript Accepted - Updates Received MEE-18-03-185.R1 [email ref: ENR-AW-1-f]
+
+17 May 2018 12:49 8 KB
+From:
+Methods in Ecology and Evolution
+To: [...]
+
+17-May-2018
+
+Dear Dr Richèl Bilderbeek:
+
+MEE-18-03-185.R1
+
+This is an automatic email to thank you for returning your final files. These will now be checked and you will be informed if any further updates are needed. If no updates are required the files will be sent to production.
+
+Sincerely,
+Methods in Ecology and Evolution Editorial Office
+```
