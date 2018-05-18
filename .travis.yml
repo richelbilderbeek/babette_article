@@ -4,6 +4,7 @@ install:
   #- sudo apt-get install npm
   #- sudo npm install -g markdown-link-check
   # spell
+  - apt-cache search spell
   - sudo apt install spell
   # proselint
   - sudo pip install proselint
