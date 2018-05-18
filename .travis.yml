@@ -1,4 +1,7 @@
 install:
+  # Newer tools
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update -qq
   # Check dead links
   # Temporarily disabled due to error CERT_UNTRUSTED
   #- sudo apt-get install npm
