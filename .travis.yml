@@ -30,4 +30,4 @@ script:
   # Count words, must be below 3000 for 'Applications'
   - pandoc article/article.tex -t plain | wc --words
   # Figures must have at least 300 dpi
-  - identify -format '%x,%y\n' figures/figures.jpg -units PixelsPerInch
+  - identify -format '%x,%y\n' -units PixelsPerInch figures/figures.jpg
