@@ -4,6 +4,8 @@ Branch|[![Travis CI logo](pics/TravisCI.png)](https://travis-ci.org)
 ---|---
 master|[![Build Status](https://travis-ci.org/richelbilderbeek/babette_article.svg?branch=master)](https://travis-ci.org/richelbilderbeek/babette_article)
 
+[![DOI](https://zenodo.org/badge/105884140.svg)](https://zenodo.org/badge/latestdoi/105884140)
+
 ![](pics/babette_logo.png)
 
 Article about [babette](https://github.com/richelbilderbeek/babette).
