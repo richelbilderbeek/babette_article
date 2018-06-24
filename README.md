@@ -12,9 +12,10 @@ Article about [babette](https://github.com/richelbilderbeek/babette).
 
 ## Downloads
 
- * [bioRxiv pre-print](https://doi.org/10.1101/271866)
- * [full article (PDF)](article/article_full.pdf)
- * [article, no figures (PDF)](article/article.pdf)
+ * [print version](https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/2041-210X.13032), in 'Methods in Ecology and Evolution'
+ * [pre-print](https://doi.org/10.1101/271866), in bioRxiv
+ * [raw, full article (PDF)](article/article_full.pdf), in this repository
+ * [raw, article, no figures (PDF)](article/article.pdf), in this repository
 
 ## Content
 
