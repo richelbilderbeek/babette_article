@@ -2,13 +2,18 @@
 
 The manuscript.
 
-## How to build article
+## How to build the article
 
 From a GNU/Linux terminal, do:
 
 ```
-cd article
 ./create_article
+```
+
+To only build the figure:
+
+```
+./create_figures
 ```
 
 # Figures
