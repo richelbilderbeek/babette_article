@@ -32,4 +32,4 @@ script:
   # Figures must have at least 300 dpi
   - identify -format '%x,%y\n' -units PixelsPerInch figures/figures.jpg
   # Build article
-  - cd article; ./create_article; cd ..
+  - cd article; ./create; cd ..
