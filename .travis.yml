@@ -25,13 +25,11 @@ script:
   #- ./check_dead_links
   # proselint
   - proselint `find | grep .*\.md` | egrep -v "curly_quotes"
-  # Can article be converted to PDF?
-  # - ./create_article
+  # Build article
+  - cd article; ./create_article; cd ..
   # List possible spelling errors
   - spell `find | egrep "(tex|md)"`
   # Count words, must be below 3000 for 'Applications'
   - pandoc article/article.tex -t plain | wc --words
   # Figures must have at least 300 dpi
-  - identify -format '%x,%y\n' -units PixelsPerInch figures/figures.jpg
-  # Build article
-  - cd article; ./create; cd ..
+  - identify -format '%x,%y\n' -units PixelsPerInch article/figures.jpg
