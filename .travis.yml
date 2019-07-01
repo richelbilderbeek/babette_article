@@ -23,6 +23,7 @@ install:
 
 script:
   # Check dead links
+  - ls
   - rm .travis.yml
   - ./scripts/check_dead_links
   # proselint
