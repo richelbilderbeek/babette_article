@@ -26,6 +26,7 @@ script:
   # proselint
   - proselint `find | grep .*\.md` | egrep -v "curly_quotes"
   # Build article
+  - rm article/article.pdf
   - cd article; ./create_article; cd ..
   - if [ ! -f article/article.pdf ]; then echo "file 'article.pdf' not found" ; exit 1 ; fi
   # List possible spelling errors
