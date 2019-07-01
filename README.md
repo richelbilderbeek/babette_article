@@ -13,13 +13,12 @@ Article about [babette](https://github.com/richelbilderbeek/babette).
 ## Links
 
  * [print version](https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/2041-210X.13032), in 'Methods in Ecology and Evolution'
- * [blog post](https://methodsblog.wordpress.com/2018/06/25/babette-beast2/) in Methods.Blog
+ * [blog post](https://methodsblog.wordpress.com/2018/06/25/babette-beast2) in Methods.Blog
 
 ## Downloads
 
  * [pre-print](https://doi.org/10.1101/271866), in bioRxiv
- * [raw, full article (PDF)](article/article_full.pdf), in this repository
- * [raw, article, no figures (PDF)](article/article.pdf), in this repository
+ * [raw, full article (PDF)](article/article.pdf), in this repository
 
 ## Content
 
@@ -30,7 +29,6 @@ Folder|Description
 [cover_letter_submission](cover_letter_submission/README.md)|Cover letter for submission
 [data](data/README.md)|Data
 [feedback](feedback/README.md)|Feedback
-[figures](figures/README.md)|Figures (as used in manuscript)
 [pics](pics/README.md)|Pictures (not used in manuscript)
 [response_letter](response_letter/README.md)|Response letter
 

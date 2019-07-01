@@ -23,6 +23,7 @@ install:
 
 script:
   # Check dead links
+  - rm .travis.yml
   - ./scripts/check_dead_links
   # proselint
   - proselint `find | grep .*\.md` | egrep -v "curly_quotes"
