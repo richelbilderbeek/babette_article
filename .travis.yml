@@ -18,7 +18,8 @@ install:
   - sudo apt install pandoc 
   # imagemagick
   - sudo apt install imagemagick
-  # texlive-latex-recommended texlive-latex-extra texlive-fonts-extra texlive-fonts-recommended texlive-extra-utils texlive-humanities texlive-full pgf texlive-games texlive-pictures texlive-science texlive-xetex ktikz
+  # PDF creation
+  - sudo apt install texlive-latex-recommended texlive-latex-extra texlive-fonts-extra texlive-fonts-recommended texlive-extra-utils texlive-humanities texlive-full pgf texlive-games texlive-pictures texlive-science texlive-xetex ktikz
 
 script:
   # Check dead links
