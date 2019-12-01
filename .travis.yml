@@ -6,9 +6,9 @@ install:
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt-get update -qq
   # Check dead links
-  - sudo apt-get install -qq npm
-  - npm config set strict-ssl false
-  - sudo npm install -g markdown-link-check
+  #- sudo apt-get install -qq npm
+  #- npm config set strict-ssl false
+  #- sudo npm install -g markdown-link-check
   # spell
   - apt-cache search spell
   - sudo apt install spell
@@ -24,9 +24,9 @@ install:
 
 script:
   # Check dead links
-  - ls
-  - rm .travis.yml
-  - ./scripts/check_dead_links || true
+  #- ls
+  #- rm .travis.yml
+  #- ./scripts/check_dead_links || true
   # proselint
   - proselint `find | grep .*\.md` | egrep -v "curly_quotes"
   # Build article
