@@ -1,3 +1,9 @@
 *.aux
 content.bbl
 content.blg
+*.bbl
+*.log
+*.out
+*.blg
+babette_article.pdf
+babette_figures.pdf

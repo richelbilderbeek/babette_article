@@ -1,3 +1,0 @@
-#!/bin/bash
-
-pdflatex figures.tex --shell-escape
