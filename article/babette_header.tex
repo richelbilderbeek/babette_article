@@ -1,0 +1,77 @@
+\documentclass{article}
+
+% Bibliography
+\usepackage{natbib}
+\bibpunct{(}{)}{;}{a}{}{;}
+
+% Use 'It was found that A is B (Name 1234)' style
+\setcitestyle{authoryear,open={},close={}}
+
+% Affiliations
+\usepackage{authblk}
+\title{babette: BEAUti 2, BEAST2 and Tracer for R}
+\author[1]{Rich\`el J.C. Bilderbeek}
+\author[1]{Rampal S. Etienne}
+\affil[1]{Groningen Institute for Evolutionary Life Sciences, University of Groningen, Groningen, The Netherlands}
+
+% Use double spacing
+\usepackage{setspace}
+\doublespacing
+
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{todonotes}
+\usepackage{verbatim}
+\usepackage{pgf}
+\usepackage{bm}
+
+% Style of listings
+% From http://r.789695.n4.nabble.com/How-to-nicely-display-R-code-with-the-LaTeX-package-listings-tp4648110.html
+\usepackage{fancyvrb} 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolor}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+  language=R,% set programming language
+  basicstyle=\ttfamily\small,% basic font style
+  commentstyle=\color{gray},% comment style
+  % numbers=left,% display line numbers on the left side
+  numberstyle=\scriptsize,% use small line numbers
+  numbersep=10pt,% space between line numbers and code
+  tabsize=2,% sizes of tabs
+  showstringspaces=false,% do not replace spaces in strings by a certain character
+  captionpos=b,% positioning of the caption below
+  breaklines=true,% automatic line breaking
+  escapeinside={(*}{*)},% escaping to LaTeX
+  fancyvrb=true,% verbatim code is typset by listings
+  extendedchars=false,% prohibit extended chars (chars of codes 128--255)
+  alsoletter={.<-},% becomes a letter
+  alsoother={$},% becomes other
+  otherkeywords={!=, ~, $, \&, \%/\%, \%*\%, \%\%, <-, <<-, /},% other keywords
+  deletekeywords={c}% remove keywords 
+}
+\lstset{style=mystyle}
+
+% TikZ drawing
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+
+% Adds numbered lines
+\usepackage{lineno}
+\linenumbers
+
+% Rename 'Abstract' to 'Summary 
+\usepackage[english]{babel}
+\addto{\captionsenglish}{\renewcommand{\abstractname}{Summary}}
+
+\begin{document}
+
+\maketitle
+
+\include{babette_article}
+
+\include{babette_figure_1}
+
+\end{document}
