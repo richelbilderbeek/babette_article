@@ -1,6 +1,5 @@
 all: article.pdf
 	echo "5) Done"
-	./view.sh
 
 article.pdf: babette_header.pdf
 	echo "4) Create 'article.pdf'"
@@ -29,6 +28,10 @@ babette_article.aux: babette_article.tex
 babette_header.aux: babette_article.tex
 	echo "1b) Create 'babette_header.aux'"
 	pdflatex babette_header > /dev/null
+
+view:
+	make
+	./view.sh
 
 clean:
 	./clean.sh
