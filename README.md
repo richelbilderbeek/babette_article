@@ -1,8 +1,9 @@
 # babette_article
 
-Branch|[![Travis CI logo](pics/TravisCI.png)](https://travis-ci.org)
----|---
-master|[![Build Status](https://travis-ci.org/richelbilderbeek/babette_article.svg?branch=master)](https://travis-ci.org/richelbilderbeek/babette_article)
+Branch   |[![Travis CI logo](pics/TravisCI.png)](https://travis-ci.org)
+---------|----------------------------------------------------------------------------------------------------------------------------------------------------
+`master` |[![Build Status](https://travis-ci.org/richelbilderbeek/babette_article.svg?branch=master)](https://travis-ci.org/richelbilderbeek/babette_article)
+`develop`|[![Build Status](https://travis-ci.org/richelbilderbeek/babette_article.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/babette_article)
 
 [![DOI](https://zenodo.org/badge/105884140.svg)](https://zenodo.org/badge/latestdoi/105884140)
 
