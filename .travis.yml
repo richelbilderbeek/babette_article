@@ -31,7 +31,7 @@ script:
   - proselint $(find | grep .*\.md) | egrep -v "curly_quotes" || true
   # Build article
   - rm -f article/article.pdf
-  - cd article; ./create_article.sh; cd ..
+  - make
   - if [ ! -f article/article.pdf ]; then echo "file 'article.pdf' not found" ; exit 1 ; fi
   # List possible spelling errors
   - spell `find | egrep "(tex|md)"`
