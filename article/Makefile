@@ -7,6 +7,7 @@ article.pdf: babette_header.pdf
 
 babette_header.pdf: babette_article.tex babette_header.bbl
 	echo "3) Create 'babette_header.pdf'"
+	aspell -t -c babette_article.tex
 	pdflatex babette_header > /dev/null
 	pdflatex babette_header > /dev/null
 
