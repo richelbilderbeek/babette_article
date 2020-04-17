@@ -7,7 +7,7 @@ article.pdf: babette_header.pdf
 
 babette_header.pdf: babette_article.tex babette_header.bbl
 	echo "3) Create 'babette_header.pdf'"
-	./spell_check.sh
+	#./spell_check.sh
 	pdflatex babette_header > /dev/null
 	pdflatex babette_header > /dev/null
 
