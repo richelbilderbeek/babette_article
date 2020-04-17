@@ -36,6 +36,6 @@ script:
   # List possible spelling errors
   - spell `find | egrep "(tex|md)"`
   # Count words, must be below 3000 for 'Applications'
-  - pandoc article/article.tex -t plain | wc --words
+  - make count_words
   # Figures must have at least 300 dpi
   - identify -format '%x,%y\n' -units PixelsPerInch article/figures.jpg
