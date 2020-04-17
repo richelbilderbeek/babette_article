@@ -6,4 +6,4 @@
 #
 #   ./view.sh
 #
-qpdfview babette_article.pdf
+qpdfview article.pdf

@@ -1,10 +1,10 @@
-all: babette_article.pdf
+all: article.pdf
 	echo "5) Done"
 	./view.sh
 
-babette_article.pdf: babette_header.pdf
-	echo "4) Create 'babette_article.pdf'"
-	mv babette_header.pdf babette_article.pdf
+article.pdf: babette_header.pdf
+	echo "4) Create 'article.pdf'"
+	mv babette_header.pdf article.pdf
 
 babette_header.pdf: babette_article.tex babette_header.bbl
 	echo "3) Create 'babette_header.pdf'"
