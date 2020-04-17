@@ -1,15 +1,10 @@
 #!/bin/bash
-
+#
+# Removes intermediate files
+#
+# Usage:
+#
+#   ./clean.sh
+#
 # All except the tex, bst and bib file
-rm *.aux
-rm *.bbl
-rm *.bcf
-rm *.blg
-rm *.doc
-rm *.docx
-rm *.log
-rm *.out
-rm *.pdf
-rm *.rtf
-rm *.run.xml
-rm *.txt
+rm -f *.aux *.bbl *.bcf *.blg *.doc *.docx *.log *.out *.pdf *.rtf *.run.xml *.txt
