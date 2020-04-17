@@ -20,7 +20,7 @@ babette_header.pdf: babette_article.tex babette_header.bbl
 #  * a .bbl file
 babette_header.bbl: babette_mee.bst babette_article.aux babette_header.aux babette_article.bib
 	echo "2) Create 'babette_header.bbl'"
-	bibtex babette_header
+	bibtex babette_header > /dev/null
 
 babette_article.aux: babette_article.tex
 	echo "1a) Create 'babette_article.aux'"
