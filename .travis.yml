@@ -28,7 +28,7 @@ script:
   #- rm .travis.yml
   #- ./scripts/check_dead_links || true
   # proselint
-  - proselint `find | grep .*\.md` | egrep -v "curly_quotes"
+  - proselint $(find | grep .*\.md) | egrep -v "curly_quotes" || true
   # Build article
   - rm article/article.pdf
   - cd article; ./create_article; cd ..
