@@ -8,3 +8,6 @@ babette_header.pdf: babette_article.tex
 	pdflatex babette_header --shell-escape
 	pdflatex babette_header --shell-escape
 
+clean:
+	./clean.sh
+
