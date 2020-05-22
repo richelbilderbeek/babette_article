@@ -6,4 +6,4 @@
 #
 #   ./view.sh
 #
-qpdfview article.pdf
+evince article.pdf
